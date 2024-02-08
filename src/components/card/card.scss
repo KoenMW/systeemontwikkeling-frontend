@@ -1,9 +1,9 @@
+@import '../../assets/variables.scss';
+
 .card{
     display: flex;
     flex-direction: row;
-    border: 1px solid #bd2b2b;
+    border: 1px solid $secondary-color;
     border-radius: 0.3em;
-    background-color: #0e5524;
-
-
+    background-color: $primary-color;
 }

@@ -9,5 +9,11 @@ import Card from '@/components/card/CardComponent.vue';
       title="Card Title"
       description="Card Description"
     />
+
+    <Card
+      image="https://via.placeholder.com/300"
+      title="Card Title 2"
+      description="Card Description 2"
+    />
   </main>
 </template>

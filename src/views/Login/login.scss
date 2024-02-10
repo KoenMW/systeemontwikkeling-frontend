@@ -1,19 +1,19 @@
+$primary-color: #007bff;
+$hover-color: #0056b3;
 * {
   font-family: 'Inter', sans-serif;
 }
 
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-
   .login-form {
-    width: 100%;
-    max-width: 25rem;
+    width: 25rem;
     padding: 1.25rem;
     border: 0.0625rem solid #ccc;
-    border-radius: 1.25em; // Adjusted for consistency in em
+    border-radius: 1.25em; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
 
     .form-group {
       margin-bottom: 0.9375rem;
@@ -27,9 +27,9 @@
         width: 95%;
         padding: 0.625em;
         border: 0.0625rem solid #ccc;
-        border-radius: 1.25em; // 20px equivalent in em
+        border-radius: 1.25em; 
         background-color: transparent;
-        color: white; // Set input text color to white
+        color: white; 
 
         &:focus {
           outline: none;
@@ -41,16 +41,16 @@
     .login-button {
       width: 50%;
       padding: 0.625em;
-      background-color: #007bff;
+      background-color: $primary-color;
       color: white;
       border: none;
-      border-radius: 1.25em; // Adjusted for consistency in em
+      border-radius: 1.25em;
       cursor: pointer;
       display: block;
       margin: 0 auto;
 
       &:hover {
-        background-color: #0056b3;
+        background-color: $hover-color;
       }
     }
 
@@ -62,20 +62,19 @@
 
       &:hover {
         text-decoration: underline;
-        color: #0056b3;
+        color: $hover-color;
       }
     }
     .signup-text {
-      margin-top: 1rem; /* Adjust as needed */
+      margin-top: 1rem; 
       text-align: center;
     }
     
     .signup-link {
-      color: #007bff; /* Use your theme's link color */
-      text-decoration: none; /* Optional, based on your design */
+      color: #007bff;
+      text-decoration: none; 
     }
   }
-}
 
 .header {
   text-align: center;

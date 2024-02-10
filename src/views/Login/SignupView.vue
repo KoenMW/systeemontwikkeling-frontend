@@ -1,5 +1,4 @@
 <template>
-    <div class="login-container">
       <div class="login-form">
         <h2 class="header">Sign Up</h2>
         <form @submit.prevent="signup">
@@ -18,7 +17,6 @@
           <button type="submit" class="login-button">Sign Up</button>
         </form>
       </div>
-    </div>
   </template>
   
   <script>
@@ -32,9 +30,7 @@
     },
     methods: {
       signup() {
-        // Implement your signup logic here
         console.log('Signing up:', this.name, this.email, this.password);
-        // Typically, here you would send a request to your backend to register the user
       },
     },
   };

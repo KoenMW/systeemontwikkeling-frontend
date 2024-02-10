@@ -1,5 +1,4 @@
 <script setup>
-import Card from '@/components/card/CardComponent.vue';
 import Background from '@/components/background/BackgroundComponent.vue';
 import HomeCard from '@/components/homeCard/HomeCard.vue';
 import homeBanner from '@/components/icons/homeBanner.vue';
@@ -11,7 +10,7 @@ import foodCard from '@/assets/images/foodCard.png';
 
 <template>
     <Background :image="backgroundImage"/>
-    <section id="header">
+    <section id="banner">
         <homeBanner />
         <p>Haarlem is buzzing with excitement for its upcoming Festival! Get ready for jazz sensations like Gare du Nord, Nordians, and Soul Six. Explore history through iconic landmarks: De Grote Kerk, De Hallen, De Grote Markt, Proveniershof, and more. Don't miss top restaurants like Tatsu Haarlem, Mano Restaurant, and the Zeeuw. Join the city's celebration—a fusion of jazz beats, historical tales, and culinary delights. Haarlem awaits your presence!</p>
     </section>
@@ -29,24 +28,6 @@ import foodCard from '@/assets/images/foodCard.png';
     <HomeCard
         :image="foodCard"
         description="Delve into Haarlem's Yummie Event, an exquisite culinary celebration that tantalizes your taste buds! Experience an extensive array of flavorful adventures, ranging from exclusive restaurant menus crafted by top chefs to delightful home-cooked recipes. Immerse yourself in the vibrant and diverse food scene, capturing the true essence and spirit of our festival's culinary journey."
-    />
-    <Card
-      image="https://via.placeholder.com/300"
-      title="Card Title"
-      description="Card Description"
-      event="history"
-    />
-    <Card
-      image="https://via.placeholder.com/300"
-      title="Card Title 2"
-      description="Card Description 2"
-      event="music"
-    />
-    <Card
-      image="https://via.placeholder.com/300"
-      title="Card Title 3"
-      description="Card Description 3"
-      event="jazz"
     />
 </template>
 

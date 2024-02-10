@@ -3,7 +3,6 @@ import Card from '@/components/card/CardComponent.vue';
 </script>
 
 <template>
-  <main>
     <Card
       image="https://via.placeholder.com/300"
       title="Card Title"
@@ -23,5 +22,4 @@ import Card from '@/components/card/CardComponent.vue';
       description="Card Description 3"
       event="jazz"
     />
-  </main>
 </template>

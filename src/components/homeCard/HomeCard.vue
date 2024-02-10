@@ -1,5 +1,5 @@
 <template>
-    <section :class="['homeCard', textRight && 'textRight']" :style="{ backgroundImage: `url(${image})` }">
+    <section :class="['homeCard', textRight && 'textRight', textBlack && 'textBlack']" :style="{ backgroundImage: `url(${image})` }">
         <p>{{ description }}</p>
         <slot></slot>
     </section>
@@ -11,7 +11,8 @@ export default {
     props: {
         image: String,
         description: String,
-        textRight: Boolean
+        textRight: Boolean,
+        textBlack: Boolean 
     }
 }
 </script>

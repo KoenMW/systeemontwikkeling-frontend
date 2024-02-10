@@ -1,0 +1,82 @@
+* {
+  font-family: 'Inter', sans-serif;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .login-form {
+    width: 100%;
+    max-width: 25rem;
+    padding: 1.25rem;
+    border: 0.0625rem solid #ccc;
+    border-radius: 1.25em; // Adjusted for consistency in em
+
+    .form-group {
+      margin-bottom: 0.9375rem;
+
+      label {
+        display: block;
+        margin-bottom: 0.3125rem;
+      }
+
+      input {
+        width: 95%;
+        padding: 0.625em;
+        border: 0.0625rem solid #ccc;
+        border-radius: 1.25em; // 20px equivalent in em
+        background-color: transparent;
+        color: white; // Set input text color to white
+
+        &:focus {
+          outline: none;
+          box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+        }
+      }
+    }
+
+    .login-button {
+      width: 50%;
+      padding: 0.625em;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 1.25em; // Adjusted for consistency in em
+      cursor: pointer;
+      display: block;
+      margin: 0 auto;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+
+    .forgot-password {
+      display: block;
+      margin-top: 0.3125rem;
+      color: #007bff;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+        color: #0056b3;
+      }
+    }
+    .signup-text {
+      margin-top: 1rem; /* Adjust as needed */
+      text-align: center;
+    }
+    
+    .signup-link {
+      color: #007bff; /* Use your theme's link color */
+      text-decoration: none; /* Optional, based on your design */
+    }
+  }
+}
+
+.header {
+  text-align: center;
+}

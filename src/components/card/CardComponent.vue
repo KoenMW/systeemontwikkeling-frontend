@@ -25,7 +25,8 @@ export default {
         event: {
             type: String,
             validator: (value) => {
-                return ['history', 'jazz', 'music'].includes(value);
+                if (!['history', 'jazz', 'music'].includes(value)) {console.error('Invalid event type'); return false;}
+                else return true;
             },            
         },
     }

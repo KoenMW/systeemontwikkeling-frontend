@@ -3,6 +3,7 @@
         <img :src="image" :alt="title" />
         <h2>{{ title }}</h2>
         <p>{{ description }}</p>
+        <slot></slot>
     </section>
 </template>
 

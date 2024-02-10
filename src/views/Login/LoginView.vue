@@ -31,7 +31,6 @@
     },
     methods: {
       login() {
-        // Implement your login logic here
         console.log('Email:', this.email);
         console.log('Password:', this.password);
       },

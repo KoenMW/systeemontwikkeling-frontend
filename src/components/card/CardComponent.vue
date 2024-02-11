@@ -3,10 +3,12 @@
         <img :src="image" :alt="title" />
         <h2>{{ title }}</h2>
         <p>{{ description }}</p>
+        <slot></slot>
     </section>
 </template>
 
 <script>
+import { validate } from '../../helpers/eventValidator';
 
 export default {
     props: {
@@ -25,8 +27,7 @@ export default {
         event: {
             type: String,
             validator: (value) => {
-                if (!['history', 'jazz', 'music'].includes(value)) {console.error('Invalid event type'); return false;}
-                else return true;
+                return validate(value);
             },            
         },
     }
@@ -36,4 +37,4 @@ export default {
 
 <style scoped>
 @import './card.scss';
-</style>
+</style>../../models/eventValidator

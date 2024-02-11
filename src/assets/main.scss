@@ -3,11 +3,14 @@
 :root{
   width: 100vw;
   height: 100vh;
+  background-color: $primary-color;
+  color: $secondary-color;
+}
+
+main{
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  overflow-x: hidden;
-  overflow-y: auto;
-  background-color: $primary-color;
-  color: $secondary-color;
+  justify-content: space-evenly;
+  align-items: center;
 }

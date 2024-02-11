@@ -1,3 +1,5 @@
+@import '../../assets/variables.scss';
+
 .agenda-item{
     display: flex;
     flex-direction: row;
@@ -13,7 +15,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     width: 9em;
 }
 
@@ -52,3 +54,14 @@ button{
     color: black;
 }
 
+.jazz{
+    background-color: $jazz-card;
+}
+
+.history{
+    background-color: $histor-card;
+}
+
+.music{
+    background-color: $music-card;
+}

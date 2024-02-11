@@ -17,6 +17,7 @@ import AgendaItem from '@/components/agendaItem/AgendaItem.vue';
         endDate="July 31st, 2022"
         :price="25"
         :ticketsAvailable="100"
+        event="jazz"
     />
     <Background :image="backgroundImage"/>
     <section id="banner">

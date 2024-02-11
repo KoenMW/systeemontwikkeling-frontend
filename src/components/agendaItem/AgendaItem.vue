@@ -1,5 +1,5 @@
 <template>
-    <div class="agenda-item">
+    <div :class="['agenda-item', event]">
         <div class="info">
             <h3>{{ eventName }}</h3>
             <div class="details">
@@ -8,10 +8,13 @@
                 <p>Price: €{{ price }}</p>
             </div>
         </div>
-        <div class="tickets">
+        <div class="tickets"  v-if="ticketsAvailable >= 0">
             <button @click="removeTicket()" class="subtrackt">-</button>
             <span>{{ tickets }}</span>
             <button @click="addTicket()" class="add">+</button>
+        </div>
+        <div class="tickets" v-else>
+            Sold out
         </div>
     </div>
 </template>
@@ -44,7 +47,15 @@ export default{
         ticketsAvailable: {
             type: Number,
             required: true
-        }
+        },
+        event: {
+            type: String,
+            validator: (value) => {
+                console.log(value);
+                if (!['history', 'jazz', 'music'].includes(value)) {console.error('Invalid event type'); return false;}
+                else return true;
+            },            
+        },
     },
     data() {
         return {

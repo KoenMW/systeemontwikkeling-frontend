@@ -1,14 +1,14 @@
 <template>
-    <div :class="['agenda-item', event]">
+    <div :class="['agenda-item', agendaItem.event]">
         <div class="info">
-            <h3>{{ eventName }}</h3>
+            <h3>{{ agendaItem.eventName }}</h3>
             <div class="details">
-                <p>{{ location }}</p>
-                <p>{{ startDate }} - {{ endDate }}</p>
-                <p>Price: €{{ price }}</p>
+                <p>{{ agendaItem.location }}</p>
+                <p>{{ agendaItem.startDate }} - {{ agendaItem.endDate }}</p>
+                <p>Price: €{{ agendaItem.price }}</p>
             </div>
         </div>
-        <div class="tickets"  v-if="ticketsAvailable >= 0">
+        <div class="tickets"  v-if="agendaItem.ticketsAvailable > 0">
             <button @click="removeTicket()" class="subtrackt">-</button>
             <span>{{ tickets }}</span>
             <button @click="addTicket()" class="add">+</button>
@@ -21,40 +21,14 @@
 
 
 <script>
-import { validate } from '../../helpers/eventValidator';
+import { Event } from '../../models/event'
 
 export default{
     props: {
-        eventName: {
-            type: String,
+        agendaItem: {
+            type: Event,
             required: true
-        },
-        location: {
-            type: String,
-            required: true
-        },
-        startDate: {
-            type: String,
-            required: true
-        },
-        endDate: {
-            type: String,
-            required: true
-        },
-        price: {
-            type: Number,
-            required: true
-        },
-        ticketsAvailable: {
-            type: Number,
-            required: true
-        },
-        event: {
-            type: String,
-            validator: (value) => {
-                return validate(value);
-            },            
-        },
+        }
     },
     data() {
         return {
@@ -79,4 +53,4 @@ export default{
 
 <style scoped>
 @import url(./agendaItem.scss);
-</style>../../helpers/eventValidator
+</style>../../helpers/eventValidator../../models/eventValidator../../models/event

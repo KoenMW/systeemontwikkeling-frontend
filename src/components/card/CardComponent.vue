@@ -37,4 +37,4 @@ export default {
 
 <style scoped>
 @import './card.scss';
-</style>
+</style>../../models/eventValidator

@@ -5,10 +5,10 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    min-height: 3em;
     width: 50%;
     padding: 0.5em;
     border-radius: 0.75em;
-    background-color: aqua;
 }
 
 .tickets{
@@ -60,6 +60,7 @@ button{
 
 .history{
     background-color: $histor-card;
+    color: black;
 }
 
 .music{

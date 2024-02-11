@@ -6,19 +6,18 @@ import backgroundImage from '@/assets/images/homebanner.png';
 import jazzCard from '@/assets/images/jazzCard.png';
 import historyCard from '@/assets/images/historyCard.png';
 import foodCard from '@/assets/images/foodCard.png';
-import AgendaItem from '@/components/agendaItem/AgendaItem.vue';
+import AgendaComponent from '@/components/agenda/AgendaComponent.vue';
+import { Event } from '@/models/event';
+
+
+const events = [
+    new Event('Jazz', 'Grote Markt', '2024-07-26', '2024-07-26', 25, 100, 'jazz'),
+    new Event('History', 'Grote Markt', '2024-07-27', '2024-07-27', 25, 100, 'history'),
+    new Event('Food', 'Grote Markt', '2024-07-28', '2024-07-28', 25, 0, 'music')
+]
 </script>
 
 <template>
-    <AgendaItem
-        eventName="Haarlem Festival Jazz"
-        location="Grote Markt, Haarlem"
-        startDate="July 28th, 2022"
-        endDate="July 31st, 2022"
-        :price="25"
-        :ticketsAvailable="100"
-        event="jazz"
-    />
     <Background :image="backgroundImage"/>
     <section id="banner">
         <homeBanner />
@@ -40,9 +39,12 @@ import AgendaItem from '@/components/agendaItem/AgendaItem.vue';
         description="Delve into Haarlem's Yummie Event, an exquisite culinary celebration that tantalizes your taste buds! Experience an extensive array of flavorful adventures, ranging from exclusive restaurant menus crafted by top chefs to delightful home-cooked recipes. Immerse yourself in the vibrant and diverse food scene, capturing the true essence and spirit of our festival's culinary journey."
     />
 
-    
+    <AgendaComponent
+        :agendaItems="events"
+    />    
 </template>
 
 <style scoped>
 @import url(./home.scss);
 </style>
+@/models/event

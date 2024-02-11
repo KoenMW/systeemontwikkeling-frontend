@@ -47,7 +47,7 @@
     .forgot-password {
       display: block;
       margin-top: 0.3125rem;
-      color: #007bff;
+      color: $primary-color-login;
       text-decoration: none;
 
       &:hover {
@@ -61,7 +61,7 @@
     }
     
     .signup-link {
-      color: #007bff;
+      color: $primary-color-login;
       text-decoration: none; 
     }
 

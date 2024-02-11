@@ -21,6 +21,7 @@
 
 
 <script>
+import { validate } from '../../helpers/eventValidator';
 
 export default{
     props: {
@@ -51,9 +52,7 @@ export default{
         event: {
             type: String,
             validator: (value) => {
-                console.log(value);
-                if (!['history', 'jazz', 'music'].includes(value)) {console.error('Invalid event type'); return false;}
-                else return true;
+                return validate(value);
             },            
         },
     },
@@ -80,4 +79,4 @@ export default{
 
 <style scoped>
 @import url(./agendaItem.scss);
-</style>
+</style>../../helpers/eventValidator

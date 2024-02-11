@@ -6,9 +6,18 @@ import backgroundImage from '@/assets/images/homebanner.png';
 import jazzCard from '@/assets/images/jazzCard.png';
 import historyCard from '@/assets/images/historyCard.png';
 import foodCard from '@/assets/images/foodCard.png';
+import AgendaItem from '@/components/agendaItem/AgendaItem.vue';
 </script>
 
 <template>
+    <AgendaItem
+        eventName="Haarlem Festival Jazz"
+        location="Grote Markt, Haarlem"
+        startDate="July 28th, 2022"
+        endDate="July 31st, 2022"
+        :price="25"
+        :ticketsAvailable="100"
+    />
     <Background :image="backgroundImage"/>
     <section id="banner">
         <homeBanner />
@@ -29,6 +38,8 @@ import foodCard from '@/assets/images/foodCard.png';
         :image="foodCard"
         description="Delve into Haarlem's Yummie Event, an exquisite culinary celebration that tantalizes your taste buds! Experience an extensive array of flavorful adventures, ranging from exclusive restaurant menus crafted by top chefs to delightful home-cooked recipes. Immerse yourself in the vibrant and diverse food scene, capturing the true essence and spirit of our festival's culinary journey."
     />
+
+    
 </template>
 
 <style scoped>

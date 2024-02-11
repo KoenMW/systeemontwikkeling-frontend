@@ -1,7 +1,6 @@
 <template>
-    <div class="login-form">
       <h2 class="header">Login</h2>
-      <form @submit.prevent="login">
+      <form @submit.prevent="login" class="login-form">
         <div class="form-group">
           <label for="email">Email:</label>
           <input type="email" id="email" v-model="email" required placeholder="Enter your email">
@@ -14,7 +13,6 @@
         <button type="submit" class="login-button">Login</button>
         <p class="signup-text">Don’t have an account? <router-link to="/signup" class="signup-link">Sign up</router-link></p>
       </form>
-    </div>
 </template>
 
 

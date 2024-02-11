@@ -1,5 +1,4 @@
-$primary-color: #007bff;
-$hover-color: #0056b3;
+@import '../../assets/variables.scss';
 * {
   font-family: 'Inter', sans-serif;
 }
@@ -9,10 +8,7 @@ $hover-color: #0056b3;
     padding: 1.25rem;
     border: 0.0625rem solid #ccc;
     border-radius: 1.25em; 
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+ 
     
 
     .form-group {
@@ -41,7 +37,7 @@ $hover-color: #0056b3;
     .login-button {
       width: 50%;
       padding: 0.625em;
-      background-color: $primary-color;
+      background-color: $primary-color-login;
       color: white;
       border: none;
       border-radius: 1.25em;
@@ -50,7 +46,7 @@ $hover-color: #0056b3;
       margin: 0 auto;
 
       &:hover {
-        background-color: $hover-color;
+        background-color: $hover-color-login;
       }
     }
 
@@ -62,7 +58,7 @@ $hover-color: #0056b3;
 
       &:hover {
         text-decoration: underline;
-        color: $hover-color;
+        color: $hover-color-login;
       }
     }
     .signup-text {

@@ -1,7 +1,6 @@
 <template>
-      <div class="login-form">
         <h2 class="header">Sign Up</h2>
-        <form @submit.prevent="signup">
+        <form @submit.prevent="signup" class="login-form">
           <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" id="name" v-model="name" required placeholder="Enter your name">
@@ -16,7 +15,6 @@
           </div>
           <button type="submit" class="login-button">Sign Up</button>
         </form>
-      </div>
   </template>
   
   <script>

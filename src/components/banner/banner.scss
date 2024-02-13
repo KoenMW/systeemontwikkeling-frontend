@@ -1,0 +1,28 @@
+.banner {
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    justify-content: space-between;
+    text-align: center; 
+    margin-top: 5rem;
+    flex-wrap: wrap;
+    
+    h2, p {
+      margin-left: 5rem;
+      padding-right: 1rem; 
+    }
+    
+    
+    img {
+      min-width: 10em; 
+      height: auto; 
+      
+    }
+  }
+  
+  .body-text {
+    max-width: 40rem;
+    margin: 2rem auto; 
+    text-align: left;
+  }
+  

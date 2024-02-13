@@ -1,28 +1,23 @@
 .banner {
     display: flex;
     flex-direction: row;
-    align-items: center; 
-    justify-content: space-between;
-    text-align: center; 
-    margin-top: 5rem;
+    justify-content: center;
     flex-wrap: wrap;
-    
-    h2, p {
-      margin-left: 5rem;
-      padding-right: 1rem; 
-    }
-    
+    width: 100%;    
     
     img {
-      min-width: 10em; 
-      height: auto; 
+      width: 50%;
+      max-width: 40em;
+      flex-grow: 1;
       
     }
   }
   
-  .body-text {
-    max-width: 40rem;
-    margin: 2rem auto; 
+  .text-content {
+    flex-grow: 1;
+    width: 45%;
     text-align: left;
+    margin: auto;
+    padding: 3em;
   }
   

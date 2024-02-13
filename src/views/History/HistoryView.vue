@@ -26,7 +26,7 @@
         </div>
 </template>
 <script setup>
-import banner from '@/components/banner/banner.vue';
+import banner from '@/components/banner/bannerComponent.vue';
 import bannerPicture from '@/assets/images/history/history-banner.png';
 </script>
 <style scoped>

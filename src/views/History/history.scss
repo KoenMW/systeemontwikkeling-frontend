@@ -1,29 +1,12 @@
 @import '../../assets/variables.scss';
 
-#banner-text {
-    margin-top: 10rem;
-    margin-left: 1rem;
-    margin-right: 50rem;
-    text-align: center;
-}
-#banner-picture {
-    width: 30rem;
-    height: 20.15625rem;
-    margin-left: 50rem;
-    margin-top: -12rem;
-    }
-.body-text {
-    margin-top: 2rem;
-    margin-left: 1rem;
-    margin-right: 40rem;
-    text-align: left;
-}
 .background-picture {
+    width: 100%; // Add this line to make the element take full width
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.37) 0%, rgba(0, 0, 0, 0.37) 100%), url('../../assets/images/history/history-background.png'), lightgray 50%;
     background-size: 100%;
     background-repeat: no-repeat;
+    margin-right: 1rem;
     
-
 }
 
 h3 {

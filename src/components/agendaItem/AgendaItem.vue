@@ -9,9 +9,9 @@
             </div>
         </div>
         <div class="tickets"  v-if="agendaItem.ticketsAvailable > 0">
-            <button @click="removeTicket()" class="subtrackt">-</button>
-            <span>{{ tickets }}</span>
-            <button @click="addTicket()" class="add">+</button>
+            <button @click="removeTicket" class="subtrackt">-</button>
+            <div>{{ tickets }}</div>
+            <button @click="addTicket" class="add">+</button>
         </div>
         <div class="tickets" v-else>
             Sold out
@@ -22,8 +22,17 @@
 
 <script>
 import { Event } from '../../models/event'
+import { useTicketsStore } from '../../stores/tickets'
 
 export default{
+    setup(){
+        const ticketStore = useTicketsStore();
+        return { 
+            addTicketStore: ticketStore.addTicket,
+            getTickets: ticketStore.getTicketsById,
+            removeTicketStore: ticketStore.removeTicket
+        };
+    },
     props: {
         agendaItem: {
             type: Event,
@@ -37,20 +46,24 @@ export default{
     },
     methods: {
         addTicket() {
-            if (this.tickets < this.ticketsAvailable) {
-                this.tickets++
+            if (this.tickets < this.agendaItem.ticketsAvailable) {
+                this.addTicketStore(this.agendaItem);
+                this.tickets = this.getTickets(this.agendaItem.id);
             }
         },
         removeTicket() {
             if (this.tickets > 0) {
-                this.tickets--
+                this.removeTicketStore(this.agendaItem);
+                this.tickets = this.getTickets(this.agendaItem.id);
             }
         }
+    },mounted() {
+        this.tickets = this.getTickets(this.agendaItem.id);
     }
 }
 
 </script>
 
 <style scoped>
-@import url(./agendaItem.scss);
-</style>../../helpers/eventValidator../../models/eventValidator../../models/event
+@import './agendaItem.scss';
+</style>

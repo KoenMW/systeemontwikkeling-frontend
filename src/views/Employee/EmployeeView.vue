@@ -1,6 +1,6 @@
 <template>
 
-    <section>
+    <section id="qrReader">
         <QrcodeStream @detect="onDetect"></QrcodeStream>
     </section>
 
@@ -25,3 +25,7 @@ export default {
 }
 
 </script>
+
+<style scoped>
+@import './Employee.scss';
+</style>

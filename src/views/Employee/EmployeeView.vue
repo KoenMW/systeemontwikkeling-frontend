@@ -1,6 +1,8 @@
 <template>
 
-    <QrcodeStream @detect="onDetect"></QrcodeStream>
+    <section>
+        <QrcodeStream @detect="onDetect"></QrcodeStream>
+    </section>
 
 </template>
 

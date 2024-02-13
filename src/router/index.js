@@ -19,6 +19,8 @@ const router = createRouter({
         if(role === 'employee') next('/employee');
         //en als de role 'admin' is rederect naar /admin
         else if (role === 'admin') next('/admin');  // ik twijfel nog of dit handig is. we kunnen het ook een gecontroleerde header item maken
+        //als de role niet employee of admin is ga naar /login
+        else next();
       },
       component: HomeView,
     },
@@ -50,6 +52,7 @@ const router = createRouter({
       beforeEnter: (to, from, next) => {
         const role = localStorage.getItem('role');
         if (role != 'employee' | role != 'admin') next('/login');
+        else next();
       }
     }
   ]

@@ -1,0 +1,37 @@
+/* Top section css */
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3%; 
+}
+.plate {
+  width: 50%;
+}
+.fork {
+  width: 20%; 
+  transform: scale(2); 
+}
+.knife {
+  width: 20%; 
+  transform: scale(2.4); 
+}
+
+/* Restaurant icons section css */
+.restaurant-icons-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.restaurant-icon-left,
+.restaurant-icon-right {
+  width: 10%;
+  margin: 0 200px; 
+}
+
+/* Restaurant cards section css */
+.restaurant-cards-section {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; 
+}

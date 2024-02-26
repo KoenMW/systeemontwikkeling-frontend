@@ -1,0 +1,31 @@
+.restaurant-card {
+    background-color: #F3F9E3;
+    width: 30%; 
+    margin: 1em; 
+    padding: 1em; 
+    box-sizing: border-box; 
+    border-radius: 15px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.image-section img {
+    width: 100%;
+    height: auto; 
+}
+
+.text-section {
+    color: #2C3E28; 
+    word-wrap: break-word; 
+}
+
+.reservation-button {
+    background-color: #EDD83D; 
+    border: none; 
+    border-radius: 15px; 
+    padding: 10px 20px;
+    color: #000;
+    cursor: pointer;
+    align-self: center; 
+}

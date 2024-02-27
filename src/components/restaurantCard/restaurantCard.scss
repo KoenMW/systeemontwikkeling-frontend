@@ -8,24 +8,45 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
+
+    img {
+        width: 100%;
+        height: auto; 
+    }
+
+    h2 {
+        color: #2C3E28; 
+    }
+
+    p {
+        color: #2C3E28; 
+        word-wrap: break-word; 
+    }
+
+    button {
+        background-color: #EDD83D; 
+        border: none; 
+        border-radius: 15px; 
+        padding: 10px 20px;
+        color: #000;
+        cursor: pointer;
+        align-self: center; 
+    }
+
+    .star {
+        width: 30px; 
+        height: 30px; 
+        position: absolute;
+        right: 10px;
+        bottom: 10px; 
+    }
+
+    span {
+        position: absolute;
+        bottom: 10px;
+        right: 40px;
+        color: #000; 
+      }
 }
 
-.image-section img {
-    width: 100%;
-    height: auto; 
-}
-
-.text-section {
-    color: #2C3E28; 
-    word-wrap: break-word; 
-}
-
-.reservation-button {
-    background-color: #EDD83D; 
-    border: none; 
-    border-radius: 15px; 
-    padding: 10px 20px;
-    color: #000;
-    cursor: pointer;
-    align-self: center; 
-}

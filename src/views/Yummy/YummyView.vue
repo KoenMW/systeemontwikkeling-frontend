@@ -14,9 +14,9 @@ import RestaurantCard from '@/components/restaurantCard/RestaurantCard.vue';
 import { Event } from '@/models/event';
 
 const restaurants = [
-  { image: Tatsu, title: 'Tatsu Haarlem', text: 'At Tatsu Haarlem, you can enjoy a delightful all-you-can-eat lunch and dinner seven days a week. Come by and get two hours of unlimited access to our delicious sushi and modern Japanese cuisine.' },
-  { image: Mano, title: 'Mano Restaurant', text: 'Meet Kevin Kion and Daniël Damen, the culinary force behind Mano. Our menu blends global street food influences with French finesse. Join our 15-year flavorful journey today! ' },
-  { image: Zeeuw, title: 'Restaurant De Zeeuw', text: 'Discover Restaurant De Zeeuws artisanal touch, offering a sustainable dining experience with locally sourced seasonal delights, curated by skilled chefs.' },
+  { image: Tatsu, title: 'Tatsu Haarlem', text: 'At Tatsu Haarlem, you can enjoy a delightful all-you-can-eat lunch and dinner seven days a week. Come by and get two hours of unlimited access to our delicious sushi and modern Japanese cuisine.', rating : 4},
+  { image: Mano, title: 'Mano Restaurant', text: 'Meet Kevin Kion and Daniël Damen, the culinary force behind Mano. Our menu blends global street food influences with French finesse. Join our 15-year flavorful journey today! ', rating : 5},
+  { image: Zeeuw, title: 'Restaurant De Zeeuw', text: 'Discover Restaurant De Zeeuws artisanal touch, offering a sustainable dining experience with locally sourced seasonal delights, curated by skilled chefs.', rating : 5},
 ];
 
 </script>
@@ -35,7 +35,12 @@ const restaurants = [
         </section>
 
         <section class="restaurant-cards-section">
-            <RestaurantCard v-for="restaurant in restaurants" :key="restaurant.title" :image="restaurant.image" :title="restaurant.title" :text="restaurant.text" />
+            <RestaurantCard v-for="restaurant in restaurants" :key="restaurant.title" :image="restaurant.image" :title="restaurant.title" :text="restaurant.text" :rating="restaurant.rating"/>
+        </section>
+
+        <section class="homerecipes-icons-section">
+            <img class="ingredients-icon" :src="Ingredients" alt="Ingredients image">
+            <img class="pan-icon" :src="Pan" alt="Pan image">
         </section>
     </main>
 </template>

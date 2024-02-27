@@ -1,17 +1,20 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
+<script>
+import CardComponent from './components/card/CardComponent.vue';
+import HeaderComponent from './components/header/HeaderComponent.vue';
+export default {
+  components: {
+    HeaderComponent,
+    CardComponent
+}
+}
 </script>
 
 <template>
-  <header>
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-  </header>
-  <RouterView />
+  <div id="app">
+    <HeaderComponent  />
+  </div>
 </template>
 
 <style scoped>
-@import './assets/app.scss';
+/* Add scoped styles here */
 </style>

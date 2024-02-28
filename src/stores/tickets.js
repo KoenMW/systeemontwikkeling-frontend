@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 
 const getTicketsFromLocalStorage = () => {
-    return JSON.parse(localStorage.getItem('tickets') || '[]');
+    return JSON.parse(localStorage.getItem('tickets') || '[]')._value || [];
 }
 
 export const useTicketsStore = defineStore('tickets', () => {

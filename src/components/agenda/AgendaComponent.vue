@@ -46,7 +46,6 @@ export default {
     computed: {
         filteredAgendaItems() {
             return this.agendaItems.filter((item) => {
-                console.log(item, this.selectedDay);
                 return item.startDate === this.selectedDay;
             });
         }

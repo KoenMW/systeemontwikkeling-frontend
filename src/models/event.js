@@ -8,7 +8,8 @@ const validate = (event) => {
 }
 
 export class Event {
-    constructor(eventName, location, startDate, endDate, price, ticketsAvailable, event) {
+    constructor(id, eventName, location, startDate, endDate, price, ticketsAvailable, event) {
+        if (typeof id !== 'number') throw new Error('Invalid id');
         if (typeof eventName !== 'string') throw new Error('Invalid eventName');
         if (typeof location !== 'string') throw new Error('Invalid location');
         if (typeof startDate !== 'string') throw new Error('Invalid startDate');
@@ -18,6 +19,7 @@ export class Event {
         if (typeof event !== 'string') throw new Error('Invalid event');
 
 
+        this.id = id;
         this.eventName = eventName;
         this.location = location
         this.startDate = startDate;

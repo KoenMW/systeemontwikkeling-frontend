@@ -27,6 +27,7 @@
     <div class="cards-container">
         <Card v-for="event in sights" :key="event.id" :image="event.image" :title="event.title"
             :description="event.description" event="history" />
+            
     </div>
     <h2>Book Your Journey</h2>
     <AgendaComponent
@@ -52,9 +53,9 @@ const events = [
 ];
 
 const sights = [
-{ id: 1, title: 'Event 1', description: 'Description for Event 1', image: event1Image },
-  { id: 2, title: 'Event 2', description: 'Description for Event 2', image: event2Image },
-  { id: 3, title: 'Event 3', description: 'Description for Event 3', image: event3Image },
+{ id: 1, title: 'De Sint Bavokerk', description: 'The city of Haarlem is located around the Grote St. Bavokerk (or Sint-Bavo Cathedral). This late medieval church was built on the Grote Markt and has a height of 78 meters.', image: event1Image },
+  { id: 2, title: 'De Hallen', description: 'The Frans Hals Museum, founded in 1862 and known as the “Museum of the Golden Century,” displays Haarlem’s 16th-century architectural development.', image: event2Image },
+  { id: 3, title: 'Grote Markt', description: 'Next to the church of St. Bavo there is a large square in the centre, formerly known as t Sant, a name originating from when the square was unpaved.', image: event3Image },
 ];
 // for when the database is ready
 onMounted(async () => {

@@ -1,4 +1,5 @@
 <script>
+import { RouterLink, RouterView } from 'vue-router';
 import CardComponent from './components/card/CardComponent.vue';
 import HeaderComponent from './components/header/HeaderComponent.vue';
 export default {
@@ -8,13 +9,16 @@ export default {
 }
 }
 </script>
-
 <template>
-  <div id="app">
-    <HeaderComponent  />
-  </div>
+   <div id="app">
+      <HeaderComponent />
+      <CardComponent />
+   </div>
+   <main>
+      <RouterView />
+  </main>
 </template>
 
 <style scoped>
-/* Add scoped styles here */
+@import './assets/app.scss'
 </style>

@@ -1,22 +1,40 @@
 <template>
-    <section class="card">
+    <section :class="['card', event ?? '']">
         <img :src="image" :alt="title" />
         <h2>{{ title }}</h2>
         <p>{{ description }}</p>
+        <slot></slot>
     </section>
 </template>
 
 <script>
+import { validate } from '../../helpers/eventValidator';
+
 export default {
     props: {
-        image: String,
-        title: String,
-        description: String
+        image: {
+            type: String,
+            required: true
+        },
+        title: {
+            type: String,
+            required: true
+        },
+        description: {
+            type: String,
+            required: true
+        },
+        event: {
+            type: String,
+            validator: (value) => {
+                return validate(value);
+            },            
+        },
     }
 }
+
 </script>
 
 <style scoped>
-
 @import './card.scss';
-</style>
+</style>../../models/eventValidator

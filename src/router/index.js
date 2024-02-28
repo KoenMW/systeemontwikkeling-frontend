@@ -7,6 +7,7 @@ import AboutViewVue from '@/views/AboutView.vue'
 import EmployeeView from '@/views/Employee/EmployeeView.vue'
 import History from '@/views/History/HistoryView.vue'
 
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -47,6 +48,7 @@ const router = createRouter({
       component: Signup
     },
     {
+
       path: '/history',
       name: 'history',
       component: History,

@@ -10,18 +10,20 @@
     justify-content: space-between;
     position: relative;
 
-    img {
-        width: 100%;
-        height: auto; 
-    }
+    ::v-deep {
+        img {
+            width: 100%;
+            height: auto; 
+        }
 
-    h2 {
-        color: #2C3E28; 
-    }
+        h2 {
+            color: #2C3E28; 
+        }
 
-    p {
-        color: #2C3E28; 
-        word-wrap: break-word; 
+        p {
+            color: #2C3E28; 
+            word-wrap: break-word; 
+        }
     }
 
     button {
@@ -47,6 +49,5 @@
         bottom: 10px;
         right: 40px;
         color: #000; 
-      }
+    }
 }
-

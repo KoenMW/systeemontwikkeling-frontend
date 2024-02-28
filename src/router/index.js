@@ -57,8 +57,8 @@ const router = createRouter({
       component: EmployeeView,
       beforeEnter: (to, from, next) => {
         const role = localStorage.getItem('role');
-        if (role != 'employee' | role != 'admin') next('/login');
-        else next();
+       // if (role != 'employee' | role != 'admin') next('/login');
+       // else next();
       }
     }
   ]

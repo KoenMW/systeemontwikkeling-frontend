@@ -1,19 +1,20 @@
 <template>
-    <article class="restaurant-card">
-      <img :src="image" alt="Restaurant image">
-      <h2>{{ title }}</h2>
-      <p>{{ text }}</p>
-      <span>{{ rating }}</span>
-      <img class="star" :src="Star" alt="Star image">
-      <button class="reservation-button">Reservation</button>
-    </article>
-  </template>
-  
+  <Card class="restaurant-card" :image="image" :title="title" :description="description">
+    <span>{{ rating }}</span>
+    <img class="star" :src="Star" alt="Star image">
+    <button class="reservation-button">Reservation</button>
+  </Card>
+</template>
+
 <script>
 import Star from '@/assets/images/Yummy/star.png';
+import Card from '@/components/card/CardComponent.vue';
 
 export default {
-  props: ['image', 'title', 'text', 'rating'],
+  components: {
+    Card
+  },
+  props: ['image', 'title', 'description', 'rating'],
   data() {
     return {
       Star: Star
@@ -21,7 +22,7 @@ export default {
   }
 }
 </script>
-  
-  <style scoped>
-  @import url(./restaurantCard.scss);
-  </style>
+
+<style scoped>
+@import url(./restaurantCard.scss);
+</style>

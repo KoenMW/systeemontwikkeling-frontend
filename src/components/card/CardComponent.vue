@@ -25,8 +25,7 @@ export default {
         },
         event: {
             type: String,
-            required: true,
-            },            
+            required: false
         },
     }
 

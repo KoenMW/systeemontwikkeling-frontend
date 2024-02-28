@@ -1,0 +1,14 @@
+@import '../../assets/variables.scss';
+
+.background-picture {
+    width: 100%;
+    overflow-x: hidden;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.37) 0%, rgba(0, 0, 0, 0.37) 100%), url('../../assets/images/history/history-background.png'), lightgray 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 2em 0 2em 0;
+    *{
+        padding: 0 2em 0 2em;
+    }
+}
+

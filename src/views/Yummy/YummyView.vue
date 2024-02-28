@@ -9,9 +9,7 @@ import Tatsu from '@/assets/images/Yummy/home/tatsu.png';
 import Zeeuw from '@/assets/images/Yummy/home/zeeuw.png';
 import Fork from '@/assets/images/Yummy/fork.png';
 import Knife from '@/assets/images/Yummy/knife.png';
-import Star from '@/assets/images/Yummy/star.png';
 import RestaurantCard from '@/components/restaurantCard/RestaurantCard.vue';
-import { Event } from '@/models/event';
 
 const restaurants = [
   { image: Tatsu, title: 'Tatsu Haarlem', text: 'At Tatsu Haarlem, you can enjoy a delightful all-you-can-eat lunch and dinner seven days a week. Come by and get two hours of unlimited access to our delicious sushi and modern Japanese cuisine.', rating : 4},

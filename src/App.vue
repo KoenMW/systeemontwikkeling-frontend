@@ -1,5 +1,6 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router';
+
 import CardComponent from './components/card/CardComponent.vue';
 import HeaderComponent from './components/header/HeaderComponent.vue';
 export default {
@@ -10,15 +11,15 @@ export default {
 }
 </script>
 <template>
-   <div id="app">
+   <header id="app">
       <HeaderComponent />
       <CardComponent />
-   </div>
+   </header>
    <main>
       <RouterView />
   </main>
 </template>
 
 <style scoped>
-@import './assets/app.scss'
+@import './assets/app.scss';
 </style>

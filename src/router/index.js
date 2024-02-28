@@ -52,7 +52,7 @@ const router = createRouter({
       path: '/history',
       name: 'history',
       component: History,
-    }
+    },
     {
       path: '/employee',
       name: 'employee',

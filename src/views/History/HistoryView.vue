@@ -23,13 +23,48 @@
                 the ebb and flow of a captivating town.</p>
         </section>
     </div>
-    <Card image="@/assets/images/events/event1.png" title="Event Title" description="Short event description."
-        event="history" />
+    <h2>Sights</h2>
+    <div class="cards-container">
+        <Card v-for="event in sights" :key="event.id" :image="event.image" :title="event.title"
+            :description="event.description" event="history" />
+    </div>
+    <h2>Book Your Journey</h2>
+    <AgendaComponent
+        :agendaItems="events"
+    />    
 </template>
 <script setup>
 import banner from '@/components/banner/bannerComponent.vue';
 import bannerPicture from '@/assets/images/history/history-banner.png';
 import Card from '@/components/card/CardComponent.vue';
+import event1Image from '@/assets/images/history/card1.png';
+import event2Image from '@/assets/images/history/card2.png';
+import event3Image from '@/assets/images/history/card3.png';
+import AgendaComponent from '@/components/agenda/AgendaComponent.vue';
+import { onMounted, ref } from 'vue';
+import axios from 'axios';
+import { Event } from '@/models/event';
+
+const events = [
+    new Event(0, 'History', 'Grote Markt', '2024-07-26', '2024-07-26', 17.5, 100, 'history'),
+    new Event(1, 'History', 'Grote Markt', '2024-07-27', '2024-07-27', 17.5, 100, 'history'),
+    new Event(2, 'History', 'Grote Markt', '2024-07-28', '2024-07-28', 17.5, 0, 'history')
+];
+
+const sights = [
+{ id: 1, title: 'Event 1', description: 'Description for Event 1', image: event1Image },
+  { id: 2, title: 'Event 2', description: 'Description for Event 2', image: event2Image },
+  { id: 3, title: 'Event 3', description: 'Description for Event 3', image: event3Image },
+];
+// for when the database is ready
+onMounted(async () => {
+    try {
+        const response = await axios.get('/api/events');
+        events.value = response.data.slice(0, 9);
+    } catch (error) {
+        console.error("Failed to fetch events", error);
+    }
+});
 </script>
 <style scoped>
 @import './history.scss';

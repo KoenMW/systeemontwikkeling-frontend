@@ -8,7 +8,6 @@
 </template>
 
 <script>
-//import { validate } from '../../helpers/eventValidator';
 
 export default {
     props: {
@@ -26,9 +25,7 @@ export default {
         },
         event: {
             type: String,
-            validator: (value) => {
-                return validate(value);
-            },            
+            required: false
         },
     }
 }

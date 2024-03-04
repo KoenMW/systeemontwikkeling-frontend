@@ -8,8 +8,7 @@
 </template>
 
 <script>
-//import { validate } from '../../helpers/eventValidator';
-
+import { validate } from '../../helpers/eventValidator';
 export default {
     props: {
         image: {
@@ -26,9 +25,7 @@ export default {
         },
         event: {
             type: String,
-            validator: (value) => {
-                return validate(value);
-            },            
+            required: false
         },
     }
 }
@@ -37,4 +34,4 @@ export default {
 
 <style scoped>
 @import './card.scss';
-</style>../../models/eventValidator
+</style>

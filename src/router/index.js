@@ -5,6 +5,8 @@ import ForgetPassword from '../views/Login/ForgotPasswordView.vue'
 import Signup from '../views/Login/SignupView.vue'
 import AboutViewVue from '@/views/AboutView.vue'
 import EmployeeView from '@/views/Employee/EmployeeView.vue'
+import History from '@/views/History/HistoryView.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +46,12 @@ const router = createRouter({
       path: '/signup',
       name: 'signup',
       component: Signup
+    },
+    {
+
+      path: '/history',
+      name: 'history',
+      component: History,
     },
     {
       path: '/employee',

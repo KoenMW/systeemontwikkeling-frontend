@@ -11,36 +11,53 @@
   left: 0;
   right: 0;
   z-index: 100;
+  overflow: hidden;
+  flex-wrap: wrap;
 }
 
 .header-link {
-  flex: 0;
+  flex: 1;
   text-align: center;
-  padding: 0;
-  width: 320px;
-  height: 100px   ;
-}
-
-.header-image {
-  height: 100px; // Adjusted to take up full height of the header
-  width: 320px; // Adjusted to maintain aspect ratio
-  background-size: 100% auto; // Adjusted to make the images cover the entire width of the link
-  background-repeat: no-repeat;
-  background-position: center;
+  height: 4rem;
+  font-size: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
+  position: relative;
+
+  .header-image {
+    height: 100%;
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+  }
 }
 
-/* Define dimensions for specific icons */
 .user,
 .language {
-  width: 6rem;
-  height: 6rem;
+  width: 3rem;
+  height: 3rem;
 }
 
-/* Define background images for different sections */
+.shop,
+.dance,
+.jazz,
+.yummy,
+.home,
+.history,
+.user,
+.language {
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .shop {
   background-image: url('../../assets/images/header/Shopheader.png');
 }

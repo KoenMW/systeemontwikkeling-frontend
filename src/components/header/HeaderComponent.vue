@@ -1,6 +1,6 @@
 <template>
   <div class="header-container">
-    <RouterLink to="/user" class="header-link">
+    <RouterLink to="/login" class="header-link">
       <div class="header-image user">User</div>
     </RouterLink>
     <RouterLink to="/dance" class="header-link">

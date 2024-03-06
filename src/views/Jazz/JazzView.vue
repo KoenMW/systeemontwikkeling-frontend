@@ -5,6 +5,4 @@
 <script setup>
 import bannerComponent from '@/components/banner/bannerComponent.vue';
 import image from '@/assets/images/jazz/image 2.png';
-import { changeBackgroundColour } from '@/helpers/colour.js';
-changeBackgroundColour('jazz');
 </script>

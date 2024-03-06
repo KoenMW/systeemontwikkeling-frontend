@@ -9,6 +9,7 @@ import EmployeeView from '@/views/Employee/EmployeeView.vue'
 import History from '@/views/History/HistoryView.vue'
 import YummyDetailView from '@/views/Yummy/DetailPage/YummyDetailView.vue'
 import Jazz from '@/views/Jazz/JazzView.vue'
+import { changeBackgroundColour } from '@/helpers/colour'
 
 
 const router = createRouter({
@@ -17,7 +18,8 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      beforeEnter: (to, from, next) => {
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('transparent')
         //pak de role uit de local storage 
         const role = localStorage.getItem('role');
         //als de role 'employee' is rederect naar /employee
@@ -42,35 +44,56 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      component: AboutViewVue
+      component: AboutViewVue,
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('default')
+        next();
+      }
     },
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login, 
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('default')
+        next();
+      }
       
     },
     {
       path: '/forget-password',
       name: 'forget-password',
-      component: ForgetPassword
+      component: ForgetPassword,
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('default')
+        next();
+      }
     },
     {
       path: '/signup',
       name: 'signup',
-      component: Signup
+      component: Signup,
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('default')
+        next();
+      }
     },
     {
 
       path: '/history',
       name: 'history',
       component: History,
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('history')
+        next();
+      }
     },
     {
       path: '/employee',
       name: 'employee',
       component: EmployeeView,
-      beforeEnter: (to, from, next) => {
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('default')
         const role = localStorage.getItem('role');
        // if (role != 'employee' | role != 'admin') next('/login');
        // else next();
@@ -80,6 +103,10 @@ const router = createRouter({
       path: '/jazz',
       name: 'jazz',
       component: Jazz,
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('jazz')
+        next();
+      }
     }
   ]
 })

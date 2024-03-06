@@ -6,6 +6,7 @@ import Signup from '../views/Login/SignupView.vue'
 import AboutViewVue from '@/views/AboutView.vue'
 import EmployeeView from '@/views/Employee/EmployeeView.vue'
 import History from '@/views/History/HistoryView.vue'
+import Jazz from '@/views/Jazz/JazzView.vue'
 
 
 const router = createRouter({
@@ -62,6 +63,11 @@ const router = createRouter({
         if (role != 'employee' | role != 'admin') next('/login');
         else next();
       }
+    },
+    {
+      path: '/jazz',
+      name: 'jazz',
+      component: Jazz,
     }
   ]
 })

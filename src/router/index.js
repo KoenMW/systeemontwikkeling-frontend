@@ -1,11 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/Home/HomeView.vue'
+import YummyView from '../views/Yummy/Home/YummyHomeView.vue'
 import Login from '../views/Login/LoginView.vue'
 import ForgetPassword from '../views/Login/ForgotPasswordView.vue'
 import Signup from '../views/Login/SignupView.vue'
 import AboutViewVue from '@/views/AboutView.vue'
 import EmployeeView from '@/views/Employee/EmployeeView.vue'
 import History from '@/views/History/HistoryView.vue'
+import YummyDetailView from '@/views/Yummy/DetailPage/YummyDetailView.vue'
 import Jazz from '@/views/Jazz/JazzView.vue'
 
 
@@ -26,6 +28,16 @@ const router = createRouter({
         else next();
       },
       component: HomeView,
+    },
+    {
+      path: '/yummy',
+      name: 'yummy',
+      component: YummyView
+    },
+    {
+      path: '/yummydetail',
+      name: 'yummydetail',
+      component: YummyDetailView
     },
     {
       path: '/about',
@@ -60,8 +72,8 @@ const router = createRouter({
       component: EmployeeView,
       beforeEnter: (to, from, next) => {
         const role = localStorage.getItem('role');
-        if (role != 'employee' | role != 'admin') next('/login');
-        else next();
+       // if (role != 'employee' | role != 'admin') next('/login');
+       // else next();
       }
     },
     {

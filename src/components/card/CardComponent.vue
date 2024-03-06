@@ -8,8 +8,6 @@
 </template>
 
 <script>
-//import { validate } from '../../helpers/eventValidator';
-
 export default {
     props: {
         image: {

@@ -1,19 +1,13 @@
 <script>
-
-import CardComponent from './components/card/CardComponent.vue';
 import HeaderComponent from './components/header/HeaderComponent.vue';
 export default {
   components: {
-    HeaderComponent,
-    CardComponent
+    HeaderComponent
 }
 }
 </script>
 <template>
-   <header id="app">
-      <HeaderComponent />
-      <CardComponent />
-   </header>
+   <HeaderComponent />
    <main>
       <RouterView />
   </main>

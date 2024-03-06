@@ -7,23 +7,17 @@
         <RouterLink to="/signup">Register</RouterLink>
       </div>
     </div>
-    <RouterLink to="/dance" class="header-link">
-      <div class="header-image dance">Dance</div>
+    <RouterLink to="/dance" class="header-link header-image dance">Dance 
     </RouterLink>
-    <RouterLink to="/jazz" class="header-link">
-      <div class="header-image jazz">Jazz</div>
+    <RouterLink to="/jazz" class="header-link header-image jazz">Jazz
     </RouterLink>
-    <RouterLink to="/yummy" class="header-link">
-      <div class="header-image yummy">Yummy</div>
+    <RouterLink to="/yummy" class="header-link header-image yummy">Yummy
     </RouterLink>
-    <RouterLink to="/" class="header-link">
-      <div class="header-image home">Home</div>
+    <RouterLink to="/" class="header-link header-image home">Home
     </RouterLink>
-    <RouterLink to="/history" class="header-link">
-      <div class="header-image history">History</div>
+    <RouterLink to="/history" class="header-link header-image history">History
     </RouterLink>
-    <RouterLink to="/shop" class="header-link">
-      <div class="header-image shop">Shop</div>
+    <RouterLink to="/shop" class="header-link header-image shop">Shop
     </RouterLink>
     <div class="header-dropdown" @mouseover="showDropdown('language')" @mouseleave="hideDropdown('language')">
       <div class="header-image language">Language</div>

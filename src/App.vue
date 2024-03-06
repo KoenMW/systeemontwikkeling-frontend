@@ -11,7 +11,7 @@ export default {
 }
 </script>
 <template>
-   <header id="app">
+   <header>
       <HeaderComponent />
       <CardComponent />
    </header>

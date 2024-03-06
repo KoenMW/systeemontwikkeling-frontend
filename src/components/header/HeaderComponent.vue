@@ -1,8 +1,12 @@
 <template>
-  <div class="header-container">
-    <RouterLink to="/login" class="header-link">
+  <header>
+    <div class="header-dropdown" @mouseover="showDropdown('user')" @mouseleave="hideDropdown('user')">
       <div class="header-image user">User</div>
-    </RouterLink>
+      <div v-if="dropdownVisible.user" class="dropdown-content">
+        <RouterLink to="/login">Login</RouterLink>
+        <RouterLink to="/signup">Register</RouterLink>
+      </div>
+    </div>
     <RouterLink to="/dance" class="header-link">
       <div class="header-image dance">Dance</div>
     </RouterLink>
@@ -21,14 +25,33 @@
     <RouterLink to="/shop" class="header-link">
       <div class="header-image shop">Shop</div>
     </RouterLink>
-    <RouterLink to="/language" class="header-link">
+    <div class="header-dropdown" @mouseover="showDropdown('language')" @mouseleave="hideDropdown('language')">
       <div class="header-image language">Language</div>
-    </RouterLink>
-  </div>
+      <div v-if="dropdownVisible.language" class="dropdown-content">
+        <div>SP</div>
+        <div>EN</div>
+        <div>FR</div>
+      </div>
+    </div>
+  </header>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
+
+const dropdownVisible = ref({
+  user: false,
+  language: false
+})
+
+const showDropdown = (type) => {
+  dropdownVisible.value[type] = true
+}
+
+const hideDropdown = (type) => {
+  dropdownVisible.value[type] = false
+}
 </script>
 
 <style scoped>

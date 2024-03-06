@@ -7,9 +7,7 @@ export default {
 }
 </script>
 <template>
-   <header>
-      <HeaderComponent />
-   </header>
+   <HeaderComponent />
    <main>
       <RouterView />
   </main>

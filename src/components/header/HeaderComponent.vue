@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header id="header">
     <div class="header-dropdown" @mouseover="showDropdown('user')" @mouseleave="hideDropdown('user')">
       <div class="header-image user">User</div>
       <div v-if="dropdownVisible.user" class="dropdown-content">

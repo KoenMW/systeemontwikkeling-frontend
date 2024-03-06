@@ -8,6 +8,7 @@
 </template>
 
 <script>
+//import { validate } from '../../helpers/eventValidator';
 
 export default {
     props: {
@@ -34,4 +35,4 @@ export default {
 
 <style scoped>
 @import './card.scss';
-</style>../../models/eventValidator
+</style>

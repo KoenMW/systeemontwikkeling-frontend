@@ -8,6 +8,8 @@ import AboutViewVue from '@/views/AboutView.vue'
 import EmployeeView from '@/views/Employee/EmployeeView.vue'
 import History from '@/views/History/HistoryView.vue'
 import YummyDetailView from '@/views/Yummy/DetailPage/YummyDetailView.vue'
+import Jazz from '@/views/Jazz/JazzView.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -73,6 +75,11 @@ const router = createRouter({
        // if (role != 'employee' | role != 'admin') next('/login');
        // else next();
       }
+    },
+    {
+      path: '/jazz',
+      name: 'jazz',
+      component: Jazz,
     }
   ]
 })

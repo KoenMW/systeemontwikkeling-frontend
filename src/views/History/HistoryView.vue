@@ -45,6 +45,9 @@ import AgendaComponent from '@/components/agenda/AgendaComponent.vue';
 import { onMounted, ref } from 'vue';
 // import axios from 'axios';
 import { Event } from '@/models/event';
+import { changeBackgroundColour } from '@/helpers/colour';
+
+changeBackgroundColour('history');
 
 const events = [
     new Event(0, 'History', 'Grote Markt', '2024-07-26', '2024-07-26', 17.5, 100, 'history'),

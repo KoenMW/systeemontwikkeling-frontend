@@ -1,19 +1,21 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-</script>
+<script>
 
+import CardComponent from './components/card/CardComponent.vue';
+import HeaderComponent from './components/header/HeaderComponent.vue';
+export default {
+  components: {
+    HeaderComponent,
+    CardComponent
+}
+}
+</script>
 <template>
-  <header>
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/yummy">Yummy</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/login">Login</RouterLink>
-        <RouterLink to="/history">History</RouterLink>
-      </nav>
-  </header>
-  <main>
-    <RouterView />
+   <header id="app">
+      <HeaderComponent />
+      <CardComponent />
+   </header>
+   <main>
+      <RouterView />
   </main>
 </template>
 

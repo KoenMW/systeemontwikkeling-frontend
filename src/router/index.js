@@ -95,8 +95,8 @@ const router = createRouter({
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('default')
         const role = localStorage.getItem('role');
-       // if (role != 'employee' | role != 'admin') next('/login');
-       // else next();
+        if (role != 'employee' | role != 'admin') next('/login');
+        else next();
       }
     },
     {

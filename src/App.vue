@@ -1,5 +1,4 @@
 <script>
-import { RouterLink, RouterView } from 'vue-router';  
 import HeaderComponent from './components/header/HeaderComponent.vue';
 export default {
   components: {

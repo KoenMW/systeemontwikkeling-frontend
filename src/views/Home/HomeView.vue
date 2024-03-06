@@ -15,6 +15,7 @@ const events = [
   new Event(1, 'History', 'Grote Markt', '2024-07-27', '2024-07-27', 25, 100, 'history'),
   new Event(2, 'Food', 'Grote Markt', '2024-07-28', '2024-07-28', 25, 0, 'music')
 ]
+
 </script>
 
 <template>

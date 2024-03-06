@@ -43,7 +43,7 @@ import event2Image from '@/assets/images/history/card2.png';
 import event3Image from '@/assets/images/history/card3.png';
 import AgendaComponent from '@/components/agenda/AgendaComponent.vue';
 import { onMounted, ref } from 'vue';
-import axios from 'axios';
+// import axios from 'axios';
 import { Event } from '@/models/event';
 
 const events = [

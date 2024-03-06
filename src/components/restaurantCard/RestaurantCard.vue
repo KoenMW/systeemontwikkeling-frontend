@@ -2,19 +2,21 @@
   <Card class="restaurant-card" :image="image" :title="title" :description="description">
     <span>{{ rating }}</span>
     <img class="star" :src="Star" alt="Star image">
-    <button class="reservation-button">Reservation</button>
+    <router-link :to="route">
+      <button class="reservation-button">Reservation</button>
+    </router-link>
   </Card>
 </template>
 
 <script>
-import Star from '@/assets/images/Yummy/star.png';
+import Star from '@/assets/images/Yummy/star.svg';
 import Card from '@/components/card/CardComponent.vue';
 
 export default {
   components: {
     Card
   },
-  props: ['image', 'title', 'description', 'rating'],
+  props: ['image', 'title', 'description', 'rating', 'route'],
   data() {
     return {
       Star: Star

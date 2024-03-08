@@ -32,14 +32,14 @@ export default {
         }
     },
     mounted() {
-        axios.get(`${import.meta.env.VITE_API_URL}/pages`)
+        axios.get(`${import.meta.env.VITE_API_URL}/pages/1`)
             .then(response => {
                 this.pageData = response.data;
             })
             .catch(error => {
                 console.log(error);
             });
-        axios.get(`${import.meta.env.VITE_API_URL}/events`)
+        axios.get(`${import.meta.env.VITE_API_URL}/events/1`)
             .then(response => {
                 response.data.forEach((event) => {
                     this.events.push(new Event(event.id, event.title, event.location, event.startTime, event.endTime, event.price, event.ticket_amount, event.eventType));
@@ -53,4 +53,8 @@ export default {
 
 
 </script>
+
+<style scoped>
+@import url(./jazz.scss);
+</style>
 

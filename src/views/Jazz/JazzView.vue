@@ -1,8 +1,58 @@
 <template>
-    <bannerComponent title="" description="Experience the soulful diversity at Haarlem Festival Jazz with an electrifying lineup of vibrant jazz styles. From the improvisational fusion of Gumbo Kings to Evolve's avant-garde beats, and Ntjam Rosie's captivating neo-soul, immerse yourself in a tapestry of musical brilliance. Groove to Wicked Jazz Sounds' infectious rhythms, savor Tom Thomsom Assemble's dynamic compositions, and be enchanted by Jonna Frazer's spellbinding vocals. Let Fox & The Mayors' melodic tales captivate, Uncle Sue's nostalgia linger, and Chris Allen's smooth jazz mastery mesmerize. Feel Myles Sanko's soulful tunes, embrace Ruis Soundsystem's experimental beats, and bask in The Family XL's expansive melodies. Join us in Haarlem for an unforgettable celebration of jazz's rich tapestry!" :image />
+    <bannerComponent :title="pageData.name" :description="pageData.intro" :image="pageData.picture" />
+
+    <section id="cards">
+        <CardComponent v-for="card in pageData.cards" :key="card.name" :title="card.title" :description="card.text" :image="card.picture" event="jazz"/>
+    </section>
+  
+    <AgendaComponent :agendaItems="events" />
+  
 </template>
 
 <script setup>
 import bannerComponent from '@/components/banner/bannerComponent.vue';
-import image from '@/assets/images/jazz/image 2.png';
+import CardComponent from '@/components/card/CardComponent.vue';
+import AgendaComponent from '@/components/agenda/AgendaComponent.vue';
+import axios from 'axios';
+import { Event } from '@/models/event';
 </script>
+
+<script>
+
+export default {
+    components: {
+        bannerComponent,
+        CardComponent,
+        AgendaComponent
+    },
+    data() {
+        return {
+            pageData: {},
+            events: []
+        }
+    },
+    mounted() {
+        axios.get(`${import.meta.env.VITE_API_URL}/pages`)
+            .then(response => {
+              console.log("response", response.data)
+                this.pageData = response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        axios.get(`${import.meta.env.VITE_API_URL}/events`)
+            .then(response => {
+                response.data.forEach((event) => {
+                    this.events.push(new Event(event.id, event.title, event.location, event.startTime, event.endTime, event.price, event.ticket_amount, event.eventType));
+                });
+                console.log("events", response.data)
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    },
+}
+
+
+</script>
+

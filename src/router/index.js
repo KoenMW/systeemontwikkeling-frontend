@@ -6,7 +6,7 @@ import Signup from '../views/Login/SignupView.vue'
 import AboutViewVue from '@/views/AboutView.vue'
 import EmployeeView from '@/views/Employee/EmployeeView.vue'
 import History from '@/views/History/HistoryView.vue'
-
+import Dance from '@/views/Dance/DanceView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -52,6 +52,11 @@ const router = createRouter({
       path: '/history',
       name: 'history',
       component: History,
+    },
+    {
+      path: '/dance',
+      name: 'dance',
+      component: Dance
     },
     {
       path: '/employee',

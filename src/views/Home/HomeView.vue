@@ -6,6 +6,7 @@ import backgroundImage from '@/assets/images/homebanner.png';
 import jazzCard from '@/assets/images/jazzCard.png';
 import historyCard from '@/assets/images/historyCard.png';
 import foodCard from '@/assets/images/foodCard.png';
+import danceCard from '@/assets/images/danceCard.png';
 import AgendaComponent from '@/components/agenda/AgendaComponent.vue';
 import { Event } from '@/models/event';
 
@@ -13,7 +14,8 @@ import { Event } from '@/models/event';
 const events = [
     new Event(0, 'Jazz', 'Grote Markt', '2024-07-26', '2024-07-26', 25, 100, 'jazz'),
     new Event(1, 'History', 'Grote Markt', '2024-07-27', '2024-07-27', 25, 100, 'history'),
-    new Event(2, 'Food', 'Grote Markt', '2024-07-28', '2024-07-28', 25, 0, 'music')
+    new Event(2, 'Food', 'Grote Markt', '2024-07-28', '2024-07-28', 25, 0, 'music'),
+    new Event(3, 'Dance', 'Grote Markt', '2024-07-27', '2024-07-27', 25, 100,'dance')
 ]
 </script>
 
@@ -37,6 +39,11 @@ const events = [
     <HomeCard
         :image="foodCard"
         description="Delve into Haarlem's Yummie Event, an exquisite culinary celebration that tantalizes your taste buds! Experience an extensive array of flavorful adventures, ranging from exclusive restaurant menus crafted by top chefs to delightful home-cooked recipes. Immerse yourself in the vibrant and diverse food scene, capturing the true essence and spirit of our festival's culinary journey."
+    />
+    <HomeCard
+      :image="danceCard"
+      description="Experience the rhythm of Haarlem's dance festival, where the city's streets transform into a vibrant stage. Join us for a captivating celebration of dance, where the city's rich history and modern culture intertwine. From traditional folk dances to contemporary performances, Haarlem's dance festival promises an unforgettable experience for all."
+      textRight
     />
 
     <AgendaComponent

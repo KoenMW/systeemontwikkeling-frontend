@@ -1,4 +1,4 @@
-const events = ['jazz', 'history', 'music'];
+const events = ['jazz', 'history', 'music' , 'dance'];
 
 
 const validate = (event) => {

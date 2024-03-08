@@ -34,7 +34,6 @@ export default {
     mounted() {
         axios.get(`${import.meta.env.VITE_API_URL}/pages`)
             .then(response => {
-              console.log("response", response.data)
                 this.pageData = response.data;
             })
             .catch(error => {
@@ -45,7 +44,6 @@ export default {
                 response.data.forEach((event) => {
                     this.events.push(new Event(event.id, event.title, event.location, event.startTime, event.endTime, event.price, event.ticket_amount, event.eventType));
                 });
-                console.log("events", response.data)
             })
             .catch(error => {
                 console.log(error);

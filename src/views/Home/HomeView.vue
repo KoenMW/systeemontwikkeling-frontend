@@ -11,9 +11,9 @@ import AgendaComponent from '@/components/agenda/AgendaComponent.vue'
 import { Event } from '@/models/event'
 
 const events = [
-  new Event(0, 'Jazz', 'Grote Markt', '2024-07-26', '2024-07-26', 25, 100, 'jazz'),
-  new Event(1, 'History', 'Grote Markt', '2024-07-27', '2024-07-27', 25, 100, 'history'),
-  new Event(2, 'Food', 'Grote Markt', '2024-07-28', '2024-07-28', 25, 0, 'music')
+  new Event(0, 'Jazz', 'Grote Markt', '2024-07-26', '2024-07-26', 25, 100, 1),
+  new Event(1, 'History', 'Grote Markt', '2024-07-27', '2024-07-27', 25, 15, 2),
+  new Event(2, 'Food', 'Grote Markt', '2024-07-28', '2024-07-28', 25, 0, 3)
 ]
 
 </script>

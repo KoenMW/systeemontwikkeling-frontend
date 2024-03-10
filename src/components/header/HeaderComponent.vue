@@ -3,8 +3,14 @@
     <div class="header-dropdown" @mouseover="showDropdown('user')" @mouseleave="hideDropdown('user')">
       <div class="header-image user">User</div>
       <div v-if="dropdownVisible.user" class="dropdown-content">
+        <div v-if="authStore.isLoggedIn">
+          <RouterLink to="/account">Account Info</RouterLink>
+          <RouterLink to="/" @click="logout">Logout</RouterLink>
+        </div>
+        <div v-else>
         <RouterLink to="/login">Login</RouterLink>
         <RouterLink to="/signup">Register</RouterLink>
+        </div>
       </div>
     </div>
     <RouterLink to="/dance" class="header-link header-image dance">Dance 
@@ -32,7 +38,11 @@
 
 <script setup>
 import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter} from 'vue-router'
+import { useAuthStore } from '../../stores/auth.js';
+
+const authStore = useAuthStore()
+const router = useRouter()
 
 const dropdownVisible = ref({
   user: false,
@@ -46,6 +56,12 @@ const showDropdown = (type) => {
 const hideDropdown = (type) => {
   dropdownVisible.value[type] = false
 }
+const logout = () => {
+  localStorage.removeItem('jwt');
+  authStore.logout() 
+  router.push('/login')
+}
+
 </script>
 
 <style scoped>

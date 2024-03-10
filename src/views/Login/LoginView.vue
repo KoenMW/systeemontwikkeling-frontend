@@ -11,6 +11,8 @@
       </form>
 </template>
   <script>
+  import axios from '../../axios-auth.js';
+  import { useAuthStore } from '../../stores/auth.js';
   export default {
     data() {
       return {
@@ -20,14 +22,26 @@
     },
     methods: {
       login() {
-        console.log('Email:', this.email);
-        console.log('Password:', this.password);
-        if (this.email === 'employee') {
-          this.$router.push('/employee');
+        axios.post('users/login', {
+          email: this.email,
+          password: this.password,
+        })
+          .then((response) => {
+            axios.defaults.headers.common['Authorization'] = "Bearer" + response.data.jwt;
+            localStorage.setItem('jwt', response.data.jwt);
+            const authStore = useAuthStore();
+            authStore.login();
+            this.$router.push('/');
+            console.log(response.data.jwt);
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+            alert('Invalid email or password');
+          });
         }
       },
-    },
-  };
+    };
   </script>
   
   <style>

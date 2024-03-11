@@ -7,7 +7,7 @@
           <input type="password" id="password" v-model="password" required placeholder="Enter your password">
           <router-link to="/forget-password" class="forgot-password">Forgot password?</router-link>
         <button type="submit" class="login-button">Login</button>
-        <p class="signup-text">Don’t have an account? <router-link to="/signup" class="signup-link">Sign up</router-link></p>
+        <p class="signup-text">Don`t have an account? <router-link to="/signup" class="signup-link">Sign up</router-link></p>
       </form>
 </template>
   <script>
@@ -22,6 +22,9 @@
       login() {
         console.log('Email:', this.email);
         console.log('Password:', this.password);
+        if (this.email === 'employee') {
+          this.$router.push('/employee');
+        }
       },
     },
   };

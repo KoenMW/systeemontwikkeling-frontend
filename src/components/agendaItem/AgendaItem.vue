@@ -4,11 +4,11 @@
             <h3>{{ agendaItem.eventName }}</h3>
             <div class="details">
                 <p>{{ agendaItem.location }}</p>
-                <p>{{ agendaItem.startDate }} - {{ agendaItem.endDate }}</p>
+                <p>{{ formattedDate(agendaItem.startTime) }} - {{ formattedDate(agendaItem.endTime) }}</p>
                 <p>Price: €{{ agendaItem.price }}</p>
             </div>
         </div>
-        <div class="tickets"  v-if="agendaItem.ticketsAvailable > 0">
+        <div class="tickets"  v-if="agendaItem.ticket_amount > 0">
             <button @click="removeTicket" class="subtrackt">-</button>
             <div>{{ tickets }}</div>
             <button @click="addTicket" class="add">+</button>
@@ -46,7 +46,7 @@ export default{
     },
     methods: {
         addTicket() {
-            if (this.tickets < this.agendaItem.ticketsAvailable) {
+            if (this.tickets < this.agendaItem.ticket_amount) {
                 this.addTicketStore(this.agendaItem);
                 this.tickets = this.getTickets(this.agendaItem.id);
             }
@@ -56,6 +56,9 @@ export default{
                 this.removeTicketStore(this.agendaItem);
                 this.tickets = this.getTickets(this.agendaItem.id);
             }
+        },
+        formattedDate(date) {
+            return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
         }
     },mounted() {
         this.tickets = this.getTickets(this.agendaItem.id);

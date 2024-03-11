@@ -1,36 +1,62 @@
 @import '../../assets/variables.scss';
 
-.card{
+.card {
+  width: 15em;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5em;
+  background-color: $primary-color;
+  padding: 1em;
 
-    width: 15em;
-    display: flex;
-    flex-direction: column;
-    border-radius: 0.5em;
-    background-color: $primary-color;
-    padding: 1em;
+  img {
+    border-radius: 1em;
+  }
 
-    img{
-        border-radius: 1em;
-    }
-
-    h2{
-        font-size: 1.5em;
-        margin: 0.5em 0 0 0;
-    }
+  h2 {
+    font-size: 1.5em;
+    margin: 0.5em 0 0 0;
+  }
 }
 
-.history{
-    background-color: $histor-card;
-    color: black;
+.history {
+  background-color: $histor-card;
+  color: black;
 }
 
-.jazz{
-    background-color: $jazz-card;
+.jazz {
+  background-color: $jazz-card;
 }
 
-.music{
-    background-color: $music-card;
-}
 .dance{
     background-color: $dance-card;
+}
+.yummy{
+   background-color: $yummy-card;
+   
+}
+
+.restaurant {
+  background-color: #f3f9e3;
+  width: 30%;
+  margin: 1em;
+  padding: 1em;
+  box-sizing: border-box;
+  border-radius: 0.9375em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  h2 {
+    color: #2c3e28;
+  }
+
+  p {
+    color: #2c3e28;
+  }
 }

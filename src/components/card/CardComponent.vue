@@ -8,7 +8,6 @@
 </template>
 
 <script>
-
 export default {
     props: {
         image: {
@@ -34,4 +33,4 @@ export default {
 
 <style scoped>
 @import './card.scss';
-</style>../../models/eventValidator
+</style>

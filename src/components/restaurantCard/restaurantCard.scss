@@ -1,53 +1,26 @@
-.restaurant-card {
-    background-color: #F3F9E3;
-    width: 30%; 
-    margin: 1em; 
-    padding: 1em; 
-    box-sizing: border-box; 
-    border-radius: 0.9375em; 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
+.card {
+  button {
+    background-color: #edd83d;
+    border: none;
+    border-radius: 0.9375em;
+    padding: 0.625em 1.25em;
+    color: #000;
+    cursor: pointer;
+    align-self: center;
+  }
 
-    ::v-deep {
-        img {
-            width: 100%;
-            height: auto; 
-        }
+  .star {
+    width: 1.875em;
+    height: 1.875em;
+    position: absolute;
+    right: 0.625em;
+    bottom: 0.625em;
+  }
 
-        h2 {
-            color: #2C3E28; 
-        }
-
-        p {
-            color: #2C3E28; 
-            word-wrap: break-word; 
-        }
-    }
-
-    button {
-        background-color: #EDD83D; 
-        border: none; 
-        border-radius: 0.9375em; 
-        padding: 0.625em 1.25em; 
-        color: #000;
-        cursor: pointer;
-        align-self: center; 
-    }
-
-    .star {
-        width: 1.875em; 
-        height: 1.875em; 
-        position: absolute;
-        right: 0.625em; 
-        bottom: 0.625em; 
-    }
-
-    span {
-        position: absolute;
-        bottom: 0.625em; 
-        right: 2.5em;
-        color: #000; 
-    }
+  span {
+    position: absolute;
+    bottom: 0.625em;
+    right: 2.5em;
+    color: #000;
+  }
 }

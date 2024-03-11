@@ -35,18 +35,21 @@ export default {
     }, 
     data() {
         return {
-            selectedDay: '2024-07-26' // not a fan of this hardcoded date but its fine for now
+            selectedDay: new Date('2024-07-26') // not a fan of this hardcoded date but its fine for now
         }
     },
     methods: {
         changeDay(day) {
-            this.selectedDay = day;
+            this.selectedDay = new Date(day);
         }
     },
     computed: {
         filteredAgendaItems() {
+            console.log("selected day: ", 
+            this.selectedDay.toString());
+            console.log("all itemts: ", this.agendaItems);
             return this.agendaItems.filter((item) => {
-                return item.startDate === this.selectedDay;
+                return item.startTime.getDay() === this.selectedDay.getDay();
             });
         }
     }

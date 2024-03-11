@@ -1,33 +1,36 @@
-const events = ['jazz', 'history', 'music'];
+const eventIdToEvent = (id) => {
+    switch (id) {
+        case 1:
+            return 'jazz';
+        case 2:
+            return 'history';
+        case 3:
+            return 'music';
+        case 4:
+            return 'yummy';
+        default:
+            return 'Invalid event';
+    }
+}
 
-
-const validate = (event) => {
-    if (events.includes(event)) return true;
-    console.error('Invalid event');
-    return false;
+const dateConverter = (date) => {
+    if (typeof date === 'string') {
+        return new Date(date);
+    }
+    return date;
 }
 
 export class Event {
     constructor(id, eventName, location, startDate, endDate, price, ticketsAvailable, event) {
-        if (typeof id !== 'number') throw new Error('Invalid id');
-        if (typeof eventName !== 'string') throw new Error('Invalid eventName');
-        if (typeof location !== 'string') throw new Error('Invalid location');
-        if (typeof startDate !== 'string') throw new Error('Invalid startDate');
-        if (typeof endDate !== 'string') throw new Error('Invalid endDate');
-        if (typeof price !== 'number') throw new Error('Invalid price');
-        if (typeof ticketsAvailable !== 'number') throw new Error('Invalid ticketsAvailable');
-        if (typeof event !== 'string') throw new Error('Invalid event');
-
-
         this.id = id;
         this.eventName = eventName;
         this.location = location
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startTime = dateConverter(startDate);
+        this.endTime = dateConverter(endDate);
         this.price = price;
-        this.ticketsAvailable = ticketsAvailable;
-        if (validate(event)) {
-            this.event = event;
-        }
+
+        this.ticket_amount = ticketsAvailable;
+        
+        this.event = eventIdToEvent(Number(event));
     }
 }

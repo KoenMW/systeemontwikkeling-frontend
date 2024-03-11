@@ -1,5 +1,5 @@
 <template>
-  <Card class="restaurant-card" :image="image" :title="title" :description="description">
+  <Card :image="image" :title="title" :description="description" event="restaurant" >
     <span>{{ rating }}</span>
     <img class="star" :src="Star" alt="Star image">
     <router-link :to="route">

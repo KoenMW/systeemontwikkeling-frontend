@@ -23,6 +23,7 @@
 <script>
 import { Event } from '../../models/event'
 import { useTicketsStore } from '../../stores/tickets'
+import { formattedDate } from '@/helpers/formatDate';
 
 export default{
     setup(){
@@ -57,9 +58,9 @@ export default{
                 this.tickets = this.getTickets(this.agendaItem.id);
             }
         },
-        formattedDate(date) {
-            return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
-        }
+        formattedDate() {
+            return formattedDate(this.agendaItem.startTime);
+        },
     },mounted() {
         this.tickets = this.getTickets(this.agendaItem.id);
     }

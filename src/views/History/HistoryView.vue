@@ -23,7 +23,7 @@
     </div>
     <h2>Sights</h2>
     <section id="cards">
-        <CardComponent v-for="card in pageData.cards" :key="card.name" :title="card.title" :description="card.text" :image="card.picture" event="jazz"/>
+        <CardComponent v-for="card in pageData.cards" :key="card.name" :title="card.title" :description="card.text" :image="card.picture" event="history"/>
     </section>
     <h2>Book Your Journey</h2>
     <AgendaComponent :agendaItems="events" />
@@ -32,7 +32,7 @@
 import bannerComponent from '@/components/banner/bannerComponent.vue';
 import CardComponent from '@/components/card/CardComponent.vue';
 import AgendaComponent from '@/components/agenda/AgendaComponent.vue';
-import axios from 'axios';
+import axios from '../../axios-auth.js';
 import { Event } from '@/models/event';
 </script>
 <script>
@@ -49,14 +49,14 @@ export default {
         }
     },
     mounted() {
-        axios.get(`${import.meta.env.VITE_API_URL}/pages/2`)
+        axios.get(`/pages/2`)
             .then(response => {
                 this.pageData = response.data;
             })
             .catch(error => {
                 console.log(error);
             });
-        axios.get(`${import.meta.env.VITE_API_URL}/events/2`)
+        axios.get(`/events/2`)
             .then(response => {
                 response.data.forEach((event) => {
                     this.events.push(new Event(event.id, event.title, event.location, event.startTime, event.endTime, event.price, event.ticket_amount, event.eventType));

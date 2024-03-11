@@ -7,6 +7,7 @@ import Signup from '../views/Login/SignupView.vue'
 import AboutViewVue from '@/views/AboutView.vue'
 import EmployeeView from '@/views/Employee/EmployeeView.vue'
 import History from '@/views/History/HistoryView.vue'
+import Dance from '@/views/Dance/DanceView.vue'
 import YummyDetailView from '@/views/Yummy/DetailPage/YummyDetailView.vue'
 import Jazz from '@/views/Jazz/JazzView.vue'
 import { changeBackgroundColour } from '@/helpers/colour'
@@ -97,14 +98,21 @@ const router = createRouter({
       }
     },
     {
+      path: '/dance',
+      name: 'dance',
+      component: Dance
+    },
+    {
       path: '/employee',
       name: 'employee',
       component: EmployeeView,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('default')
-        const role = localStorage.getItem('role');
-        if (role != 'employee' | role != 'admin') next('/login');
-        else next();
+        next();
+        //const role = localStorage.getItem('role');
+
+        //if (role != 'employee' | role != 'admin') next('/login');
+        //else next();
       }
     },
     {

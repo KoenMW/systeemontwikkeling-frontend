@@ -1,8 +1,6 @@
 <template>
         <h2 class="header">Sign Up</h2>
         <form @submit.prevent="signup" class="login-form">
-            <label for="name">Name:</label>
-            <input type="text" id="name" v-model="name" required placeholder="Enter your name">
             <label for="email">Email:</label>
             <input type="email" id="email" v-model="email" required placeholder="Enter your email">
             <label for="password">Password:</label>
@@ -12,17 +10,34 @@
   </template>
   
   <script>
+  import axios from '../../axios-auth.js';
   export default {
     data() {
       return {
-        name: '',
         email: '',
         password: '',
+        role: 0,
       };
     },
     methods: {
       signup() {
-        console.log('Signing up:', this.name, this.email, this.password);
+        if (this.email && this.password) {
+          axios.post('users/signUp', {
+            email: this.email,
+            password: this.password,
+            role: this.role,
+          })
+            .then((response) => {
+              if (response.status === 200) { 
+              this.$router.push('/login');
+            } else {
+              console.log("Signup was not successful. Please try again.");
+            }
+          })
+          .catch((error) => {
+            console.error("An error occurred during signup:", error);
+          });
+        }
       },
     },
   };

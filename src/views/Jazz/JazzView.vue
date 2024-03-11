@@ -13,7 +13,7 @@
 import bannerComponent from '@/components/banner/bannerComponent.vue';
 import CardComponent from '@/components/card/CardComponent.vue';
 import AgendaComponent from '@/components/agenda/AgendaComponent.vue';
-import axios from 'axios';
+import axios from '../../axios-auth.js';
 import { Event } from '@/models/event';
 </script>
 
@@ -32,14 +32,14 @@ export default {
         }
     },
     mounted() {
-        axios.get(`${import.meta.env.VITE_API_URL}/pages/1`)
+        axios.get(`/pages/1`)
             .then(response => {
                 this.pageData = response.data;
             })
             .catch(error => {
                 console.log(error);
             });
-        axios.get(`${import.meta.env.VITE_API_URL}/events/1`)
+        axios.get(`/events/1`)
             .then(response => {
                 response.data.forEach((event) => {
                     this.events.push(new Event(event.id, event.title, event.location, event.startTime, event.endTime, event.price, event.ticket_amount, event.eventType));

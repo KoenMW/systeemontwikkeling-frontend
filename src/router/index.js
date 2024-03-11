@@ -100,9 +100,11 @@ const router = createRouter({
       component: EmployeeView,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('default')
-        const role = localStorage.getItem('role');
-        if (role != 'employee' | role != 'admin') next('/login');
-        else next();
+        next();
+        //const role = localStorage.getItem('role');
+
+        //if (role != 'employee' | role != 'admin') next('/login');
+        //else next();
       }
     },
     {

@@ -34,12 +34,20 @@ const router = createRouter({
     {
       path: '/yummy',
       name: 'yummy',
-      component: YummyView
+      component: YummyView,
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('yummy')
+        next();
+      }
     },
     {
       path: '/yummydetail',
       name: 'yummydetail',
-      component: YummyDetailView
+      component: YummyDetailView,
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('yummy')
+        next();
+      }
     },
     {
       path: '/about',

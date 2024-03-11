@@ -19,14 +19,14 @@
         <tr>
           <th @click="setSortField('email')">Email</th>
           <th @click="setSortField('role')">Role</th>
-          <th @click="setSortField('create_time')">Created At</th>
+          <th @click="setSortField('createDate')">Created At</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="user in users" :key="user.id">
           <td>{{ user.email }}</td>
           <td>{{ user.role }}</td>
-          <td>{{ user.create_time }}</td>
+          <td>{{ user.createDate }}</td>
         </tr>
       </tbody>
     </table>

@@ -71,47 +71,7 @@ export default {
   },
 };
 </script>
-<style scoped>
-.user-management {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.filters {
-  margin-bottom: 20px;
-  display: flex;
-  gap: 10px;
-}
-
-.search-input, .role-select, .sort-select {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
-}
-
-.users-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.users-table th, .users-table td {
-  text-align: left;
-  padding: 8px;
-  border-bottom: 1px solid #000000;
-}
-
-.users-table th {
-  background-color: #000000;
-  cursor: pointer;
-}
-
-.users-table th:hover {
-  background-color: #000000;
-}
-
-.users-table tr:nth-child(even) {
-  background-color: #000000;
-}
+<style>
+@import 'users.scss';
 </style>
+

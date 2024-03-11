@@ -123,7 +123,7 @@ const router = createRouter({
     {
       path: '/jazz/:id',
       name: 'jazz-detail',
-      component: Detail,
+      //component: Detail,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('jazz')
         next();
@@ -132,7 +132,7 @@ const router = createRouter({
     {
       path: 'history/:id',
       name: 'history-detail',
-      component: Detail,
+      //component: Detail,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('history')
         next();
@@ -141,7 +141,7 @@ const router = createRouter({
     {
       path: 'dance/:id',
       name: 'dance-detail',
-      component: Detail,
+      //component: Detail,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('dance')
         next();
@@ -149,7 +149,7 @@ const router = createRouter({
     },{
       path: 'yummy/:id',
       name: 'yummy-detail',
-      component: Detail,
+      //component: Detail,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('yummy')
         next();

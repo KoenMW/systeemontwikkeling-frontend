@@ -101,7 +101,11 @@ const router = createRouter({
     {
       path: '/dance',
       name: 'dance',
-      component: Dance
+      component: Dance,
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('default')
+        next();
+      }
     },
     {
       path: '/employee',

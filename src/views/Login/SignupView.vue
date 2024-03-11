@@ -28,12 +28,15 @@
             role: this.role,
           })
             .then((response) => {
-              console.log(response);
+              if (response.status === 200) { 
               this.$router.push('/login');
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+            } else {
+              console.log("Signup was not successful. Please try again.");
+            }
+          })
+          .catch((error) => {
+            console.error("An error occurred during signup:", error);
+          });
         }
       },
     },

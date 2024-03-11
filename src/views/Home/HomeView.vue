@@ -1,19 +1,21 @@
 <script setup>
-import Background from '@/components/background/BackgroundComponent.vue'
-import HomeCard from '@/components/homeCard/HomeCard.vue'
-import homeBanner from '@/components/icons/homeBanner.vue'
-import backgroundImage from '@/assets/images/homebanner.png'
-import jazzCard from '@/assets/images/jazzCard.png'
-import historyCard from '@/assets/images/historyCard.png'
-import foodCard from '@/assets/images/foodCard.png'
-import danceCard from '@/assets/images/danceCard.png'
-import AgendaComponent from '@/components/agenda/AgendaComponent.vue'
-import { Event } from '@/models/event'
+import Background from '@/components/background/BackgroundComponent.vue';
+import HomeCard from '@/components/homeCard/HomeCard.vue';
+import homeBanner from '@/components/icons/homeBanner.vue';
+import backgroundImage from '@/assets/images/homebanner.png';
+import jazzCard from '@/assets/images/jazzCard.png';
+import historyCard from '@/assets/images/historyCard.png';
+import foodCard from '@/assets/images/foodCard.png';
+import danceCard from '@/assets/images/danceCard.png';
+import AgendaComponent from '@/components/agenda/AgendaComponent.vue';
+import { Event } from '@/models/event';
+
 
 const events = [
-  new Event(0, 'Jazz', 'Grote Markt', '2024-07-26', '2024-07-26', 25, 100, 1),
-  new Event(1, 'History', 'Grote Markt', '2024-07-27', '2024-07-27', 25, 15, 2),
-  new Event(2, 'Food', 'Grote Markt', '2024-07-28', '2024-07-28', 25, 0, 3)
+    new Event(0, 'Jazz', 'Grote Markt', '2024-07-26', '2024-07-26', 25, 100, 'jazz'),
+    new Event(1, 'History', 'Grote Markt', '2024-07-27', '2024-07-27', 25, 100, 'history'),
+    new Event(2, 'Food', 'Grote Markt', '2024-07-28', '2024-07-28', 25, 0, 'music'),
+    new Event(3, 'Dance', 'Grote Markt', '2024-07-27', '2024-07-27', 25, 100,'dance')
 ]
 
 </script>

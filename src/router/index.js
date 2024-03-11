@@ -7,6 +7,7 @@ import Signup from '../views/Login/SignupView.vue'
 import AboutViewVue from '@/views/AboutView.vue'
 import EmployeeView from '@/views/Employee/EmployeeView.vue'
 import History from '@/views/History/HistoryView.vue'
+import Dance from '@/views/Dance/DanceView.vue'
 import YummyDetailView from '@/views/Yummy/DetailPage/YummyDetailView.vue'
 import Jazz from '@/views/Jazz/JazzView.vue'
 import { changeBackgroundColour } from '@/helpers/colour'
@@ -87,6 +88,11 @@ const router = createRouter({
         changeBackgroundColour('history')
         next();
       }
+    },
+    {
+      path: '/dance',
+      name: 'dance',
+      component: Dance
     },
     {
       path: '/employee',

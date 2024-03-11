@@ -1,3 +1,4 @@
+const events = ['jazz', 'history', 'music' , 'yummy'];
 const eventIdToEvent = (id) => {
     switch (id) {
         case 1:

@@ -12,6 +12,7 @@ import YummyDetailView from '@/views/Yummy/DetailPage/YummyDetailView.vue'
 import Jazz from '@/views/Jazz/JazzView.vue'
 import Shop from '@/views/Shop/ShopView.vue'
 import Users from '@/views/Admin/UsersView.vue'
+import PasswordReset from '@/views/Login/PasswordResetView.vue'
 import { changeBackgroundColour } from '@/helpers/colour'
 
 
@@ -60,6 +61,15 @@ const router = createRouter({
         changeBackgroundColour('default')
         next();
       }
+    },
+    {
+      path: '/reset-password', 
+      name: 'reset-password',
+      component: PasswordReset,
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('default');
+        next();
+      },
     },
     {
       path: '/login',

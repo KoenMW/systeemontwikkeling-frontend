@@ -1,33 +1,21 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
 
-const getTicketsFromLocalStorage = () => {
-    return JSON.parse(localStorage.getItem('tickets') || '[]')._value || [];
-}
+export const useTicketsStore = defineStore('tickets',  {
+    state: () => ({
+        tickets: JSON.parse(localStorage.getItem('tickets')) ?? []
+    }),
+    actions: {
+        addTicket(ticket) {
+            this.tickets.push(ticket);
+            localStorage.setItem('tickets', JSON.stringify(this.tickets));
+        },
+        removeTicket(ticket) {
+            this.tickets.splice(this.tickets.indexOf(ticket), 1);
+            localStorage.setItem('tickets', JSON.stringify(this.tickets));
+        },
+        getTicketById(id) {
 
-export const useTicketsStore = defineStore('tickets', () => {
-    const tickets = ref(getTicketsFromLocalStorage());
-
-    const addTicket = (ticket) => {
-        tickets.value.push(ticket);
-        localStorage.setItem('tickets', JSON.stringify(tickets));
+            return this.tickets.filter(t => t === id).length || 0;
+        }
     }
-
-    const removeTicket = (ticket) => {
-        const index = tickets.value.findIndex(t => t.id === ticket.id);
-        tickets.value.splice(index, 1);
-        localStorage.setItem('tickets', JSON.stringify(tickets));
-    }
-
-    const getTicketsById = (id) => {
-        return tickets.value.filter(t => t.id === id).length;
-    }
-    
-    return {
-        tickets,
-        addTicket,
-        removeTicket,
-        getTicketsById
-    };
-
 });

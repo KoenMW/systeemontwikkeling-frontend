@@ -1,4 +1,4 @@
-const events = ['jazz', 'history', 'music' , 'yummy'];
+const events = ['jazz', 'history', 'dance' , 'yummy'];
 const eventIdToEvent = (id) => {
     switch (id) {
         case 1:
@@ -6,7 +6,7 @@ const eventIdToEvent = (id) => {
         case 2:
             return 'history';
         case 3:
-            return 'music';
+            return 'dance';
         case 4:
             return 'yummy';
         default:
@@ -32,6 +32,8 @@ export class Event {
 
         this.ticket_amount = ticketsAvailable;
         
-        this.event = eventIdToEvent(Number(event));
+        console.log(event);
+        console.log(typeof event);
+        events.includes(typeof event != 'number') ? this.event = event.toLowerCase() : this.event = eventIdToEvent(Number(event));
     }
 }

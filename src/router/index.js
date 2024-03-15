@@ -10,6 +10,7 @@ import History from '@/views/History/HistoryView.vue'
 import Dance from '@/views/Dance/DanceView.vue'
 import YummyDetailView from '@/views/Yummy/DetailPage/YummyDetailView.vue'
 import Jazz from '@/views/Jazz/JazzView.vue'
+import Users from '@/views/Admin/UsersView.vue'
 import { changeBackgroundColour } from '@/helpers/colour'
 
 
@@ -35,12 +36,20 @@ const router = createRouter({
     {
       path: '/yummy',
       name: 'yummy',
-      component: YummyView
+      component: YummyView,
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('yummy')
+        next();
+      }
     },
     {
       path: '/yummydetail',
       name: 'yummydetail',
-      component: YummyDetailView
+      component: YummyDetailView,
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('yummy')
+        next();
+      }
     },
     {
       path: '/about',
@@ -94,7 +103,7 @@ const router = createRouter({
       name: 'dance',
       component: Dance,
       beforeEnter: (_to, _from, next) => {
-        changeBackgroundColour('dance')
+        changeBackgroundColour('default')
         next();
       }
     },
@@ -152,6 +161,14 @@ const router = createRouter({
       //component: Detail,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('yummy')
+        next();
+      }
+    },{
+      path: '/admin/users',
+      name: 'admin',
+      component: Users,
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('default')
         next();
       }
     }

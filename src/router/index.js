@@ -139,7 +139,7 @@ const router = createRouter({
       }
     },
     {
-      path: 'history/:id',
+      path: '/history/:id',
       name: 'history-detail',
       //component: Detail,
       beforeEnter: (_to, _from, next) => {
@@ -148,7 +148,7 @@ const router = createRouter({
       }
     },
     {
-      path: 'dance/:id',
+      path: '/dance/:id',
       name: 'dance-detail',
       //component: Detail,
       beforeEnter: (_to, _from, next) => {
@@ -156,7 +156,7 @@ const router = createRouter({
         next();
       }
     },{
-      path: 'yummy/:id',
+      path: '/yummy/:id',
       name: 'yummy-detail',
       //component: Detail,
       beforeEnter: (_to, _from, next) => {

@@ -22,6 +22,7 @@ import CardComponent from '@/components/card/CardComponent.vue';
 import AgendaComponent from '@/components/agenda/AgendaComponent.vue';
 import axios from '../../axios-auth.js';
 import { Event } from '@/models/event';
+import router from '@/router/index.js';
 </script>
 
 <script>
@@ -53,6 +54,7 @@ export default {
             })
             .catch(error => {
                 console.log(error);
+                router.push('/404');
             });
     },
 }

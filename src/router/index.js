@@ -12,6 +12,7 @@ import YummyDetailView from '@/views/Yummy/DetailPage/YummyDetailView.vue'
 import Jazz from '@/views/Jazz/JazzView.vue'
 import DetailPage from '@/views/detail/detailView.vue'
 import Users from '@/views/Admin/UsersView.vue'
+import errorPage from '@/views/error/404View.vue'
 import { changeBackgroundColour } from '@/helpers/colour'
 
 
@@ -168,6 +169,14 @@ const router = createRouter({
       path: '/admin/users',
       name: 'admin',
       component: Users,
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('default')
+        next();
+      }
+    },{
+      path: '/:pathMatch(.*)*',
+      name: 'error',
+      component: errorPage,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('default')
         next();

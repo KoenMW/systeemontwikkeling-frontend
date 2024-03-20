@@ -10,6 +10,7 @@ import History from '@/views/History/HistoryView.vue'
 import Dance from '@/views/Dance/DanceView.vue'
 import YummyDetailView from '@/views/Yummy/DetailPage/YummyDetailView.vue'
 import Jazz from '@/views/Jazz/JazzView.vue'
+import DetailPage from '@/views/detail/detailView.vue'
 import Users from '@/views/Admin/UsersView.vue'
 import { changeBackgroundColour } from '@/helpers/colour'
 
@@ -132,7 +133,7 @@ const router = createRouter({
     {
       path: '/jazz/:id',
       name: 'jazz-detail',
-      //component: Detail,
+      component: DetailPage,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('jazz')
         next();

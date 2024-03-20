@@ -4,7 +4,7 @@
             <h2>{{ title }}</h2>
             <p>{{ description }}</p>
         </div>
-            <img :src="image" :alt="title" />
+            <img :src="image" :alt="title" v-if="image"/>
     </section>
 </template>
 <script>

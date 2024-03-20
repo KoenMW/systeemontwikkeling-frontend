@@ -13,6 +13,10 @@ import Jazz from '@/views/Jazz/JazzView.vue'
 import DetailPage from '@/views/detail/detailView.vue'
 import Users from '@/views/Admin/UsersView.vue'
 import errorPage from '@/views/error/404View.vue'
+import Admin from '@/views/Admin/AdminDashboard.vue'
+import Events from '@/views/Admin/EventsView.vue'
+import Orders from '@/views/Admin/OrdersView.vue'
+import Wysiwyg from '@/views/Admin/WysiwygView.vue'
 import { changeBackgroundColour } from '@/helpers/colour'
 
 
@@ -141,14 +145,42 @@ const router = createRouter({
         changeBackgroundColour(parentName)
         next();
       }
-    },{
-      path: '/admin/users',
-      name: 'admin',
-      component: Users,
+    },
+    {
+      path: '/admin',
+      name: 'adminDashboard',
+      component: Admin,
+      children: [
+        {
+          path: 'users',
+          name: 'adminUsers',
+          component: Users,
+        },
+        {
+          path: 'events',
+          name: 'adminEvents',
+          component: Events,
+        },
+        {
+          path: 'orders',
+          name: 'adminOrders',
+          component: Orders,
+        },
+        {
+          path: 'wysiwyg',
+          name: 'adminWysiwyg',
+          component: Wysiwyg,
+        },
+      ],
       beforeEnter: (_to, _from, next) => {
-        changeBackgroundColour('default')
-        next();
+      if (_to.path.startsWith('/admin')) {
+        document.body.classList.add('admin-page');
+      } else {
+        document.body.classList.remove('admin-page');
       }
+      next();
+    }
+      
     },{
       path: '/:pathMatch(.*)*',
       name: 'error',

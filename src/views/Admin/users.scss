@@ -40,6 +40,12 @@
 .users-table tr:nth-child(even) {
   background-color: #000000;
 }
+.add-user-btn {
+  margin-bottom: 1rem;
+}
+button {
+  margin-right: 0.5rem;
+}
 .admin-page header {
   display: none;
 }

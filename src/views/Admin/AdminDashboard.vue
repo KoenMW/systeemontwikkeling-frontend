@@ -1,14 +1,14 @@
 <template>
   <div class="admin-panel">
-        <aside class="sidebar">
-          <ul>
-            <li @click="navigateTo('adminUsers')">Users</li>
-            <li @click="navigateTo('adminEvents')">Events</li>
-            <li @click="navigateTo('adminOrders')">Orders</li>
-            <li @click="navigateTo('adminWysiwyg')">WYSIWYG</li>
-          </ul>
-        </aside>
-        <section class="content">
+    <aside class="sidebar">
+      <ul>
+        <li @click="navigateTo('adminUsers')">Users</li>
+        <li @click="navigateTo('adminEvents')">Events</li>
+        <li @click="navigateTo('adminOrders')">Orders</li>
+        <li @click="navigateTo('adminWysiwyg')">WYSIWYG</li>
+      </ul>
+    </aside>
+    <section class="content">
       <router-view></router-view>
     </section>
   </div>
@@ -18,8 +18,6 @@
 export default {
   data() {
     return {
-      isSidebarOpen: true,
-      activePage: 'users',
     };
   },
   methods: {

@@ -1,5 +1,6 @@
 <template>
   <div class="user-management">
+    <button @click="navigateTo('signup', { adminAdd: true })">Add User</button>
     <div class="filters">
       <input v-model="searchQuery" @input="fetchUsers" placeholder="Search users..." class="search-input">
       <select v-model="filterRole" @change="fetchUsers" class="role-select">
@@ -27,7 +28,12 @@
           <td>{{ user.email }}</td>
           <td>{{ user.role }}</td>
           <td>{{ user.createDate }}</td>
+          <td>
+            <button @click="editUser(user.id)">Edit</button>
+            <button @click="deleteUser(user.id)">Delete</button>
+          </td>
         </tr>
+
       </tbody>
     </table>
   </div>
@@ -44,15 +50,16 @@ export default {
       filterRole: '',
       sortField: 'email',
       sortOrder: 'ASC',
+      isAdminAdd: this.$route.query.adminAdd,
     };
   },
-  
+
   methods: {
     fetchUsers() {
       axios
         .get('/users', {
           params: {
-            searchEmail: this.searchQuery, 
+            searchEmail: this.searchQuery,
             filterRole: this.filterRole,
             sortByCreateDate: this.sortOrder,
             sortField: this.sortField,
@@ -65,6 +72,21 @@ export default {
           console.error('There was an error fetching the users:', error);
         });
     },
+    deleteUser(userId) {
+      if (confirm("Are you sure you want to delete this user?")) {
+        axios
+          .delete(`/users/delete/${userId}`)
+          .then(() => {
+            this.fetchUsers();
+          })
+          .catch(error => {
+            console.error('There was an error deleting the user:', error);
+          });
+      }
+    }, 
+    navigateTo(routeName, queryParams = {}) {
+      this.$router.push({ name: routeName, query: queryParams });
+    },
   },
   mounted() {
     this.fetchUsers();
@@ -74,4 +96,3 @@ export default {
 <style>
 @import 'users.scss';
 </style>
-

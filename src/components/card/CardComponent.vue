@@ -1,6 +1,6 @@
 <template>
     <section :class="['card', event ?? '']">
-        <img :src="image" :alt="title" />
+        <img :src="image" :alt="title" v-if="image"/>
         <h2>{{ title }}</h2>
         <p>{{ description }}</p>
         <slot></slot>
@@ -11,8 +11,7 @@
 export default {
     props: {
         image: {
-            type: String,
-            required: true
+            type: String
         },
         title: {
             type: String,

@@ -14,7 +14,7 @@
         <p>location: {{ orderData.location }}</p>
         <p>Start time: {{ formattedDate(orderData.startTime) }}</p>
         <p>End time: {{ formattedDate(orderData.endTime) }}</p>
-        <button @click="checkin" v-if="!orderData.checkedIn">check in</button>
+        <button @click="checkin" v-if="!orderData.checkedIn && !!orderData.paymentDate">check in</button>
         <button @click="clearData">clear</button>
     </section>
 </template>

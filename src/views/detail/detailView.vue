@@ -9,7 +9,7 @@
     </section>
 
     <section id="cards">
-        <CardComponent v-for="card in pageData.cards" :key="card.name" :title="card.title" :description="card.text" :image="card.picture" event="jazz"/>
+        <CardComponent v-for="card in pageData.cards" :key="card.name" :title="card.title" :description="card.text" :image="card.picture" :event="this.pageData.parentName.toLocaleLowerCase()"/>
     </section>
   
     <AgendaComponent :agendaItems="events" v-if="events.length > 0"/>
@@ -45,6 +45,10 @@ export default {
         axios.get(`/pages/detail/${this.$route.params.id}`)
             .then(response => {
                 this.pageData = response.data;
+                if (this.$route.params.parentName.toLocaleLowerCase() !== this.pageData.parentName.toLocaleLowerCase()) {
+                    router.push('/404');
+                }
+
                 this.pageData.infoText.forEach((info) => {
                     this.infoText.push(info);
                 })

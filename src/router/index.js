@@ -132,37 +132,13 @@ const router = createRouter({
       }
     },
     {
-      path: '/jazz/:id',
-      name: 'jazz-detail',
+      path: '/:parentName/:id',
+      name: 'detail',
       component: DetailPage,
       beforeEnter: (_to, _from, next) => {
-        changeBackgroundColour('jazz')
-        next();
-      }
-    },
-    {
-      path: '/history/:id',
-      name: 'history-detail',
-      //component: Detail,
-      beforeEnter: (_to, _from, next) => {
-        changeBackgroundColour('history')
-        next();
-      }
-    },
-    {
-      path: '/dance/:id',
-      name: 'dance-detail',
-      //component: Detail,
-      beforeEnter: (_to, _from, next) => {
-        changeBackgroundColour('dance')
-        next();
-      }
-    },{
-      path: '/yummy/:id',
-      name: 'yummy-detail',
-      //component: Detail,
-      beforeEnter: (_to, _from, next) => {
-        changeBackgroundColour('yummy')
+        // change it to parentName:
+        const parentName = _to.params.parentName;
+        changeBackgroundColour(parentName)
         next();
       }
     },{

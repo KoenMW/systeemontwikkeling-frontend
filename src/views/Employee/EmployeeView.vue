@@ -7,7 +7,7 @@
     <section v-if="orderData.checkedIn">
         <h2>Order is already checked in</h2>
     </section>
-    <section id="orderData" v-if="orderData.id && !orderData.checkedIn">
+    <section id="orderData" v-if="orderData.id && !orderData.checkedIn && !unknownCode">
         <h2>Order data</h2>
         <p>Order payed: {{ !!orderData.paymentDate }}</p>
         <p>Tickets for: {{ orderData.title}}</p>
@@ -16,6 +16,10 @@
         <p>End time: {{ formattedDate(orderData.endTime) }}</p>
         <button @click="checkin" v-if="!orderData.checkedIn && !!orderData.paymentDate">check in</button>
         <button @click="clearData">clear</button>
+    </section>
+
+    <section v-if="unknownCode">
+        <h2>Unknown qr-code</h2>
     </section>
 </template>
 
@@ -34,7 +38,8 @@ export default {
     },
     data() {
         return {
-            orderData: {}
+            orderData: {},
+            unknownCode: false
         }
     },
     methods: {
@@ -46,11 +51,13 @@ export default {
 
             axios.get(`${import.meta.env.VITE_API_URL}/orders/check/${code}`)
                 .then(response => {
+                    this.unknownCode = false;
                     console.log('response: ', response);
                     this.orderData = response.data;
                 })
                 .catch(error => {
                     console.log(error);
+                    this.unknownCode = true;
                 });
          },
          clearData () {

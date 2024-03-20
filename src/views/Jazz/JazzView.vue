@@ -35,15 +35,9 @@ export default {
         axios.get(`/pages/1`)
             .then(response => {
                 this.pageData = response.data;
-            })
-            .catch(error => {
-                console.log(error);
-            });
-        axios.get(`/events/1`)
-            .then(response => {
-                response.data.forEach((event) => {
-                    this.events.push(new Event(event.id, event.title, event.location, event.startTime, event.endTime, event.price, event.ticket_amount, event.eventType));
-                });
+                this.pageData.events.forEach((event) => {
+                    this.events.push(new Event(event.id, event.title, event.location, event.startTime, event.endTime, event.price, event.ticket_amount, event.eventType));                
+                })
             })
             .catch(error => {
                 console.log(error);

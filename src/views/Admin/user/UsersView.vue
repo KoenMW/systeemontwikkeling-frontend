@@ -1,6 +1,6 @@
 <template>
   <div class="user-management">
-    <button @click="navigateTo('signup', { adminAdd: true })">Add User</button>
+    <button @click="navigateTo('signup', { adminAdd: true })" class="button">Add User</button>
     <div class="filters">
       <input v-model="searchQuery" @input="fetchUsers" placeholder="Search users..." class="search-input">
       <select v-model="filterRole" @change="fetchUsers" class="role-select">
@@ -29,8 +29,8 @@
           <td>{{ user.role }}</td>
           <td>{{ user.createDate }}</td>
           <td>
-            <button @click="editUser(user.id)">Edit</button>
-            <button @click="deleteUser(user.id)">Delete</button>
+            <button @click="editUser(user.id)" class="button">Edit</button>
+            <button @click="deleteUser(user.id)" class="button">Delete</button>
           </td>
         </tr>
 
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import axios from '../../axios-auth.js';
+import axios from '../../../axios-auth';
 
 export default {
   data() {

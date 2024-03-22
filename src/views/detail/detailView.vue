@@ -42,6 +42,7 @@ export default {
     },
     mounted() {
 
+        console.log('mounted: ', this.$route.params.id );
         axios.get(`/pages/detail/${this.$route.params.id}`)
             .then(response => {
                 this.pageData = response.data;

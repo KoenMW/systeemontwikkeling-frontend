@@ -1,7 +1,7 @@
 <template> 
     <section class="pageContainer">
-        <article class="page" v-for="name in pageNames" :key="name">
-        <h1>{{ name }}</h1>
+        <article class="page" v-for="name in pageNames" :key="name.id">
+        <h1>{{ name.name }}</h1>
         <button @click="editPage(name)" class="edit">Edit</button>
         <button @click="deletePage(name)" class="delete">Delete</button>
     </article>
@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     editPage(name) {
-      this.$router.push(`/admin/wysiwyg/${name}`);
+      this.$router.push(`/admin/wysiwyg/${name.id}`);
     },
     deletePage(name) {
       if (confirm('Are you sure you want to delete this page?')) {

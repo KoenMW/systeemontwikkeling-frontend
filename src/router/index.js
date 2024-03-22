@@ -160,7 +160,7 @@ const router = createRouter({
           component: Wysiwyg
         },
         {
-          path: 'wysiwyg/:name',
+          path: 'wysiwyg/:id',
           name: 'editPage',
           component: editPage
         }

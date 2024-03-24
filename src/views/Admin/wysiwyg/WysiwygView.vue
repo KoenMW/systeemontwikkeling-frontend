@@ -1,11 +1,12 @@
 <template> 
-    <section class="pageContainer">
-        <article class="page" v-for="name in pageNames" :key="name.id">
-        <h1>{{ name.name }}</h1>
-        <button @click="editPage(name)" class="edit">Edit</button>
-        <button @click="deletePage(name)" class="delete">Delete</button>
+  <section class="pageContainer">
+    <article class="page" v-for="name in pageNames" :key="name.id">
+      <h1>{{ name.name }}</h1>
+      <button @click="editPage(name)" class="edit button">Edit</button>
+      <button @click="deletePage(name)" class="delete button">Delete</button>
     </article>
-</section>
+    <button @click="this.$router.push('/admin/wysiwyg/new')" class="add">Add new page</button>
+  </section>
 
 </template>
 

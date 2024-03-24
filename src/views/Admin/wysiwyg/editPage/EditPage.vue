@@ -33,6 +33,10 @@
         </div>
         <input type="text" v-model="card.title" class="title pageEditField" placeholder="title"/>
         <textarea type="text" v-model="card.text" class="text pageEditField" placeholder="card text"></textarea>
+        <label for="redirect_link">Redirect link</label>
+        <select v-model="card.redirect_link">
+          <option v-for="link in links" :key="link" :value="link">{{ link.name }}</option>
+        </select>
         <button @click="deleteCard(card.id)">Delete</button>
       </section>
       <button @click="addCard" class="add button">Add Card</button>
@@ -48,7 +52,9 @@ export default {
   data() {
         return {
             pageData: {},
-            infoText: []
+            infoText: [],
+            links: [],
+            new: false
         }
   },
   mounted() {
@@ -59,10 +65,16 @@ export default {
         this.pageData.infoText.forEach((info) => {
           this.infoText.push(info);
         })
-      })
-      .catch(error => {
-        console.log(error);
+      }).catch(error => {
+        console.error('There was an error fetching the content:', error);
+        this.new = true;
       });
+
+    axios.get('/pages/links')
+      .then(response => {
+        this.links = response.data;
+        console.log(this.links);
+      })
   },
   methods: {
     onFileChange(e, imageProperty) {
@@ -91,6 +103,9 @@ export default {
       this.pageData.cards = this.pageData.cards.filter(card => card.id !== id);
     },
     addInfo() {
+      if (!this.pageData.infoText) {
+        this.pageData.infoText = [];
+      }
       this.infoText.push({
         id: Date.now(),
         title: '',
@@ -99,6 +114,9 @@ export default {
       });
     },
     addCard() {
+      if (!this.pageData.cards) {
+        this.pageData.cards = [];
+      }
       this.pageData.cards.push({
         id: Date.now(),
         title: '',
@@ -108,6 +126,15 @@ export default {
     },
     savePage() {
       // dit moet waarschijnlijk anders
+      if (this.new) {
+        axios.post('/pages', this.pageData)
+          .then(response => {
+            console.log(response);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      } else {
       axios.put(`/pages/${this.pageData.id}`, this.pageData)
         .then(response => {
           console.log(response);
@@ -115,6 +142,7 @@ export default {
         .catch(error => {
           console.log(error);
         });
+      }
     }
   }
 

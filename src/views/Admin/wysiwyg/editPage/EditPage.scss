@@ -84,10 +84,12 @@ textarea {
   flex-wrap: wrap;
   gap: 1em;
   justify-content: center;
+  align-items: center;
 }
 
 .add {
   border-radius: 0.25em;
+  height: min-content;
   text-align: center;
 }
 

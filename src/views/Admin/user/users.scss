@@ -1,7 +1,7 @@
 .user-management {
-  max-width: 50em; 
+  max-width: 50em;
   margin: 0 auto;
-  padding: 1.25em; 
+  padding: 1.25em;
 }
 
 .filters {
@@ -10,10 +10,12 @@
   gap: 0.625em;
 }
 
-.search-input, .role-select, .sort-select {
+.search-input,
+.role-select,
+.sort-select {
   padding: 0.625em;
-  border: 0.0625em solid #ccc; 
-  border-radius: 0.25em; 
+  border: 0.0625em solid #ccc;
+  border-radius: 0.25em;
   width: 100%;
 }
 
@@ -22,10 +24,11 @@
   border-collapse: collapse;
 }
 
-.users-table th, .users-table td {
+.users-table th,
+.users-table td {
   text-align: left;
-  padding: 0.5em; 
-  border-bottom: 0.0625em solid #ffffff; 
+  padding: 0.5em;
+  border-bottom: 0.0625em solid #ffffff;
 }
 
 .users-table th {
@@ -39,4 +42,13 @@
 
 .users-table tr:nth-child(even) {
   background-color: #000000;
+}
+.add-user-btn {
+  margin-bottom: 1rem;
+}
+.button {
+  margin-right: 0.5rem;
+}
+.admin-page header {
+  display: none;
 }

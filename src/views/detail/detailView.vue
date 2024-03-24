@@ -1,23 +1,28 @@
 <template>
     <bannerComponent :title="pageData.name" :description="pageData.intro" :image="pageData.picture" />
 
+    <section id="" v-if="infoText.length > 0">
+        <div v-for="info in infoText" :key="info.id">
+            <h2>{{info.title}}</h2>
+            <p>{{info.content}}</p>
+        </div>
+    </section>
+
     <section id="cards">
-        <CardComponent v-for="card in pageData.cards" :key="card.name" :title="card.title" :description="card.text" :image="card.picture" event="jazz"/>
+        <CardComponent v-for="card in pageData.cards" :key="card.name" :title="card.title" :description="card.text" :image="card.picture" :event="this.pageData.parentName.toLocaleLowerCase()"/>
     </section>
   
-    <AgendaComponent :agendaItems="events" />
+    <AgendaComponent :agendaItems="events" v-if="events.length > 0"/>
   
 </template>
 
-<script setup>
+<script>
 import bannerComponent from '@/components/banner/bannerComponent.vue';
 import CardComponent from '@/components/card/CardComponent.vue';
 import AgendaComponent from '@/components/agenda/AgendaComponent.vue';
 import axios from '../../axios-auth.js';
 import { Event } from '@/models/event';
-</script>
-
-<script>
+import router from '@/router/index.js';
 
 export default {
     components: {
@@ -28,19 +33,30 @@ export default {
     data() {
         return {
             pageData: {},
-            events: []
+            events: [],
+            infoText: []
         }
     },
     mounted() {
-        axios.get(`/pages/1`)
+
+        console.log('mounted: ', this.$route.params.id );
+        axios.get(`/pages/detail/${this.$route.params.id}`)
             .then(response => {
                 this.pageData = response.data;
+                if (this.$route.params.parentName.toLocaleLowerCase() !== this.pageData.parentName.toLocaleLowerCase()) {
+                    router.push('/404');
+                }
+
+                this.pageData.infoText.forEach((info) => {
+                    this.infoText.push(info);
+                })
                 this.pageData.events.forEach((event) => {
                     this.events.push(new Event(event.id, event.title, event.location, event.startTime, event.endTime, event.price, event.ticket_amount, event.eventType));                
                 })
             })
             .catch(error => {
                 console.log(error);
+                router.push('/404');
             });
     },
 }
@@ -48,7 +64,4 @@ export default {
 
 </script>
 
-<style scoped>
-@import url(./jazz.scss);
-</style>
 

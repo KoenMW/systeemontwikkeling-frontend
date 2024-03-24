@@ -1,67 +1,71 @@
 @import '../../assets/variables.scss';
 
-.agenda-item{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 3em;
-    width: 50%;
-    padding: 0.5em;
-    border-radius: 0.75em;
+.agenda-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 3em;
+  width: 50%;
+  padding: 0.5em;
+  border-radius: 0.75em;
 }
 
-.tickets{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 9em;
+.tickets {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 9em;
 }
 
-.details{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-between;
-    p{
-        margin: 0;
-    }
+.details {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  p {
+    margin: 0;
+  }
 }
 
-.info{
-    flex-grow: 1;
-    h3{
-        margin: 0;
-    }
+.info {
+  flex-grow: 1;
+  h3 {
+    margin: 0;
+  }
 }
 
-button{
-    border-radius: 100em;
-    background-color: transparent;
-    height: 3em;
-    width: 3em;
-    font-size: 1em;
-    border: white 2px solid;
-    cursor: pointer;
+button {
+  border-radius: 100em;
+  background-color: transparent;
+  height: 3em;
+  width: 3em;
+  font-size: 1em;
+  border: white 2px solid;
+  cursor: pointer;
 }
 
-.subtrackt{
-    color: white;
+.subtrackt {
+  color: white;
 }
 
-.add{
-    border-color: black;
-    color: black;
+.add {
+  border-color: black;
+  color: black;
 }
 
-.jazz{
-    background-color: $jazz-card;
+.jazz {
+  background-color: $jazz-card;
 }
 
-.history{
-    background-color: $histor-card;
-    color: black;
+.history {
+  background-color: $histor-card;
+  color: black;
+}
+
+.music{
+    background-color: $music-card;   
 }
 .dance{
     background-color: $dance-card;

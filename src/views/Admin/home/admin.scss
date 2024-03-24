@@ -1,0 +1,39 @@
+.admin-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 12.5em;
+  background: #333;
+  color: #fff;
+  height: 100%;
+  ul {
+    padding: 0;
+    margin: 0;
+    li {
+      padding: 0.625em;
+      cursor: pointer;
+      &:hover {
+        background: #555;
+      }
+    }
+  }
+}
+
+.view {
+  position: relative;
+  padding: 1em;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 100%;
+}
+.admin-page header {
+  display: none;
+}

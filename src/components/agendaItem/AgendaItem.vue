@@ -30,7 +30,7 @@ export default{
         const ticketStore = useTicketsStore();
         return { 
             addTicketStore: ticketStore.addTicket,
-            getTickets: ticketStore.getTicketsById,
+            getTickets: ticketStore.getTicketById,
             removeTicketStore: ticketStore.removeTicket
         };
     },
@@ -48,7 +48,7 @@ export default{
     methods: {
         addTicket() {
             if (this.tickets < this.agendaItem.ticket_amount) {
-                this.addTicketStore(this.agendaItem);
+                this.addTicketStore(this.agendaItem.id);
                 this.tickets = this.getTickets(this.agendaItem.id);
             }
         },

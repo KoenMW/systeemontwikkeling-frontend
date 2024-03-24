@@ -22,6 +22,7 @@ const events = ref([]);
 axios.get(`${import.meta.env.VITE_API_URL}/pages/4`)
     .then(response => {
         pageData.value = response.data;
+        
     })
     .catch(error => {
         console.log(error);

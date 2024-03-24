@@ -13,6 +13,7 @@ import Jazz from '@/views/Jazz/JazzView.vue'
 import Shop from '@/views/Shop/ShopView.vue'
 import Users from '@/views/Admin/UsersView.vue'
 import PasswordReset from '@/views/Login/PasswordResetView.vue'
+import checkout from '@/views/Shop/ShopView.vue'
 import { changeBackgroundColour } from '@/helpers/colour'
 
 
@@ -82,6 +83,15 @@ const router = createRouter({
       
     },
     {
+      path: '/checkout',
+      name: 'checkout',
+      component: checkout,
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('default')
+        next();
+      }
+    },
+    {
       path: '/forget-password',
       name: 'forget-password',
       component: ForgetPassword,
@@ -99,6 +109,7 @@ const router = createRouter({
         next();
       }
     },
+
     {
 
       path: '/history',

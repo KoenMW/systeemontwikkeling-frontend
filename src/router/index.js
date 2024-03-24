@@ -154,11 +154,6 @@ const router = createRouter({
           component: Users
         },
         {
-          path: 'events',
-          name: 'adminEvents',
-          component: Events
-        },
-        {
           path: 'orders',
           name: 'adminOrders',
           component: Orders
@@ -167,6 +162,12 @@ const router = createRouter({
           path: 'wysiwyg',
           name: 'adminWysiwyg',
           component: Wysiwyg
+        },
+        {
+          path: 'events/:eventType?',
+          name: 'adminEvents',
+          component: Events,
+          props: true
         }
       ],
       beforeEnter: (_to, _from, next) => {

@@ -1,10 +1,10 @@
-.user-management {
+.management {
   max-width: 50em; 
   margin: 0 auto;
   padding: 1.25em; 
 }
 
-.filters, .add-user-btn {
+.filters {
   margin-bottom: 1.25em;
   display: flex;
   gap: 0.625em;
@@ -23,29 +23,28 @@
   }
 }
 
-.users-table {
+table {
   width: 100%;
   border-collapse: collapse;
 }
-
-.users-table th, .users-table td {
+th, td {
   text-align: left;
   padding: 0.5em; 
   border-bottom: 0.0625em solid #ffffff; 
 }
 
-.users-table th {
+th {
   background-color: #000000;
   cursor: pointer;
 }
 
-.users-table th:hover {
+th:hover {
   background-color: #000000;
+}
+tr:nth-child(even) {
+  background-color: #3f413e;
 }
 
-.users-table tr:nth-child(even) {
-  background-color: #000000;
-}
 button {
   padding: 0.625em 1.25em;
   border: none;
@@ -53,29 +52,8 @@ button {
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-
-  &.add-user-btn {
-    color: white;
-    &:hover {
-      background-color: darken(#000000, 10%);
-    }
-  }
-
-  &.edit-btn {
-    background-color: #007bff;
-    color: white;
-    &:hover {
-      background-color: darken(#007bff, 10%);
-    }
-  }
-
-  &.delete-btn {
-    background-color: #dc3545;
-    color: white;
-    &:hover {
-      background-color: darken(#dc3545, 10%);
-    }
-  }
+  color: #000;
+  background-color: #ffffff;
 }
 .admin-page header {
   display: none;

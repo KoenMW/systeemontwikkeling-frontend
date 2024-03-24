@@ -45,9 +45,6 @@ export default {
     },
     computed: {
         filteredAgendaItems() {
-            console.log("selected day: ", 
-            this.selectedDay.toString());
-            console.log("all itemts: ", this.agendaItems);
             return this.agendaItems.filter((item) => {
                 return item.startTime.getDay() === this.selectedDay.getDay();
             });

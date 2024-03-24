@@ -31,9 +31,6 @@ export class Event {
         this.price = price;
 
         this.ticket_amount = ticketsAvailable;
-        
-        console.log(event);
-        console.log(typeof event);
         events.includes(typeof event != 'number') ? this.event = event.toLowerCase() : this.event = eventIdToEvent(Number(event));
     }
 }

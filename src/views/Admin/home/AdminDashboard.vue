@@ -8,7 +8,7 @@
         <li @click="navigateTo('adminWysiwyg')">WYSIWYG</li>
       </ul>
     </aside>
-    <section class="content">
+    <section class="view">
       <router-view></router-view>
     </section>
   </div>

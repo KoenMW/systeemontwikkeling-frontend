@@ -1,0 +1,33 @@
+.admin-panel {
+  height: 100vh; 
+}
+
+.sidebar {
+  width: 12.5em; 
+  background: #333;
+  color: #fff;
+  height: 100%;
+  position: fixed; 
+  left: 0; 
+  top: 0; 
+  ul {
+    padding: 0;
+    margin: 0;
+    li {
+      padding: 0.625em;
+      cursor: pointer;
+      &:hover {
+        background: #555;
+      }
+    }
+  }
+}
+
+.content {
+  flex-grow: 1;
+  width: calc(100vw - 12.5em); 
+  position: relative; 
+}
+.admin-page header {
+  display: none;
+}

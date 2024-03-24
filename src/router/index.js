@@ -14,8 +14,11 @@ import DetailPage from '@/views/detail/detailView.vue'
 import Users from '@/views/Admin/UsersView.vue'
 import errorPage from '@/views/error/404View.vue'
 import AccountView from '@/views/Account/AccountView.vue'
+import Admin from '@/views/Admin/AdminDashboard.vue'
+import Events from '@/views/Admin/EventsView.vue'
+import Orders from '@/views/Admin/OrdersView.vue'
+import Wysiwyg from '@/views/Admin/WysiwygView.vue'
 import { changeBackgroundColour } from '@/helpers/colour'
-
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,16 +28,17 @@ const router = createRouter({
       name: 'home',
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('transparent')
-        //pak de role uit de local storage 
-        const role = localStorage.getItem('role');
+        //pak de role uit de local storage
+        const role = localStorage.getItem('role')
         //als de role 'employee' is rederect naar /employee
-        if(role === 'employee') next('/employee');
+        if (role === 'employee') next('/employee')
         //en als de role 'admin' is rederect naar /admin
-        else if (role === 'admin') next('/admin');  // ik twijfel nog of dit handig is. we kunnen het ook een gecontroleerde header item maken
+        else if (role === 'admin')
+          next('/admin') // ik twijfel nog of dit handig is. we kunnen het ook een gecontroleerde header item maken
         //als de role niet employee of admin is ga naar /login
-        else next();
+        else next()
       },
-      component: HomeView,
+      component: HomeView
     },
     {
       path: '/yummy',
@@ -42,7 +46,7 @@ const router = createRouter({
       component: YummyView,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('yummy')
-        next();
+        next()
       }
     },
     {
@@ -51,7 +55,7 @@ const router = createRouter({
       component: YummyDetailView,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('yummy')
-        next();
+        next()
       }
     },
     {
@@ -60,18 +64,17 @@ const router = createRouter({
       component: AboutViewVue,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('default')
-        next();
+        next()
       }
     },
     {
       path: '/login',
       name: 'login',
-      component: Login, 
+      component: Login,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('default')
-        next();
+        next()
       }
-      
     },
     {
       path: '/forget-password',
@@ -79,7 +82,7 @@ const router = createRouter({
       component: ForgetPassword,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('default')
-        next();
+        next()
       }
     },
     {
@@ -88,17 +91,16 @@ const router = createRouter({
       component: Signup,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('default')
-        next();
+        next()
       }
     },
     {
-
       path: '/history',
       name: 'history',
       component: History,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('history')
-        next();
+        next()
       }
     },
     {
@@ -107,7 +109,7 @@ const router = createRouter({
       component: Dance,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('default')
-        next();
+        next()
       }
     },
     {
@@ -116,7 +118,7 @@ const router = createRouter({
       component: EmployeeView,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('default')
-        next();
+        next()
         //const role = localStorage.getItem('role');
 
         //if (role != 'employee' | role != 'admin') next('/login');
@@ -129,7 +131,7 @@ const router = createRouter({
       component: Jazz,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('jazz')
-        next();
+        next()
       }
     },
     {
@@ -137,26 +139,54 @@ const router = createRouter({
       name: 'detail',
       component: DetailPage,
       beforeEnter: (_to, _from, next) => {
-        // change it to parentName:
-        const parentName = _to.params.parentName;
+        const parentName = _to.params.parentName
         changeBackgroundColour(parentName)
-        next();
+        next()
       }
-    },{
-      path: '/admin/users',
-      name: 'admin',
-      component: Users,
+    },
+    {
+      path: '/admin',
+      name: 'adminDashboard',
+      component: Admin,
+      children: [
+        {
+          path: 'users',
+          name: 'adminUsers',
+          component: Users
+        },
+        {
+          path: 'events',
+          name: 'adminEvents',
+          component: Events
+        },
+        {
+          path: 'orders',
+          name: 'adminOrders',
+          component: Orders
+        },
+        {
+          path: 'wysiwyg',
+          name: 'adminWysiwyg',
+          component: Wysiwyg
+        }
+      ],
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('default')
-        next();
+        if (_to.path.startsWith('/admin')) {
+          document.body.classList.add('admin-page')
+        } else {
+          document.body.classList.remove('admin-page')
+        }
+        next()
       }
-    },{
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'error',
       component: errorPage,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('default')
-        next();
+        next()
       }
     },
     {

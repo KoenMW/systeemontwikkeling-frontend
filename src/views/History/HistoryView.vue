@@ -1,5 +1,5 @@
 <template>
-        <bannerComponent :title="pageData.name" :description="pageData.intro" :image="pageData.picture" />
+    <bannerComponent :title="pageData.name" :description="pageData.intro" :image="pageData.picture" />
     <div class="background-picture">
         <section class="body-text">
             <h3>Flexible Departures</h3>
@@ -23,7 +23,8 @@
     </div>
     <h2>Sights</h2>
     <section id="cards">
-        <CardComponent v-for="card in pageData.cards" :key="card.name" :title="card.title" :description="card.text" :image="card.picture" event="history"/>
+        <CardComponent v-for="card in pageData.cards" :key="card.name" :title="card.title" :description="card.text"
+            :image="card.picture" event="history" />
     </section>
     <h2>Book Your Journey</h2>
     <AgendaComponent :agendaItems="events" />
@@ -52,15 +53,9 @@ export default {
         axios.get(`/pages/2`)
             .then(response => {
                 this.pageData = response.data;
-            })
-            .catch(error => {
-                console.log(error);
-            });
-        axios.get(`/events/2`)
-            .then(response => {
-                response.data.forEach((event) => {
+                this.pageData.events.forEach((event) => {
                     this.events.push(new Event(event.id, event.title, event.location, event.startTime, event.endTime, event.price, event.ticket_amount, event.eventType));
-                });
+                })
             })
             .catch(error => {
                 console.log(error);

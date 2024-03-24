@@ -1,3 +1,7 @@
+<!--
+    author: @KoenMW
+-->
+
 <template>
     <section :style="{ backgroundImage: `url(${image})` }" id="background">
         <slot></slot>

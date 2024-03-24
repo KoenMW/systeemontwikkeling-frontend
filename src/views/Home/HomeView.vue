@@ -1,3 +1,7 @@
+<!--
+    author: @KoenMW
+-->
+
 <script setup>
 import Background from '@/components/background/BackgroundComponent.vue';
 import HomeCard from '@/components/homeCard/HomeCard.vue';

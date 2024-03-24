@@ -4,22 +4,26 @@ import YummyView from '../views/Yummy/Home/YummyHomeView.vue'
 import Login from '../views/Login/LoginView.vue'
 import ForgetPassword from '../views/Login/ForgotPasswordView.vue'
 import Signup from '../views/Login/SignupView.vue'
-import AboutViewVue from '@/views/AboutView.vue'
 import EmployeeView from '@/views/Employee/EmployeeView.vue'
 import History from '@/views/History/HistoryView.vue'
 import Dance from '@/views/Dance/DanceView.vue'
 import YummyDetailView from '@/views/Yummy/DetailPage/YummyDetailView.vue'
 import Jazz from '@/views/Jazz/JazzView.vue'
 import DetailPage from '@/views/detail/detailView.vue'
-import Users from '@/views/Admin/UsersView.vue'
+import Users from '@/views/Admin/user/UsersView.vue'
 import errorPage from '@/views/error/404View.vue'
-import AccountView from '@/views/Account/AccountView.vue'
-import Admin from '@/views/Admin/AdminDashboard.vue'
-import Events from '@/views/Admin/EventsView.vue'
-import Orders from '@/views/Admin/OrdersView.vue'
-import Wysiwyg from '@/views/Admin/WysiwygView.vue'
+import Admin from '@/views/Admin//home/AdminDashboard.vue'
+import Events from '@/views/Admin/event/EventsView.vue'
+import Orders from '@/views/Admin/order/OrdersView.vue'
+import Wysiwyg from '@/views/Admin/wysiwyg/WysiwygView.vue'
+import editPage from '@/views/Admin/wysiwyg/editPage/EditPage.vue'
 import { changeBackgroundColour } from '@/helpers/colour'
 
+/**
+ * @type {import('vue-router').RouteRecordRaw[]}
+ * @description this is the router object that will be used in the app
+ * @author @KoenMW @647825
+ */
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -55,15 +59,6 @@ const router = createRouter({
       component: YummyDetailView,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('yummy')
-        next()
-      }
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: AboutViewVue,
-      beforeEnter: (_to, _from, next) => {
-        changeBackgroundColour('default')
         next()
       }
     },
@@ -135,16 +130,6 @@ const router = createRouter({
       }
     },
     {
-      path: '/:parentName/:id',
-      name: 'detail',
-      component: DetailPage,
-      beforeEnter: (_to, _from, next) => {
-        const parentName = _to.params.parentName
-        changeBackgroundColour(parentName)
-        next()
-      }
-    },
-    {
       path: '/admin',
       name: 'adminDashboard',
       component: Admin,
@@ -168,6 +153,11 @@ const router = createRouter({
           path: 'wysiwyg',
           name: 'adminWysiwyg',
           component: Wysiwyg
+        },
+        {
+          path: 'wysiwyg/:id',
+          name: 'editPage',
+          component: editPage
         }
       ],
       beforeEnter: (_to, _from, next) => {
@@ -177,6 +167,16 @@ const router = createRouter({
         } else {
           document.body.classList.remove('admin-page')
         }
+        next()
+      }
+    },
+    {
+      path: '/:parentName/:id',
+      name: 'detail',
+      component: DetailPage,
+      beforeEnter: (_to, _from, next) => {
+        const parentName = _to.params.parentName
+        changeBackgroundColour(parentName)
         next()
       }
     },

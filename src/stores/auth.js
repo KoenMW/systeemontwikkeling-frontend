@@ -1,5 +1,9 @@
 import { defineStore } from 'pinia'
 
+/**
+ * Auth store
+ * @author @647825
+ */
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     isLoggedIn: false,

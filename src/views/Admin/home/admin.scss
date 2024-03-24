@@ -1,15 +1,17 @@
 .admin-panel {
-  height: 100vh; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
 }
 
 .sidebar {
-  width: 12.5em; 
+  width: 12.5em;
   background: #333;
   color: #fff;
   height: 100%;
-  position: fixed; 
-  left: 0; 
-  top: 0; 
   ul {
     padding: 0;
     margin: 0;
@@ -23,10 +25,14 @@
   }
 }
 
-.content {
-  flex-grow: 1;
-  width: calc(100vw - 12.5em); 
-  position: relative; 
+.view {
+  position: relative;
+  padding: 1em;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 100%;
 }
 .admin-page header {
   display: none;

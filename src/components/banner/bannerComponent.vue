@@ -1,3 +1,7 @@
+<!--
+    author: @647825
+-->
+
 <template>
     <section class="banner">
         <div class="text-content">

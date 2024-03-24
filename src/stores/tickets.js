@@ -1,5 +1,9 @@
 import { defineStore } from "pinia";
 
+/**
+ * Tickets store
+ * @author @KoenMW
+ */
 export const useTicketsStore = defineStore('tickets',  {
     state: () => ({
         tickets: JSON.parse(localStorage.getItem('tickets')) ?? []

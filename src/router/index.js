@@ -19,6 +19,11 @@ import Wysiwyg from '@/views/Admin/wysiwyg/WysiwygView.vue'
 import editPage from '@/views/Admin/wysiwyg/editPage/EditPage.vue'
 import { changeBackgroundColour } from '@/helpers/colour'
 
+/**
+ * @type {import('vue-router').RouteRecordRaw[]}
+ * @description this is the router object that will be used in the app
+ * @author @KoenMW @647825
+ */
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [

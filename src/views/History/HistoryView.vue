@@ -1,3 +1,7 @@
+<!--
+    author: @647825
+-->
+
 <template>
     <bannerComponent :title="pageData.name" :description="pageData.intro" :image="pageData.picture" />
     <div class="background-picture">

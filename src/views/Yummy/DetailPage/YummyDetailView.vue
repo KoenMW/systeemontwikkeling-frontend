@@ -1,3 +1,7 @@
+<!--
+    author: @LukoGi
+-->
+
 <script setup>
 import Fork from '@/assets/images/Yummy/fork.svg';
 import Knife from '@/assets/images/Yummy/knife.svg';

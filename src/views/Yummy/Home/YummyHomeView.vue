@@ -1,3 +1,7 @@
+<!--
+    author: @LukoGi
+-->
+
 <template>
     <main class="centered-container">
         

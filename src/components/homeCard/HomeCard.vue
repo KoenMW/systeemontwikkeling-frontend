@@ -1,3 +1,7 @@
+<!--
+    author: @KoenMW
+-->
+
 <template>
     <section :class="['homeCard', textRight && 'textRight', textBlack && 'textBlack']" :style="{ backgroundImage: `url(${image})` }">
         <p>{{ description }}</p>

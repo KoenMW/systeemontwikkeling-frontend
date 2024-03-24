@@ -1,3 +1,7 @@
+<!--
+    author: @KoenMW
+-->
+
 <template>
     <section :class="['card', event ?? '']">
         <img :src="image" :alt="title" v-if="image"/>

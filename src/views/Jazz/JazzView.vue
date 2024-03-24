@@ -1,3 +1,7 @@
+<!--
+    author: @KoenMW
+-->
+
 <template>
     <bannerComponent :title="pageData.name" :description="pageData.intro" :image="pageData.picture" />
 

@@ -1,3 +1,7 @@
+<!--
+    author: @647825
+-->
+
 <template>
   <div class="admin-panel">
     <aside class="sidebar">

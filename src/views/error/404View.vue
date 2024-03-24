@@ -1,3 +1,7 @@
+<!--
+    author: @KoenMW
+-->
+
 <template>
     <section id="error">
         <h1>404</h1>

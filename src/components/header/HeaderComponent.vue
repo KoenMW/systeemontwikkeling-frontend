@@ -1,3 +1,7 @@
+<!--
+    author: @NickS721
+-->
+
 <template>
   <header id="header">
     <div class="header-dropdown " @mouseover="showDropdown('user')" @mouseleave="hideDropdown('user')" >

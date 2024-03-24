@@ -21,6 +21,20 @@ const dateConverter = (date) => {
     return date;
 }
 
+/**
+ * Event class
+ * @param {number} id
+ * @param {string} eventName
+ * @param {string} location
+ * @param {string} startDate
+ * @param {string} endDate
+ * @param {number} price
+ * @param {number} ticketsAvailable
+ * @param {string} event
+ * @returns Event
+ * @constructor
+ * @author @KoenMW
+ */
 export class Event {
     constructor(id, eventName, location, startDate, endDate, price, ticketsAvailable, event) {
         this.id = id;

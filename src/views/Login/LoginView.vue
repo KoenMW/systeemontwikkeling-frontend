@@ -1,3 +1,7 @@
+<!--
+    author: @647825
+-->
+
 <template>
       <h2 class="header">Login</h2>
       <form @submit.prevent="login" class="login-form">

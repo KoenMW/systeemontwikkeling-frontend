@@ -4,7 +4,6 @@ import YummyView from '../views/Yummy/Home/YummyHomeView.vue'
 import Login from '../views/Login/LoginView.vue'
 import ForgetPassword from '../views/Login/ForgotPasswordView.vue'
 import Signup from '../views/Login/SignupView.vue'
-import AboutViewVue from '@/views/AboutView.vue'
 import EmployeeView from '@/views/Employee/EmployeeView.vue'
 import History from '@/views/History/HistoryView.vue'
 import Dance from '@/views/Dance/DanceView.vue'
@@ -55,15 +54,6 @@ const router = createRouter({
       component: YummyDetailView,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('yummy')
-        next()
-      }
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: AboutViewVue,
-      beforeEnter: (_to, _from, next) => {
-        changeBackgroundColour('default')
         next()
       }
     },

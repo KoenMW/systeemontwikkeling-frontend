@@ -9,7 +9,7 @@
     </section>
 
     <section id="cards">
-        <CardComponent v-for="card in pageData.cards" :key="card.name" :title="card.title" :description="card.text" :image="card.picture" :event="this.pageData.parentName.toLocaleLowerCase()"/>
+        <CardComponent v-for="card in pageData.cards" :key="card.name" :title="card.title" :description="card.text" :image="card.picture" :event="this.pageData.parentName.toLocaleLowerCase()" :redirect_link="card.redirect_link"/>
     </section>
   
     <AgendaComponent :agendaItems="events" v-if="events.length > 0"/>

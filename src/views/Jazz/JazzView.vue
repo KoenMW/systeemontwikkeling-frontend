@@ -2,7 +2,7 @@
     <bannerComponent :title="pageData.name" :description="pageData.intro" :image="pageData.picture" />
 
     <section id="cards">
-        <CardComponent v-for="card in pageData.cards" :key="card.name" :title="card.title" :description="card.text" :image="card.picture" event="jazz"/>
+        <CardComponent v-for="card in pageData.cards" :key="card.name" :title="card.title" :description="card.text" :image="card.picture" event="jazz" :redirect_link="card.redirect_link"/>
     </section>
   
     <AgendaComponent :agendaItems="events" />

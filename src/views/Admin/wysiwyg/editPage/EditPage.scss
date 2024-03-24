@@ -6,6 +6,14 @@
   height: max-content;
   flex-direction: row;
   align-items: center;
+
+  .pageEditField {
+    color: white;
+  }
+
+  textarea {
+    height: 15em;
+  }
 }
 
 .text-content {
@@ -76,4 +84,16 @@ textarea {
   flex-wrap: wrap;
   gap: 1em;
   justify-content: center;
+}
+
+.add {
+  border-radius: 0.25em;
+  text-align: center;
+}
+
+.savePage {
+  position: fixed;
+  left: 50%;
+  z-index: 1;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
 }

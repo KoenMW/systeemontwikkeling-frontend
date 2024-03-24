@@ -15,13 +15,16 @@
   gap: 1em;
 }
 
-.edit {
-  background-color: $secondary-color;
-  color: $primary-color;
+.button {
   padding: 0.5em;
   border: none;
   border-radius: 0.25em;
   cursor: pointer;
+}
+
+.edit {
+  background-color: $secondary-color;
+  color: $primary-color;
   &:hover {
     background-color: $primary-color;
     color: $secondary-color;
@@ -32,10 +35,6 @@
 .delete {
   background-color: $danger-color;
   color: $primary-color;
-  padding: 0.5em;
-  border: none;
-  border-radius: 0.25em;
-  cursor: pointer;
   &:hover {
     background-color: $primary-color;
     color: $danger-color;

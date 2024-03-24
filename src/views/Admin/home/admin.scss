@@ -25,14 +25,13 @@
   }
 }
 
-.content {
+.view {
   flex-grow: 1;
   position: relative;
   margin-left: 1em;
   overflow-y: auto;
   overflow-x: hidden;
   flex-wrap: wrap;
-  display: flex;
   flex-direction: column;
 }
 .admin-page header {

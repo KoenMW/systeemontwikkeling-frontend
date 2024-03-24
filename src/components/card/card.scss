@@ -10,6 +10,8 @@
 
   img {
     border-radius: 1em;
+    aspect-ratio: 1/1;
+    width: 100%;
   }
 
   h2 {
@@ -27,8 +29,8 @@
   background-color: $jazz-card;
 }
 
-.dance{
-    background-color: $dance-card;
+.dance {
+  background-color: $dance-card;
 }
 
 .restaurant {

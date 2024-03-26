@@ -69,21 +69,21 @@ export default {
       }
     },
     addEvent() {
-      // Logic to add an event
-      // This might involve navigating to a form view or opening a modal
+      this.$router.push({ name: 'addEvent' })
     },
     editEvent(eventId) {
-      // Logic to edit an event
-      // This could navigate to an edit form with the eventId as a parameter
+      this.$router.push({ name: 'editEvent', params: { eventId } });
     },
     async deleteEvent(eventId) {
-      // Logic to delete an event
-      try {
-        await axios.delete(`/events/delete/${eventId}`)
-        // Refresh the list of events after deletion
-        this.fetchEvents()
-      } catch (error) {
-        console.error('Failed to delete event:', error)
+      if (confirm('Are you sure you want to delete this event? This cannot be undone.')) {
+        try {
+          await axios.delete(`/events/delete/${eventId}`);
+          alert('Event deleted successfully.');
+          this.fetchEvents(); // Refresh the list of events
+        } catch (error) {
+          console.error('Failed to delete event:', error);
+          alert('There was a problem deleting the event. Please try again later.');
+        }
       }
     }
   }

@@ -17,6 +17,8 @@ import Admin from '@/views/Admin/AdminDashboard.vue'
 import Events from '@/views/Admin/EventsView.vue'
 import Orders from '@/views/Admin/OrdersView.vue'
 import Wysiwyg from '@/views/Admin/WysiwygView.vue'
+import EditEventView from '@/views/Admin/EditEventView.vue'
+import AddEvent from '@/views/Admin/AddEventview.vue'
 import { changeBackgroundColour } from '@/helpers/colour'
 
 const router = createRouter({
@@ -167,6 +169,18 @@ const router = createRouter({
           path: 'events/:eventType?',
           name: 'adminEvents',
           component: Events,
+          props: true
+        },
+        {
+          path: '/events/edit/:eventId',
+          name: 'editEvent',
+          component: EditEventView,
+          props: true
+        },
+        {
+          path: '/events/add',
+          name: 'addEvent',
+          component: AddEvent,
           props: true
         }
       ],

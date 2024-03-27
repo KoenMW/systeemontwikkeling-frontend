@@ -1,8 +1,12 @@
 import { defineStore } from 'pinia';
 import axios from '../axios-auth';
 
-export const useTicketsStore = defineStore('tickets', {
-   state: () => ({
+/**
+ * Tickets store
+ * @author @KoenMW
+ */
+export const useTicketsStore = defineStore('tickets',  {
+    state: () => ({
         tickets: JSON.parse(localStorage.getItem('tickets')) ?? []
     }),
   actions: {

@@ -1,3 +1,7 @@
+<!--
+    author: @647825
+-->
+
 <template>
   <div class="user-management">
     <button @click="navigateTo('signup', { adminAdd: true })" class="button">Add User</button>

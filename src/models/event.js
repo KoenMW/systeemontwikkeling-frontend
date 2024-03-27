@@ -21,6 +21,20 @@ const dateConverter = (date) => {
     return date;
 }
 
+/**
+ * Event class
+ * @param {number} id
+ * @param {string} eventName
+ * @param {string} location
+ * @param {string} startDate
+ * @param {string} endDate
+ * @param {number} price
+ * @param {number} ticketsAvailable
+ * @param {string} event
+ * @returns Event
+ * @constructor
+ * @author @KoenMW
+ */
 export class Event {
     constructor(id, eventName, location, startDate, endDate, price, ticketsAvailable, event) {
         this.id = id;
@@ -31,9 +45,6 @@ export class Event {
         this.price = price;
 
         this.ticket_amount = ticketsAvailable;
-        
-        console.log(event);
-        console.log(typeof event);
         events.includes(typeof event != 'number') ? this.event = event.toLowerCase() : this.event = eventIdToEvent(Number(event));
     }
 }

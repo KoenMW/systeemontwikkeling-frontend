@@ -1,3 +1,7 @@
+<!--
+    author: @KoenMW
+-->
+
 <template>
     <div :class="['agenda-item', agendaItem.event]">
         <div class="info">

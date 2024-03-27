@@ -1,3 +1,7 @@
+<!--
+    author: @647825
+-->
+
 <template>
     <bannerComponent :title="pageData.name" :description="pageData.intro" :image="pageData.picture" />
     <div class="background-picture">
@@ -24,7 +28,7 @@
     <h2>Sights</h2>
     <section id="cards">
         <CardComponent v-for="card in pageData.cards" :key="card.name" :title="card.title" :description="card.text"
-            :image="card.picture" event="history" />
+            :image="card.picture" event="history"  :redirect_link="card.redirect_link"/>
     </section>
     <h2>Book Your Journey</h2>
     <AgendaComponent :agendaItems="events" />

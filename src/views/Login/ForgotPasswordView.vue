@@ -1,3 +1,7 @@
+<!--
+    author: @647825
+-->
+
 <template>
   <div>
     <h2 class="header">Password Reset</h2>

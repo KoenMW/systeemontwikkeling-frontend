@@ -1,3 +1,7 @@
+<!--
+    author: @KoenMW
+-->
+
 <template>
   <button @click="savePage" class="savePage button">Save</button>
     <section class="banner">

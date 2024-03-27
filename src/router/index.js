@@ -4,7 +4,6 @@ import YummyView from '../views/Yummy/Home/YummyHomeView.vue'
 import Login from '../views/Login/LoginView.vue'
 import ForgetPassword from '../views/Login/ForgotPasswordView.vue'
 import Signup from '../views/Login/SignupView.vue'
-import AboutViewVue from '@/views/AboutView.vue'
 import EmployeeView from '@/views/Employee/EmployeeView.vue'
 import History from '@/views/History/HistoryView.vue'
 import Dance from '@/views/Dance/DanceView.vue'
@@ -22,6 +21,11 @@ import Shop from '@/views/Shop/ShopView.vue'
 import PasswordReset from '@/views/Login/PasswordResetView.vue'
 import { changeBackgroundColour } from '@/helpers/colour'
 
+/**
+ * @type {import('vue-router').RouteRecordRaw[]}
+ * @description this is the router object that will be used in the app
+ * @author @KoenMW @647825
+ */
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [

@@ -1,3 +1,7 @@
+<!--
+    author: @KoenMW
+-->
+
 <template>
 
     <section id="qrReader">

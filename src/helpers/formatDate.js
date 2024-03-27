@@ -1,3 +1,9 @@
+/**
+ * format date to string with format HH:MM
+ * @param {*} date 
+ * @returns string
+ * @author @KoenMW
+ */
 export const formattedDate = (date) => {
     if (!date || typeof date.getHours !== 'function' || typeof date.getMinutes !== 'function') {
         return ''; // Return an empty string or handle the undefined/null case as appropriate

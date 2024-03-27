@@ -1,5 +1,12 @@
+
 const body = document.querySelector('body');
 
+/**
+ * changes the background colour of the body and header
+ * @param {*} colour 
+ * @returns void
+ * @author @KoenMW
+ */
 export const changeBackgroundColour = (colour) => {
     const header = document.querySelector('header');
     const newColour = colours.find(c => c.name === colour) ?? colours[0];

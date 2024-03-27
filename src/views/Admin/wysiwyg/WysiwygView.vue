@@ -1,3 +1,7 @@
+<!--
+    author: @KoenMW
+-->
+
 <template> 
   <section class="pageContainer">
     <article class="page" v-for="name in pageNames" :key="name.id">

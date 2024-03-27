@@ -1,3 +1,6 @@
+<!--
+    author: @LukoGi
+-->
 <template>
     <section class="slider">
       <button @click="prevSlide"><</button>

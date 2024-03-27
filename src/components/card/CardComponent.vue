@@ -1,13 +1,20 @@
+<!--
+    author: @KoenMW
+-->
+
 <template>
     <section :class="['card', event ?? '']">
         <img :src="image" :alt="title" v-if="image"/>
         <h2>{{ title }}</h2>
         <p>{{ description }}</p>
+        <RouterLink :to="redirect_link" v-if="redirect_link" class="redirect">read more</RouterLink>
         <slot></slot>
     </section>
 </template>
 
 <script>
+import { RouterLink } from 'vue-router';
+
 export default {
     props: {
         image: {
@@ -25,6 +32,13 @@ export default {
             type: String,
             required: false
         },
+        redirect_link: {
+            type: String,
+            required: false
+        }
+    },
+    components: {
+        RouterLink
     }
 }
 

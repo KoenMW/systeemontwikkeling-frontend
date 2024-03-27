@@ -3,6 +3,9 @@
 -->
 
 <template>
+  <select v-model="pageData.parentId" v-if="!isParent">
+    <option v-for="parent in parentOptions" :key="parent.id" :value="parent.id">{{ parent.name }}</option>
+  </select>
   <button @click="savePage" class="savePage button">Save</button>
     <section class="banner">
         <div class="text-content">
@@ -16,7 +19,7 @@
         
     </section>
     
-    <section>
+    <section id="infoTexts">
         <div v-for="info in infoText" :key="info.id">
           <div class="image">
             <img :src="info.picture" :alt="info.title" v-if="info.picture"/>
@@ -40,6 +43,7 @@
         <label for="redirect_link">Redirect link</label>
         <select v-model="card.redirect_link">
           <option v-for="link in links" :key="link" :value="link">{{ link.name }}</option>
+          <option value="">No redirect</option>
         </select>
         <button @click="deleteCard(card.id)">Delete</button>
       </section>
@@ -58,7 +62,9 @@ export default {
             pageData: {},
             infoText: [],
             links: [],
-            new: false
+            new: false,
+            isParent: false,
+            parentOptions: []
         }
   },
   mounted() {
@@ -79,6 +85,16 @@ export default {
         this.links = response.data;
         console.log(this.links);
       })
+    axios.get('/pages/parent').then(response => {
+      this.parentOptions = response.data;
+    });
+
+  },
+  updated() {
+    this.isParent = this.parentOptions.some(parent => parent.id === this.pageData.id);
+    console.log("is parent: ",this.isParent);
+    console.log("page date", this.pageData);
+    console.log("parent options", this.parentOptions);
   },
   methods: {
     onFileChange(e, imageProperty) {

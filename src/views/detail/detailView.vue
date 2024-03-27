@@ -42,9 +42,7 @@ export default {
         }
     },
     mounted() {
-
-        console.log('mounted: ', this.$route.params.id );
-        axios.get(`/pages/detail/${this.$route.params.id}`)
+        axios.get(`/pages/${this.$route.params.id}`)
             .then(response => {
                 this.pageData = response.data;
                 if (this.$route.params.parentName.toLocaleLowerCase() !== this.pageData.parentName.toLocaleLowerCase()) {

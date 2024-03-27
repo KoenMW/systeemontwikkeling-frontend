@@ -1,0 +1,57 @@
+.shopping-cart-item {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.background-image {
+  flex: 1; /* Take all available space */
+  background-size: cover;
+  background-position: center;
+}
+
+.content {
+  flex: 1; /* Take all available space */
+  padding: 20px;
+}
+
+.date-time {
+  font-weight: bold;
+}
+
+.item-name {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.price {
+  margin-top: 10px;
+}
+
+.tickets {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  div {
+    margin: 0 10px;
+  }
+}
+
+.pay-later {
+  margin-top: 20px;
+
+  label {
+    cursor: pointer;
+  }
+}

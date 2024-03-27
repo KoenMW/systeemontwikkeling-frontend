@@ -40,8 +40,8 @@
 </template>
   
 <script>
-import axios from 'axios';
-import { jwtDecode } from "jwt-decode";
+import axios from '../../axios-auth.js';
+import { useAuthStore } from '../../stores/auth.js';
 
 export default {
   name: 'AccountView',
@@ -53,17 +53,18 @@ export default {
       isChangingPassword: false,
       currentPassword: '',
       newPassword: '',
+      token: null,
     };
   },
   async mounted() {
-    const token = localStorage.getItem('jwt');
-    const decodedToken = jwtDecode(token);
-    const userId = decodedToken.data.id;
+    const authStore = useAuthStore();
+    this.token = authStore.getJwt;
+    const userId = authStore.getUserId;
 
     try {
       const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/${userId}`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${this.token}`,
         },
       });
       this.user = response.data;
@@ -87,13 +88,13 @@ export default {
 
   async onConfirmButtonClick() {
     try {
-      const response = await axios.put(`${import.meta.env.VITE_API_URL}/users/changePassword`, {
+      await axios.put(`${import.meta.env.VITE_API_URL}/users/changePassword`, {
         id: this.user.id,
         currentPassword: this.currentPassword,
         newPassword: this.newPassword,
       }, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+          Authorization: `Bearer ${this.token}`,
         },
       });
 
@@ -112,7 +113,7 @@ export default {
 
   async onDoneButtonClick() {
     try {
-      const response = await axios.put(`${import.meta.env.VITE_API_URL}/users/update`, {
+      await axios.put(`${import.meta.env.VITE_API_URL}/users/update`, {
         id: this.user.id,
         username: this.user.username,
         email: this.user.email,
@@ -121,8 +122,8 @@ export default {
         role: this.user.role,
       }, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('jwt')}`,
-        },
+          'Authorization': `Bearer ${this.token}`
+        }
       });
 
       this.isEditingProfileInfo = false;
@@ -145,12 +146,12 @@ export default {
       const base64Image = reader.result.split(',')[1];
 
       try {
-        const response = await axios.put(`${import.meta.env.VITE_API_URL}/users/uploadProfilePicture`, {
+        await axios.put(`${import.meta.env.VITE_API_URL}/users/uploadProfilePicture`, {
           id: this.user.id,
           base64Image,
         }, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+            Authorization: `Bearer ${this.token}`,
           },
         });
 

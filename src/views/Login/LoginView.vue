@@ -33,10 +33,12 @@
           .then((response) => {
             axios.defaults.headers.common['Authorization'] = "Bearer" + response.data.jwt;
             localStorage.setItem('jwt', response.data.jwt);
+            localStorage.setItem('userId', response.data.userId);
             const authStore = useAuthStore();
-            authStore.login();
+            authStore.login(response.data.jwt, response.data.userId);
             this.$router.push('/');
             console.log(response.data.jwt);
+            console.log(response.data.userId);
             console.log(response);
           })
           .catch((error) => {

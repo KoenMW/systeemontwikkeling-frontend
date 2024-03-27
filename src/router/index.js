@@ -19,9 +19,7 @@ import Orders from '@/views/Admin/order/OrdersView.vue'
 import Wysiwyg from '@/views/Admin/wysiwyg/WysiwygView.vue'
 import editPage from '@/views/Admin/wysiwyg/editPage/EditPage.vue'
 import Shop from '@/views/Shop/ShopView.vue'
-import Users from '@/views/Admin/UsersView.vue'
 import PasswordReset from '@/views/Login/PasswordResetView.vue'
-import checkout from '@/views/Shop/ShopView.vue'
 import { changeBackgroundColour } from '@/helpers/colour'
 
 const router = createRouter({
@@ -87,15 +85,6 @@ const router = createRouter({
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('default')
         next()
-      }
-    },
-    {
-      path: '/checkout',
-      name: 'checkout',
-      component: checkout,
-      beforeEnter: (_to, _from, next) => {
-        changeBackgroundColour('default')
-        next();
       }
     },
     {

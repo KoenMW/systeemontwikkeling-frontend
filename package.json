@@ -11,11 +11,16 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@mollie/api-client": "^3.7.0",
+    "@stripe/stripe-js": "^3.1.0",
     "axios": "^1.6.7",
     "bootstrap": "^5.3.2",
     "bootstrap-vue": "^2.23.1",
+    "mollie": "^2.0.2",
+    "mollie-api": "^1.1.1",
     "pinia": "^2.1.7",
     "sass": "^1.70.0",
+    "stripe": "^14.22.0",
     "vue": "^3.4.15",
     "vue-qrcode-reader": "^5.5.2",
     "vue-router": "^4.0.13"

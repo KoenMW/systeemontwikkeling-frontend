@@ -52,7 +52,7 @@ export default {
       };
 
       axios
-        .put('/resetpassword', payload)
+        .put('/users/resetpassword', payload)
         .then((response) => {
           alert('Password reset successful')
           this.$router.push('/login')

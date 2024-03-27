@@ -1,5 +1,6 @@
 <template>
   <div class="shopping-cart">
+    <!-- Left Section -->
     <div class="left-section">
       <div class="program-info">
         <h2>Your Personal Program</h2>
@@ -7,138 +8,124 @@
           Reservation fee for restaurants will be deducted from the final check at the restaurant.
         </p>
       </div>
-      <div class="button-container">
-        <button class="agenda-view-button" @click="toggleView('agenda')">View Agenda</button>
-        <button class="normal-view-button" @click="toggleView('normal')">Normal View</button>
+      <div class="cart-items" v-if="!showCheckoutModal">
+        <TicketComponent
+          :agendaItem="ticket"
+          v-for="ticket in uniqueTickets"
+          :key="ticket.id"
+        />
       </div>
-      <div v-if="!showCheckoutModal" class="cart-items" :class="{ 'agenda-view': isAgendaView }">
-        <!-- Render TicketComponent or AgendaItem based on isAgendaView -->
-        <template v-if="!isAgendaView">
-          <TicketComponent
-            :ticket="ticket"
-            v-for="ticket in tickets"
-            :key="ticket.id"
-          />
-        </template>
-        <template v-else>
-          <AgendaItem
-            :ticket="ticket"
-            v-for="ticket in tickets"
-            :key="ticket.id"
-          />
-        </template>
-      </div>
-      <!-- Show CheckoutComponent when showCheckoutModal is true -->
       <CheckoutComponent v-if="showCheckoutModal" @cancel="cancelCheckout" />
     </div>
+
     <div class="right-section">
       <div class="invoice">
-        <div class="cart-summary" v-if="tickets.length > 0">
+        <div class="cart-summary">
           <div class="total-items">
-            <p class="label">{{ tickets.length }} Items <span class="value"></span></p>
+            <p class="label">{{ uniqueTickets.length }} Items <span class="value"></span></p>
           </div>
           <div class="subtotal">
-            <p class="label">Subtotal: <span class="value">€{{ subtotal }}</span></p>
+            <p class="label">
+              Subtotal: <span class="value">€{{ subtotal }}</span>
+            </p>
           </div>
-          <hr class="separator">
-          <div class="ticket-list">
-            <div v-for="ticket in tickets" :key="ticket.id">
-              <p>{{ ticket.eventName }} €{{ ticket.price }}</p>
+          <hr class="separator" />
+          <div class="ticket-list" v-if="!showCheckoutModal">
+            <div v-for="ticket in uniqueTickets" :key="ticket.id" class="ticket-item">
+              <p>{{ ticket.title }}</p>
+              <p>Price: €{{ ticket.price }}</p>
             </div>
           </div>
           <div class="total-tax">
-            <p class="label">Total Tax (9%): <span class="value">€{{ tax }}</span></p>
+            <p class="label">
+              Total Tax (9%): <span class="value">€{{ tax }}</span>
+            </p>
           </div>
-          <hr class="separator">
+          <hr class="separator" />
           <div class="final-price">
-            <p class="label">Final price (incl. Tax): <span class="value">€{{ finalPrice }}</span></p>
+            <p class="label">
+              Final price (incl. Tax): <span class="value">€{{ finalPrice }}</span>
+            </p>
+          </div>
+          <button class="checkout-button" @click="showCheckoutModal = true" v-if="!showCheckoutModal && uniqueTickets.length > 0">
+            Continue to Checkout
+          </button>
+          <div v-if="uniqueTickets.length === 0">
+            <p>No items in the cart.</p>
           </div>
         </div>
-        <div v-else>
-          <p>No items in the cart.</p>
-        </div>
-        <!-- Continue to Checkout button -->
-        <button class="checkout-button" @click="showCheckoutModal = true" v-if="tickets.length > 0">Continue to Checkout</button>
-        <!-- Checkout Modal -->
-        <!-- Removed checkout modal content from here -->
       </div>
     </div>
   </div>
 </template>
 
-<script>
-import { computed } from 'vue';
-import { useTicketsStore } from '@/stores/tickets.js'; // Adjust the path as per your project structure
-import TicketComponent from '../../components/ticket/TicketComponent.vue';
-import AgendaItem from '@/components/agendaItem/AgendaItem.vue';
-import CheckoutComponent from '@/components/checkout/CheckoutComponent.vue';
 
-export default {
-  components: {
-    TicketComponent,
-    AgendaItem,
-    CheckoutComponent,
-  },
-  setup() {
-    const ticketsStore = useTicketsStore();
+<script setup>
+import TicketComponent from '../../components/ticket/TicketComponent.vue'; 
+import CheckoutComponent from '../../components/checkout/CheckoutComponent.vue';
+import { computed, onMounted, ref } from 'vue';
+import { useTicketsStore } from '@/stores/tickets.js';
 
-    const tickets = computed(() => ticketsStore.tickets);
-    const subtotal = computed(() => tickets.value.reduce((total, ticket) => total + ticket.price * ticket.ticket_amount, 0));
-    const tax = computed(() => (subtotal.value * 0.09).toFixed(2));
-    const finalPrice = computed(() => (parseFloat(subtotal.value) + parseFloat(tax.value)).toFixed(2));
+const ticketsStore = useTicketsStore();
+const showCheckoutModal = ref(false); 
 
-    const toggleView = (view) => {
-      ticketsStore.toggleView(view);
-    };
+onMounted(() => {
+  const storedTickets = JSON.parse(localStorage.getItem('tickets')) || []; 
+  const uniqueTicketIds = [...new Set(storedTickets)];
+  
+  ticketsStore.fetchTicketDetails(uniqueTicketIds);
+});
 
-    const cancelCheckout = () => {
-      ticketsStore.cancelCheckout();
-    };
+const uniqueTickets = computed(() => {
+  const ticketMap = new Map();
+  ticketsStore.tickets.forEach(ticket => {
+    ticketMap.set(ticket.id, ticket);
+  });
+  return Array.from(ticketMap.values());
+});
 
-    return {
-      tickets,
-      subtotal,
-      tax,
-      finalPrice,
-      toggleView,
-      cancelCheckout,
-      isAgendaView: ticketsStore.isAgendaView,
-      showCheckoutModal: ticketsStore.showCheckoutModal,
-    };
-  },
+const subtotal = computed(() => {
+  return uniqueTickets.value.reduce((acc, ticket) => acc + ticket.price, 0);
+});
+
+const tax = computed(() => subtotal.value * 0.09);
+const finalPrice = computed(() => subtotal.value + tax.value);
+
+const cancelCheckout = () => {
+  showCheckoutModal.value = false;
 };
 </script>
 
 
 <style scoped>
-/* Add your SCSS styles here */
 
 .shopping-cart {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  width: 100%; /* Set width to 100% */
+  width: 100%; 
 }
 
 .left-section {
-  flex: 2; /* Set to take up 2/3 of the available width */
-  margin-left: 10px; /* Add some space between sections */
+  flex: 2;
+  margin-left: 10px; 
 }
 
 .right-section {
-  flex: 1; /* Set to take up 1/3 of the available width */
-  margin-right: 10px; /* Add some space between sections */
+  flex: 1; 
+  margin-right: 10px;
+}
+
+.invoice-container {
+  width: 100%; 
+  overflow-x: auto;
 }
 
 .invoice {
-  border: 2px solid white; /* Add white border */
-  border-radius: 10px; /* Rounded borders */
+  border: 2px solid white; 
+  border-radius: 10px; 
   padding: 10px;
-  width: calc(25% - 20px); /* Set a smaller fixed width for the invoice */
-  height: 300px; /* Set a longer height for the invoice */
-  position: absolute; /* Position the invoice absolutely */
-  top: 100px; /* Set distance from the top */
-  right: 20px; /* Set distance from the right */
+  min-width: 400px; 
 }
 
 .cart-summary {
@@ -151,7 +138,7 @@ export default {
 }
 
 .value {
-  margin-left: 10px; /* Add space between label and value */
+  margin-left: 10px;
 }
 
 .cart-items {
@@ -159,7 +146,7 @@ export default {
   flex-wrap: wrap;
   justify-content: flex-start;
   margin-top: 20px;
-  width: 100%; /* Set width to 100% */
+  width: 100%; 
 }
 
 .cart-items.agenda-view {
@@ -167,9 +154,9 @@ export default {
 }
 
 .cart-items .ticket-item {
-  width: calc(50% - 10px); /* Adjust width to 50% minus the margin between items */
-  margin-right: 10px; /* Add some space between items */
-  margin-bottom: 10px; /* Add some space between rows */
+  width: calc(50% - 10px); 
+  margin-right: 10px; 
+  margin-bottom: 10px; 
 }
 
 .program-info {
@@ -186,40 +173,26 @@ export default {
 
 .label {
   text-align: left;
-  margin-bottom: 5px;
 }
-
 .value {
   text-align: right;
-  margin-left: 10px; /* Add space between label and value */
-}
-
-.button-container {
-  display: flex;
-  flex-direction: column; /* Adjust to column layout */
-  align-items: flex-start; /* Align buttons to the left */
+  margin-left: 10px;
 }
 
 .checkout-button {
-  background-color: #562799; /* Purple color */
+  background-color: #562799; 
   color: white;
   border: none;
-  padding: 15px 40px; /* Larger padding */
+  padding: 15px 40px;
   border-radius: 5px;
   cursor: pointer;
-  margin: auto; /* Center horizontally */
-  display: block; /* Make it a block-level element */
-  position: absolute; /* Position it absolutely */
-  bottom: 20px; /* Set distance from the bottom */
-  left: 50%; /* Center horizontally */
-  transform: translateX(-50%); /* Center horizontally */
-  font-size: 16px; /* Increase font size */
+  margin-top: 20px;
+  width: 100%; 
+  font-size: 16px; 
 }
-
 
 .separator {
-  border-top: 1px solid #562799; /* Purple color */
+  border-top: 1px solid #562799;
   margin: 10px 0;
 }
-
 </style>

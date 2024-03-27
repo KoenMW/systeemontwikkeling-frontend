@@ -32,6 +32,7 @@ axios.get(`/events/4`)
     .then(response => {
         response.data.forEach(event => {
             events.value.push(new Event(event.id, event.title, event.location, event.startTime, event.endTime, event.price, event.ticket_amount, event.eventType));
+            console.log(response)
         });
     })
     .catch(error => {

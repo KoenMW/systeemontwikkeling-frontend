@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     resetPassword() {
-      axios.post('/resetlink', { email: this.email })
+      axios.post('/users/resetlink', { email: this.email })
         .then(response => {
           this.message = response.data.message;
         })

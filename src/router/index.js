@@ -17,6 +17,7 @@ import Events from '@/views/Admin/event/EventsView.vue'
 import Orders from '@/views/Admin/order/OrdersView.vue'
 import Wysiwyg from '@/views/Admin/wysiwyg/WysiwygView.vue'
 import editPage from '@/views/Admin/wysiwyg/editPage/EditPage.vue'
+import AccountView from '@/views/Account/AccountView.vue'
 import { changeBackgroundColour } from '@/helpers/colour'
 
 /**
@@ -187,6 +188,15 @@ const router = createRouter({
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('default')
         next()
+      }
+    },
+    {
+      path: '/account',
+      name: 'account',
+      component: AccountView,
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('default')
+        next();
       }
     }
   ]

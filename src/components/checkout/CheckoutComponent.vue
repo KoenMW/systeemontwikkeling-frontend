@@ -28,7 +28,6 @@
 
 <script setup>
 import { ref } from 'vue';
-import MollieApiClient from '@mollie/api-client'; 
 import payLater from '@/assets/images/shop/paymentMethods/paylater.png';
 import visa from '@/assets/images/shop/paymentMethods/visa.png';
 import ideal from '@/assets/images/shop/paymentMethods/ideal.png';
@@ -42,42 +41,39 @@ const paymentOptions = ref([
   { value: 'ideal', image: ideal, alt: 'iDeal' }
 ]);
 
-let mollie;
+import Stripe from 'stripe';
 
-try {
-  mollie = new MollieApiClient.default();
-  mollie.setApiKey('test_jnzC6g8nrGg7un5GfbkdNTF4xq6eq3');
-} catch (error) {
-  console.error('Error initializing Mollie API client:', error);
-}
+// verplaats dit naar een .env file
+const stripe = new Stripe('sk_test_51Oyw6jDaMnaVygG5Lpod1wrePHAlBM0CSPMLZo8oV0MMqsomNNtmYpsiehpq32lHIQh3Mf5NNuJnMSZHGXCCaEoD00FhRyeRTK');
 
-const redirectToMollie = async () => {
-  try {
-    if (!mollie) {
-      console.error('Mollie API client is not initialized');
-      return;
-    }
-
-    const { data: payment } = await mollie.payments.create({
-      amount: {
-        currency: 'EUR',
-        value: '10.00'
-      },
-      description: 'Tickets',
-      redirectUrl: 'https://localhost:5173/checkout-success'
-    });
-
-    window.location.href = payment._links.checkout.href;
-  } catch (error) {
-    console.error('Error creating payment:', error);
-  }
-};
-
-const cancelCheckout = () => {
-  name.value = '';
-  email.value = '';
-  paymentMethod.value = 'pay-later';
-};
+stripe.customers
+  .create({
+    email: 'customer@example.com',
+  })
+  .then((customer) => {
+    // have access to the customer object
+    return stripe.invoiceItems
+      .create({
+        customer: customer.id, // set the customer id
+        amount: 2500, // 25
+        currency: 'usd',
+        description: 'One-time setup fee',
+      })
+      .then((invoiceItem) => {
+        return stripe.invoices.create({
+          collection_method: 'send_invoice',
+          customer: invoiceItem.customer,
+        });
+      })
+      .then((invoice) => {
+        console.log(invoice);
+        // New invoice created on a new customer
+      })
+      .catch((err) => {
+        console.error(err);
+        // Deal with an error
+      });
+  });
 </script>
 
 <style scoped>

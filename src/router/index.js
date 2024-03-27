@@ -65,15 +65,6 @@ const router = createRouter({
       }
     },
     {
-      path: '/about',
-      name: 'about',
-      component: AboutViewVue,
-      beforeEnter: (_to, _from, next) => {
-        changeBackgroundColour('default')
-        next()
-      }
-    },
-    {
       path: '/reset-password', 
       name: 'reset-password',
       component: PasswordReset,

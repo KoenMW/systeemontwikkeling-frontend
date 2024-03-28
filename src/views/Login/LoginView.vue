@@ -17,6 +17,7 @@
   <script>
   import axios from '../../axios-auth.js';
   import { useAuthStore } from '../../stores/auth.js';
+  import requestAccess from '../../helpers/roleCheck.js';
   export default {
     data() {
       return {
@@ -34,10 +35,13 @@
             axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.jwt}`;
             const authStore = useAuthStore();
             authStore.login(response.data.jwt, response.data.userId);
-            this.$router.push('/');
-            console.log(response.data.jwt);
-            console.log(response.data.userId);
-            console.log(response);
+            
+        requestAccess(2).then((response) => {
+          response ? this.$router.push('/admin') : 
+          requestAccess(1).then((response) => {
+            response ? this.$router.push('/employee') : this.$router.push('/')
+          })
+        })
           })
           .catch((error) => {
             console.log(error);

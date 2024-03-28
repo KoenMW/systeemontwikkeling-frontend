@@ -12,6 +12,12 @@ import Jazz from '@/views/Jazz/JazzView.vue'
 import DetailPage from '@/views/detail/detailView.vue'
 import Users from '@/views/Admin/user/UsersView.vue'
 import errorPage from '@/views/error/404View.vue'
+import Admin from '@/views/Admin/AdminDashboard.vue'
+import Events from '@/views/Admin/EventsView.vue'
+import Orders from '@/views/Admin/OrdersView.vue'
+import Wysiwyg from '@/views/Admin/WysiwygView.vue'
+import EditEventView from '@/views/Admin/EditEventView.vue'
+import AddEvent from '@/views/Admin/AddEventview.vue'
 import Admin from '@/views/Admin//home/AdminDashboard.vue'
 import Events from '@/views/Admin/event/EventsView.vue'
 import Orders from '@/views/Admin/order/OrdersView.vue'
@@ -141,11 +147,6 @@ const router = createRouter({
           component: Users
         },
         {
-          path: 'events',
-          name: 'adminEvents',
-          component: Events
-        },
-        {
           path: 'orders',
           name: 'adminOrders',
           component: Orders
@@ -154,6 +155,24 @@ const router = createRouter({
           path: 'wysiwyg',
           name: 'adminWysiwyg',
           component: Wysiwyg
+        },
+        {
+          path: 'events/:eventType?',
+          name: 'adminEvents',
+          component: Events,
+          props: true
+        },
+        {
+          path: '/events/edit/:eventId',
+          name: 'editEvent',
+          component: EditEventView,
+          props: true
+        },
+        {
+          path: '/events/add',
+          name: 'addEvent',
+          component: AddEvent,
+          props: true
         },
         {
           path: 'wysiwyg/:id',

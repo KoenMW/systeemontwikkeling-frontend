@@ -43,7 +43,7 @@
           <textarea type="text" v-model="card.text" class="text pageEditField" placeholder="card text" required></textarea>
           <label for="redirect_link">Redirect link</label>
           <select v-model="card.redirect_link" required>
-            <option v-for="link in links" :key="link" :value="link">{{ link.name }}</option>
+            <option v-for="link in links" :key="link.link" :value="link.link">{{ link.name }}</option>
             <option value="">No redirect</option>
           </select>
           <button @click="deleteCard(card.id)">Delete</button>
@@ -94,9 +94,6 @@ export default {
   },
   updated() {
     this.isParent = this.parentOptions.some(parent => parent.id === this.pageData.id);
-    console.log("is parent: ",this.isParent);
-    console.log("page date", this.pageData);
-    console.log("parent options", this.parentOptions);
   },
   methods: {
     onFileChange(e, imageProperty) {

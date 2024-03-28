@@ -21,6 +21,8 @@ import Wysiwyg from '@/views/Admin/wysiwyg/WysiwygView.vue'
 import editPage from '@/views/Admin/wysiwyg/editPage/EditPage.vue'
 import AccountView from '@/views/Account/AccountView.vue'
 import { changeBackgroundColour } from '@/helpers/colour'
+import requestAccess from '@/helpers/roleCheck'
+import unauthorized from '@/views/error/401View.vue'
 
 /**
  * @type {import('vue-router').RouteRecordRaw[]}
@@ -33,17 +35,8 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      beforeEnter: (_to, _from, next) => {
+      beforeEnter: () => {
         changeBackgroundColour('transparent')
-        //pak de role uit de local storage
-        const role = localStorage.getItem('role')
-        //als de role 'employee' is rederect naar /employee
-        if (role === 'employee') next('/employee')
-        //en als de role 'admin' is rederect naar /admin
-        else if (role === 'admin')
-          next('/admin') // ik twijfel nog of dit handig is. we kunnen het ook een gecontroleerde header item maken
-        //als de role niet employee of admin is ga naar /login
-        else next()
       },
       component: HomeView
     },
@@ -115,12 +108,10 @@ const router = createRouter({
       name: 'employee',
       component: EmployeeView,
       beforeEnter: (_to, _from, next) => {
-        changeBackgroundColour('default')
-        next()
-        //const role = localStorage.getItem('role');
-
-        //if (role != 'employee' | role != 'admin') next('/login');
-        //else next();
+        changeBackgroundColour('default');
+        requestAccess(1).then((response) => {
+          response ? next() : next('/401')
+        })
       }
     },
     {
@@ -183,7 +174,9 @@ const router = createRouter({
         } else {
           document.body.classList.remove('admin-page')
         }
-        next()
+        requestAccess(2).then((response) => {
+          response ? next() : next('/401')
+        })
       }
     },
     {
@@ -200,6 +193,15 @@ const router = createRouter({
       path: '/:pathMatch(.*)*',
       name: 'error',
       component: errorPage,
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('default')
+        next()
+      }
+    },
+    {
+      path: '/401',
+      name: 'unauthorized',
+      component: unauthorized,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('default')
         next()

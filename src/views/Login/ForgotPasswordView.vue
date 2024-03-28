@@ -1,3 +1,7 @@
+<!--
+    author: @647825
+-->
+
 <template>
   <h2 class="header">Password Reset</h2>
   <form @submit.prevent="resetPassword" class="login-form">

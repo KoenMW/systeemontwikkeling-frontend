@@ -1,3 +1,7 @@
+<!--
+    author: @LukoGi
+-->
+
 <template>
     <main class="centered-container">
         
@@ -9,7 +13,7 @@
         </section>
 
         <section class="restaurant-cards-section">
-            <CardComponent v-for="card in pageData.cards" :key="card.name" :title="card.title" :description="card.text" :image="card.picture" event="yummy"/>
+            <CardComponent v-for="card in pageData.cards" :key="card.name" :title="card.title" :description="card.text" :image="card.picture" event="yummy" :redirect_link="card.redirect_link"/>
         </section>
 
         <section class="homerecipes-icons-section">
@@ -63,7 +67,7 @@ export default {
             .catch(error => {
                 console.log(error);
             });
-    },
+    }
 }
 </script>
 

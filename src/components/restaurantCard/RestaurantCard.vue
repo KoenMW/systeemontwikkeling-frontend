@@ -1,3 +1,6 @@
+<!--
+    author: @LukoGi
+-->
 <template>
   <Card :image="image" :title="title" :description="description" event="restaurant" >
     <span>{{ rating }}</span>

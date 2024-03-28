@@ -1,3 +1,7 @@
+<!--
+    author: @Nicks721
+-->
+
 <template>
     <bannerComponent :title="pageData.name" :description="pageData.intro" :image="pageData.picture" />
 

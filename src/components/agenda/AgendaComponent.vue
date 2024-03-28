@@ -1,6 +1,6 @@
-<script setup>
-import AgendaItem from '@/components/agendaItem/AgendaItem.vue';
-</script>
+<!--
+    author: @KoenMW
+-->
 
 <template>
     <section id="agenda">
@@ -18,10 +18,9 @@ import AgendaItem from '@/components/agendaItem/AgendaItem.vue';
     </section>
 </template>
 
-
-
 <script>
 import { Event} from '@/models/event';
+import AgendaItem from '@/components/agendaItem/AgendaItem.vue';
 
 export default {
     props: {
@@ -45,13 +44,13 @@ export default {
     },
     computed: {
         filteredAgendaItems() {
-            console.log("selected day: ", 
-            this.selectedDay.toString());
-            console.log("all itemts: ", this.agendaItems);
             return this.agendaItems.filter((item) => {
                 return item.startTime.getDay() === this.selectedDay.getDay();
             });
         }
+    },
+    components: {
+        AgendaItem
     }
 }
 </script>

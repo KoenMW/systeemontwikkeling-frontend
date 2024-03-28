@@ -1,3 +1,7 @@
+<!--
+    author: @647825
+-->
+
 <template>
   <div class="admin-panel">
     <aside class="sidebar">
@@ -16,7 +20,7 @@
         <li @click="navigateTo('adminWysiwyg')">WYSIWYG</li>
       </ul>
     </aside>
-    <section class="content">
+    <section class="view">
       <router-view></router-view>
     </section>
   </div>

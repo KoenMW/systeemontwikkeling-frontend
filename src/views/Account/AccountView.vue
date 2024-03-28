@@ -42,6 +42,7 @@
 <script>
 import axios from '../../axios-auth.js';
 import { useAuthStore } from '../../stores/auth.js';
+import { requestHeader } from '@/helpers/requestHeader.js'
 
 export default {
   name: 'AccountView',
@@ -62,10 +63,8 @@ export default {
     const userId = authStore.getUserId;
 
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${this.token}`,
-        },
+      const response = await axios.get(`/users/${userId}`, {
+        headers: requestHeader(),
       });
       this.user = response.data;
     } catch (error) {

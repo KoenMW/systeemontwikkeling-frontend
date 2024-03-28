@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import axios from '../../axios-auth.js';
+import axios from '../../../axios-auth.js';
 
 export default {
   data() {

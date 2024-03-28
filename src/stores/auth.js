@@ -19,6 +19,8 @@ export const useAuthStore = defineStore('auth', {
       this.isLoggedIn = true;
       this.jwt = jwt;
       this.userId = userId;
+      localStorage.setItem('jwt', jwt);
+      localStorage.setItem('userId', userId);
     },
     logout() {
       this.isLoggedIn = false;

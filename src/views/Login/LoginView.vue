@@ -31,9 +31,7 @@
           password: this.password,
         })
           .then((response) => {
-            axios.defaults.headers.common['Authorization'] = "Bearer" + response.data.jwt;
-            localStorage.setItem('jwt', response.data.jwt);
-            localStorage.setItem('userId', response.data.userId);
+            axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.jwt}`;
             const authStore = useAuthStore();
             authStore.login(response.data.jwt, response.data.userId);
             this.$router.push('/');

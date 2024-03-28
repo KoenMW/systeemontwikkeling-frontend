@@ -45,6 +45,7 @@
 
 <script>
 import axios from '../../../axios-auth';
+import { requestHeader } from '@/helpers/requestHeader.js'
 
 export default {
   data() {
@@ -60,16 +61,11 @@ export default {
 
   methods: {
     fetchUsers() {
-      axios
-        .get('/users', {
-          params: {
-            searchEmail: this.searchQuery,
-            filterRole: this.filterRole,
-            sortByCreateDate: this.sortOrder,
-            sortField: this.sortField,
-          },
-        })
+      axios.get(`/users`, {
+        headers: requestHeader(),
+      })
         .then(response => {
+          console.log(response.data);
           this.users = response.data;
         })
         .catch(error => {

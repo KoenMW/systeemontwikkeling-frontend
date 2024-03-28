@@ -39,7 +39,7 @@ export default {
     },
     deletePage(name) {
       console.log(name);
-      if (confirm('Are you sure you want to delete this page?')) {
+      if (confirm('Are you sure you want to delete this page?\n This action cannot be undone.')) {
         axios.delete(`/pages/${name.id}`)
           .then(() => {
             this.pageNames = this.pageNames.filter(pageName => pageName !== name);

@@ -3,52 +3,54 @@
 -->
 
 <template>
-  <select v-model="pageData.parentId" v-if="!isParent">
-    <option v-for="parent in parentOptions" :key="parent.id" :value="parent.id">{{ parent.name }}</option>
-  </select>
-  <button @click="savePage" class="savePage button">Save</button>
-    <section class="banner">
-        <div class="text-content">
-          <input type="text" v-model="pageData.name" class="title pageEditField" placeholder="title"/>
-          <textarea type="text" v-model="pageData.intro" class="content pageEditField" placeholder="page intro"></textarea>
-        </div>
-        <div class="image">
-          <img :src="pageData.picture" :alt="pageData.title" v-if="pageData.picture"/>
-          <input type="file" @change="onFileChange($event, pageData)" class="fileInput" accept="image/*"/>
-        </div>
-        
-    </section>
-    
-    <section id="infoTexts">
-        <div v-for="info in infoText" :key="info.id">
-          <div class="image">
-            <img :src="info.picture" :alt="info.title" v-if="info.picture"/>
-            <input type="file" @change="onFileChange($event, info)" class="fileInput" accept="image/*"/>
+  <form>
+    <select v-model="pageData.parentId" v-if="!isParent" required>
+      <option v-for="parent in parentOptions" :key="parent.id" :value="parent.id">{{ parent.name }}</option>
+    </select>
+    <button @click="savePage" class="savePage button" type="submit">Save</button>
+      <section class="banner">
+          <div class="text-content">
+            <input type="text" v-model="pageData.name" class="title pageEditField" placeholder="title" required>
+            <textarea type="text" v-model="pageData.intro" class="content pageEditField" placeholder="page intro" required></textarea>
           </div>
-          <input type="text" v-model="info.title" class="title pageEditField" placeholder="title"/>
-          <textarea type="text" v-model="info.content" class="content pageEditField" placeholder="info text"></textarea>
-          <button @click="deleteInfo(info.id)">Delete</button>
-        </div>
-        <button @click="addInfo" class="add button">Add info text</button>
-    </section>
-
-    <section class="cards">
-      <section class="card" v-for="card in pageData.cards" :key="card.id">
-        <div class="image">
-          <img :src="card.picture" :alt="card.title" v-if="card.picture"/>
-          <input type="file" @change="onFileChange($event, card)" class="fileInput" accept="image/*"/>
-        </div>
-        <input type="text" v-model="card.title" class="title pageEditField" placeholder="title"/>
-        <textarea type="text" v-model="card.text" class="text pageEditField" placeholder="card text"></textarea>
-        <label for="redirect_link">Redirect link</label>
-        <select v-model="card.redirect_link">
-          <option v-for="link in links" :key="link" :value="link">{{ link.name }}</option>
-          <option value="">No redirect</option>
-        </select>
-        <button @click="deleteCard(card.id)">Delete</button>
+          <div class="image">
+            <img :src="pageData.picture" :alt="pageData.title" v-if="pageData.picture"/>
+            <input type="file" @change="onFileChange($event, pageData)" class="fileInput" accept="image/*"/>
+          </div>
+          
       </section>
-      <button @click="addCard" class="add button">Add Card</button>
-  </section>
+      
+      <section id="infoTexts">
+          <div v-for="info in infoText" :key="info.id">
+            <div class="image">
+              <img :src="info.picture" :alt="info.title" v-if="info.picture"/>
+              <input type="file" @change="onFileChange($event, info)" class="fileInput" accept="image/*"/>
+            </div>
+            <input type="text" v-model="info.title" class="title pageEditField" placeholder="title" required/>
+            <textarea type="text" v-model="info.content" class="content pageEditField" placeholder="info text" required></textarea>
+            <button @click="deleteInfo(info.id)">Delete</button>
+          </div>
+          <button @click="addInfo" class="add button">Add info text</button>
+      </section>
+
+      <section class="cards">
+        <section class="card" v-for="card in pageData.cards" :key="card.id">
+          <div class="image">
+            <img :src="card.picture" :alt="card.title" v-if="card.picture"/>
+            <input type="file" @change="onFileChange($event, card)" class="fileInput" accept="image/*"/>
+          </div>
+          <input type="text" v-model="card.title" class="title pageEditField" placeholder="title" required/>
+          <textarea type="text" v-model="card.text" class="text pageEditField" placeholder="card text" required></textarea>
+          <label for="redirect_link">Redirect link</label>
+          <select v-model="card.redirect_link" required>
+            <option v-for="link in links" :key="link" :value="link">{{ link.name }}</option>
+            <option value="">No redirect</option>
+          </select>
+          <button @click="deleteCard(card.id)">Delete</button>
+        </section>
+        <button @click="addCard" class="add button">Add Card</button>
+    </section>
+  </form>
 
 </template>
 

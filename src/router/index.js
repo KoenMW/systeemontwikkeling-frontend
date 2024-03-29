@@ -12,8 +12,6 @@ import Jazz from '@/views/Jazz/JazzView.vue'
 import DetailPage from '@/views/detail/detailView.vue'
 import Users from '@/views/Admin/user/UsersView.vue'
 import errorPage from '@/views/error/404View.vue'
-import EditEventView from '@/views/Admin/event/EditEventView.vue'
-import AddEvent from '@/views/Admin/event/AddEventview.vue'
 import Admin from '@/views/Admin/home/AdminDashboard.vue'
 import Events from '@/views/Admin/event/EventsView.vue'
 import Orders from '@/views/Admin/order/OrdersView.vue'
@@ -147,18 +145,6 @@ const router = createRouter({
           path: 'events/:eventType?',
           name: 'adminEvents',
           component: Events,
-          props: true
-        },
-        {
-          path: '/events/edit/:eventId',
-          name: 'editEvent',
-          component: EditEventView,
-          props: true
-        },
-        {
-          path: '/events/add',
-          name: 'addEvent',
-          component: AddEvent,
           props: true
         },
         {

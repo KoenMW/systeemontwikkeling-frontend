@@ -31,14 +31,6 @@
 
     <label for="address">Address:</label>
     <input type="text" id="address" v-model="address" required placeholder="Enter your address" />
-    <div v-if="isAdminAdd" class="role-select-container">
-      <label for="role">Role:</label>
-      <select id="role" v-model="role">
-        <option value="0">User</option>
-        <option value="1">Employee</option>
-        <option value="2">Admin</option>
-      </select>
-    </div>
     <button type="submit" class="login-button">Sign Up</button>
   </form>
 </template>
@@ -84,11 +76,6 @@ export default {
             console.error('An error occurred during signup:', error)
           })
       }
-    }
-  },
-  computed: {
-    isAdminAdd() {
-      return this.$route.query.adminAdd === 'true'
     }
   }
 }

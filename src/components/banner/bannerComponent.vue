@@ -4,7 +4,7 @@
 
 <template>
     <section class="banner">
-        <div class="text-content">
+        <div class="text-content" v-if="title || description">
             <h2>{{ title }}</h2>
             <p>{{ description }}</p>
         </div>
@@ -14,18 +14,9 @@
 <script>
 export default {
     props: {
-        title: {
-            type: String,
-            required: true
-        },
-        description: {
-            type: String,
-            required: true
-        },
-        image: {
-            type: String,
-            required: true
-        }
+        title: String,
+        description: String,
+        image: String
     }
 }
 

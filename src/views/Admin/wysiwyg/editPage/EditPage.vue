@@ -7,7 +7,7 @@
     <select v-model="pageData.parentId" v-if="!isParent" required>
       <option v-for="parent in parentOptions" :key="parent.id" :value="parent.id">{{ parent.name }}</option>
     </select>
-    <button @click="savePage" class="savePage button" type="submit">Save</button>
+    <button @click.prevent="savePage" class="savePage button" type="submit">Save</button>
       <section class="banner">
           <div class="text-content">
             <input type="text" v-model="pageData.name" class="title pageEditField" placeholder="title" required>

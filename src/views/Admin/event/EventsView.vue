@@ -1,11 +1,12 @@
 <template>
   <div class="management">
     <h1>{{ eventName }} Events</h1>
-    <button @click="addEvent">Add Event</button>
+    <button @click="addEvent" class="button edit">Add Event</button>
     <table>
       <thead>
         <tr>
           <th>Title</th>
+          <th>Event type</th>
           <th>Location</th>
           <th>Start Time</th>
           <th>End Time</th>
@@ -15,15 +16,35 @@
       </thead>
       <tbody>
         <tr v-for="event in events" :key="event.id">
-          <td>{{ event.title }}</td>
-          <td>{{ event.location }}</td>
-          <td>{{ new Date(event.startTime).toLocaleDateString() }}</td>
-          <td>{{ new Date(event.endTime).toLocaleDateString() }}</td>
-          <td>{{ event.price }}</td>
-          <td>{{ event.ticket_amount }}</td>
           <td>
-            <button @click="editEvent(event.id)">Edit</button>
-            <button @click="deleteEvent(event.id)">Delete</button>
+            <input type="text" v-model="event.title" required>
+          </td>
+          <td>
+            <select v-model="event.eventType" required>
+              <option value="1">Jazz</option>
+              <option value="2">History</option>
+              <option value="3">Yummy</option>
+              <option value="4">Dance</option>
+            </select>
+          </td>
+          <td>
+            <input type="text" v-model="event.location" required>
+          </td>
+          <td>
+            <input type="datetime-local" v-model="event.startTime" required>
+          </td>
+          <td>
+            <input type="datetime-local" v-model="event.endTime" required>
+          </td>
+          <td>
+            <input type="number" v-model="event.price" required min="0">  
+          </td>
+          <td>
+            <input type="number" v-model="event.ticket_amount" required min="0">  
+          </td>
+          <td>
+            <button @click="saveEvent(event.id)" class="button edit">save</button>
+            <button @click="deleteEvent(event.id)" class="button delete">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -32,6 +53,7 @@
 </template>
 <script>
 import axios from '../../../axios-auth.js'
+import { requestHeader } from '@/helpers/requestHeader'
 
 export default {
   props: ['eventType'],
@@ -69,17 +91,49 @@ export default {
       }
     },
     addEvent() {
-      this.$router.push({ name: 'addEvent' })
+      this.events.push({
+        title: '',
+        eventType: this.eventType,
+        location: '',
+        startTime: '',
+        endTime: '',
+        price: 0,
+        ticket_amount: 0
+      })
     },
-    editEvent(eventId) {
-      this.$router.push({ name: 'editEvent', params: { eventId } });
+    async saveEvent(eventId) {
+      const event = this.events.find(event => event.id === eventId)
+      if (!event) {
+        console.error('Event not found:', eventId)
+        return
+      }
+      try {
+        if (event.id) {
+          await axios.put(`/events/${eventId}`, event,
+            { headers: requestHeader() })
+        } else {
+          const response = await axios.post('/events', event, 
+            { headers: requestHeader() }
+          )
+          event.id = response.data.id
+        }
+      } catch (error) {
+        console.error('Failed to save event:', error)
+        alert('There was a problem saving the event. Please try again later.')
+      }
     },
     async deleteEvent(eventId) {
+      if (!eventId) {
+        this.events.pop(this.events.find(event => !event.id));
+        return;
+      }
       if (confirm('Are you sure you want to delete this event? This cannot be undone.')) {
         try {
-          await axios.delete(`/events/delete/${eventId}`);
-          alert('Event deleted successfully.');
-          this.fetchEvents(); // Refresh the list of events
+          await axios.delete(`/events/${eventId}`, 
+            { headers: requestHeader() }
+          ).then(() => {
+            this.events.pop(this.events.find(event => event.id === eventId));
+          })
         } catch (error) {
           console.error('Failed to delete event:', error);
           alert('There was a problem deleting the event. Please try again later.');
@@ -89,6 +143,3 @@ export default {
   }
 }
 </script>
-<style>
-@import '../user/users.scss';
-</style>

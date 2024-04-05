@@ -4,7 +4,7 @@
 
 <template>
   <div class="user-management">
-    <button @click="navigateTo('signup', { adminAdd: true })" class="button">Add User</button>
+    <button @click="signup" class="button">Add User</button>
     <div class="filters">
       <input v-model="searchQuery" @input="fetchUsers" placeholder="Search users..." class="search-input">
       <select v-model="filterRole" @change="fetchUsers" class="role-select">
@@ -22,6 +22,7 @@
     <table class="users-table">
       <thead>
         <tr>
+        <!-- setSortField doet nog niks-->
           <th @click="setSortField('email')">Email</th>
           <th @click="setSortField('role')">Role</th>
           <th @click="setSortField('createDate')">Created At</th>
@@ -29,13 +30,21 @@
       </thead>
       <tbody>
         <tr v-for="user in users" :key="user.id">
-          <td>{{ user.email }}</td>
-          <td>{{ user.role }}</td>
-          <td>{{ user.createDate }}</td>
-          <td>
-            <button @click="editUser(user.id)" class="button">Edit</button>
-            <button @click="deleteUser(user.id)" class="button">Delete</button>
-          </td>
+            <td>
+              <input type="email" v-model="user.email" required>
+            </td>
+            <td>
+              <select v-model="user.role" required>
+                <option value="0">User</option>
+                <option value="1">Employee</option>
+                <option value="2">Admin</option>
+              </select>
+            </td>
+            <td>{{ user.createDate }}</td>
+            <td>
+              <button @click="saveUser(user)" class="button edit">Save</button>
+              <button @click="deleteUser(user.id)" class="button delete">Delete</button>
+            </td>
         </tr>
 
       </tbody>
@@ -45,6 +54,7 @@
 
 <script>
 import axios from '../../../axios-auth';
+import { requestHeader } from '@/helpers/requestHeader.js'
 
 export default {
   data() {
@@ -60,16 +70,11 @@ export default {
 
   methods: {
     fetchUsers() {
-      axios
-        .get('/users', {
-          params: {
-            searchEmail: this.searchQuery,
-            filterRole: this.filterRole,
-            sortByCreateDate: this.sortOrder,
-            sortField: this.sortField,
-          },
-        })
+      axios.get(`/users`, {
+        headers: requestHeader(),
+      })
         .then(response => {
+          console.log(response.data);
           this.users = response.data;
         })
         .catch(error => {
@@ -79,24 +84,38 @@ export default {
     deleteUser(userId) {
       if (confirm("Are you sure you want to delete this user?")) {
         axios
-          .delete(`/users/delete/${userId}`)
+          .delete(`/users/delete/${userId}`,
+            {
+              headers: requestHeader()
+            })
           .then(() => {
-            this.fetchUsers();
+            this.users = this.users.filter(user => user.id !== userId);
           })
           .catch(error => {
             console.error('There was an error deleting the user:', error);
           });
       }
     }, 
-    navigateTo(routeName, queryParams = {}) {
-      this.$router.push({ name: routeName, query: queryParams });
+    signup() {
+      this.$router.push('signup');
     },
+    saveUser(user) {
+      axios.put(`/users`, user,
+        {
+          headers: requestHeader()
+        })
+        .then(() => {
+          console.log('User saved');
+        
+        })
+        .catch(error => {
+          console.error('There was an error saving the user:', error);
+        });
+
+    }
   },
   mounted() {
     this.fetchUsers();
   },
 };
 </script>
-<style>
-@import 'users.scss';
-</style>

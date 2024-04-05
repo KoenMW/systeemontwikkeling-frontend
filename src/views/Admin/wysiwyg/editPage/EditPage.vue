@@ -3,54 +3,61 @@
 -->
 
 <template>
-  <button @click="savePage" class="savePage button">Save</button>
-    <section class="banner">
-        <div class="text-content">
-          <input type="text" v-model="pageData.name" class="title pageEditField" placeholder="title"/>
-          <textarea type="text" v-model="pageData.intro" class="content pageEditField" placeholder="page intro"></textarea>
-        </div>
-        <div class="image">
-          <img :src="pageData.picture" :alt="pageData.title" v-if="pageData.picture"/>
-          <input type="file" @change="onFileChange($event, pageData)" class="fileInput" accept="image/*"/>
-        </div>
-        
-    </section>
-    
-    <section>
-        <div v-for="info in infoText" :key="info.id">
-          <div class="image">
-            <img :src="info.picture" :alt="info.title" v-if="info.picture"/>
-            <input type="file" @change="onFileChange($event, info)" class="fileInput" accept="image/*"/>
+  <form>
+    <select v-model="pageData.parentId" v-if="!isParent" required>
+      <option v-for="parent in parentOptions" :key="parent.id" :value="parent.id">{{ parent.name }}</option>
+    </select>
+    <button @click.prevent="savePage" class="savePage button" type="submit">Save</button>
+      <section class="banner">
+          <div class="text-content">
+            <input type="text" v-model="pageData.name" class="title pageEditField" placeholder="title" required>
+            <textarea type="text" v-model="pageData.intro" class="content pageEditField" placeholder="page intro" required></textarea>
           </div>
-          <input type="text" v-model="info.title" class="title pageEditField" placeholder="title"/>
-          <textarea type="text" v-model="info.content" class="content pageEditField" placeholder="info text"></textarea>
-          <button @click="deleteInfo(info.id)">Delete</button>
-        </div>
-        <button @click="addInfo" class="add button">Add info text</button>
-    </section>
-
-    <section class="cards">
-      <section class="card" v-for="card in pageData.cards" :key="card.id">
-        <div class="image">
-          <img :src="card.picture" :alt="card.title" v-if="card.picture"/>
-          <input type="file" @change="onFileChange($event, card)" class="fileInput" accept="image/*"/>
-        </div>
-        <input type="text" v-model="card.title" class="title pageEditField" placeholder="title"/>
-        <textarea type="text" v-model="card.text" class="text pageEditField" placeholder="card text"></textarea>
-        <label for="redirect_link">Redirect link</label>
-        <select v-model="card.redirect_link">
-          <option v-for="link in links" :key="link" :value="link">{{ link.name }}</option>
-        </select>
-        <button @click="deleteCard(card.id)">Delete</button>
+          <div class="image">
+            <img :src="pageData.picture" :alt="pageData.title" v-if="pageData.picture"/>
+            <input type="file" @change="onFileChange($event, pageData)" class="fileInput" accept="image/*"/>
+          </div>
+          
       </section>
-      <button @click="addCard" class="add button">Add Card</button>
-  </section>
+      
+      <section id="infoTexts">
+          <div v-for="info in infoText" :key="info.id">
+            <div class="image">
+              <img :src="info.picture" :alt="info.title" v-if="info.picture"/>
+              <input type="file" @change="onFileChange($event, info)" class="fileInput" accept="image/*"/>
+            </div>
+            <input type="text" v-model="info.title" class="title pageEditField" placeholder="title" required/>
+            <textarea type="text" v-model="info.content" class="content pageEditField" placeholder="info text" required></textarea>
+            <button @click="deleteInfo(info.id)">Delete</button>
+          </div>
+          <button @click="addInfo" class="add button">Add info text</button>
+      </section>
+
+      <section class="cards">
+        <section class="card" v-for="card in pageData.cards" :key="card.id">
+          <div class="image">
+            <img :src="card.picture" :alt="card.title" v-if="card.picture"/>
+            <input type="file" @change="onFileChange($event, card)" class="fileInput" accept="image/*"/>
+          </div>
+          <input type="text" v-model="card.title" class="title pageEditField" placeholder="title" required/>
+          <textarea type="text" v-model="card.text" class="text pageEditField" placeholder="card text" required></textarea>
+          <label for="redirect_link">Redirect link</label>
+          <select v-model="card.redirect_link" required>
+            <option v-for="link in links" :key="link.link" :value="link.link">{{ link.name }}</option>
+            <option value="">No redirect</option>
+          </select>
+          <button @click="deleteCard(card.id)">Delete</button>
+        </section>
+        <button @click="addCard" class="add button">Add Card</button>
+    </section>
+  </form>
 
 </template>
 
 
 <script>
 import axios from '../../../../axios-auth';
+import { useAuthStore } from '../../../../stores/auth.js';
 
 export default {
   data() {
@@ -58,27 +65,42 @@ export default {
             pageData: {},
             infoText: [],
             links: [],
-            new: false
+            new: true,
+            isParent: false,
+            parentOptions: [],
+            token: null,
         }
   },
   mounted() {
+    const authStore = useAuthStore();
+    this.token = authStore.getJwt;
+
     const pageId = this.$route.params.id;
+    if (pageId !== 'new') {
     axios.get(`/pages/${pageId}`)
       .then(response => {
         this.pageData = response.data;
         this.pageData.infoText.forEach((info) => {
           this.infoText.push(info);
         })
+        this.new = false;
       }).catch(error => {
         console.error('There was an error fetching the content:', error);
-        this.new = true;
       });
+    }
 
     axios.get('/pages/links')
       .then(response => {
         this.links = response.data;
         console.log(this.links);
       })
+    axios.get('/pages/parent').then(response => {
+      this.parentOptions = response.data;
+    });
+
+  },
+  updated() {
+    this.isParent = this.parentOptions.some(parent => parent.id === this.pageData.id);
   },
   methods: {
     onFileChange(e, imageProperty) {
@@ -129,9 +151,13 @@ export default {
       });
     },
     savePage() {
-      // dit moet waarschijnlijk anders
       if (this.new) {
-        axios.post('/pages', this.pageData)
+        this.pageData.infoText = this.infoText;
+        axios.post('/pages', this.pageData, {
+          headers: {
+            'Authorization': `Bearer ${this.token}`
+          }
+        })
           .then(response => {
             console.log(response);
           })
@@ -139,7 +165,12 @@ export default {
             console.log(error);
           });
       } else {
-      axios.put(`/pages/${this.pageData.id}`, this.pageData)
+        this.pageData.infoText = this.infoText;
+      axios.put(`/pages/${this.pageData.id}`, this.pageData, {
+          headers: {
+            'Authorization': `Bearer ${this.token}`
+          }
+        })
         .then(response => {
           console.log(response);
         })

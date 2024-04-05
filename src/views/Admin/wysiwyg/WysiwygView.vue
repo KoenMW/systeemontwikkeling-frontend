@@ -38,8 +38,9 @@ export default {
       this.$router.push(`/admin/wysiwyg/${name.id}`);
     },
     deletePage(name) {
-      if (confirm('Are you sure you want to delete this page?')) {
-        axios.delete(`/pages/delete/${name}`)
+      console.log(name);
+      if (confirm('Are you sure you want to delete this page?\nThis action cannot be undone.')) {
+        axios.delete(`/pages/${name.id}`)
           .then(() => {
             this.pageNames = this.pageNames.filter(pageName => pageName !== name);
           })

@@ -1,5 +1,145 @@
-<!--
-    author: @647825
--->
+<template>
+  <div class="management">
+    <h1>{{ eventName }} Events</h1>
+    <button @click="addEvent" class="button edit">Add Event</button>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Event type</th>
+          <th>Location</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Price</th>
+          <th>Ticket Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="event in events" :key="event.id">
+          <td>
+            <input type="text" v-model="event.title" required>
+          </td>
+          <td>
+            <select v-model="event.eventType" required>
+              <option value="1">Jazz</option>
+              <option value="2">History</option>
+              <option value="3">Yummy</option>
+              <option value="4">Dance</option>
+            </select>
+          </td>
+          <td>
+            <input type="text" v-model="event.location" required>
+          </td>
+          <td>
+            <input type="datetime-local" v-model="event.startTime" required>
+          </td>
+          <td>
+            <input type="datetime-local" v-model="event.endTime" required>
+          </td>
+          <td>
+            <input type="number" v-model="event.price" required min="0">  
+          </td>
+          <td>
+            <input type="number" v-model="event.ticket_amount" required min="0">  
+          </td>
+          <td>
+            <button @click="saveEvent(event.id)" class="button edit">save</button>
+            <button @click="deleteEvent(event.id)" class="button delete">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</template>
+<script>
+import axios from '../../../axios-auth.js'
+import { requestHeader } from '@/helpers/requestHeader'
 
-<template>  </template>
+export default {
+  props: ['eventType'],
+  data() {
+    return {
+      events: []
+    }
+  },
+  computed: {
+    eventName() {
+      const eventTypeNames = {
+        1: 'Jazz',
+        2: 'History',
+        3: 'Yummy',
+        4: 'Dance'
+      }
+      return eventTypeNames[this.eventType] || 'Unknown'
+    }
+  },
+  watch: {
+    eventType: {
+      immediate: true,
+      handler() {
+        this.fetchEvents()
+      }
+    }
+  },
+  methods: {
+    async fetchEvents() {
+      try {
+        const response = await axios.get(`/events/${this.eventType}`)
+        this.events = response.data
+      } catch (error) {
+        console.error('Failed to fetch events:', error)
+      }
+    },
+    addEvent() {
+      this.events.push({
+        title: '',
+        eventType: this.eventType,
+        location: '',
+        startTime: '',
+        endTime: '',
+        price: 0,
+        ticket_amount: 0
+      })
+    },
+    async saveEvent(eventId) {
+      const event = this.events.find(event => event.id === eventId)
+      if (!event) {
+        console.error('Event not found:', eventId)
+        return
+      }
+      try {
+        if (event.id) {
+          await axios.put(`/events/${eventId}`, event,
+            { headers: requestHeader() })
+        } else {
+          const response = await axios.post('/events', event, 
+            { headers: requestHeader() }
+          )
+          event.id = response.data.id
+        }
+      } catch (error) {
+        console.error('Failed to save event:', error)
+        alert('There was a problem saving the event. Please try again later.')
+      }
+    },
+    async deleteEvent(eventId) {
+      if (!eventId) {
+        this.events.pop(this.events.find(event => !event.id));
+        return;
+      }
+      if (confirm('Are you sure you want to delete this event? This cannot be undone.')) {
+        try {
+          await axios.delete(`/events/${eventId}`, 
+            { headers: requestHeader() }
+          ).then(() => {
+            this.events.pop(this.events.find(event => event.id === eventId));
+          })
+        } catch (error) {
+          console.error('Failed to delete event:', error);
+          alert('There was a problem deleting the event. Please try again later.');
+        }
+      }
+    }
+  }
+}
+</script>

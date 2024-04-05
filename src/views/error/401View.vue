@@ -4,8 +4,8 @@
 
 <template>
     <section id="error">
-        <h1>404</h1>
-        <p>Page not found</p>
+        <h1>401</h1>
+        <p>Unauthorized</p>
     </section>
 </template>
 

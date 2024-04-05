@@ -33,7 +33,9 @@
       >
         Continue to Checkout
       </button>
-      <p v-else-if="filteredTickets.length > 0">Please log in to continue to checkout.</p>
+      <button class="login-button" @click="handleLogin" v-else-if="filteredTickets.length > 0">
+        Log in to continue to checkout
+      </button>
     </div>
   </div>
 </template>
@@ -41,6 +43,7 @@
 <script setup>
 import { computed, defineProps, defineEmits } from 'vue'
 import { useAuthStore } from '@/stores/auth'
+import router from '@/router';
 const props = defineProps({
   tickets: Array,
   totalItems: Number,
@@ -69,6 +72,9 @@ const handleCheckout = () => {
   } else {
     alert('Please log in to continue to checkout.')
   }
+}
+const handleLogin = () => {
+  router.push('/login')
 }
 </script>
 

@@ -19,7 +19,7 @@
       </div>
       <checkoutComponent
         v-if="showCheckoutModal"
-        @close="handleCancelCheckout"
+        @cancel="handleCancelCheckout"
         :tickets="tickets"
         :finalPrice="finalPrice"
         :ticketAmount="totalItems"

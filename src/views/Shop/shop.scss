@@ -2,12 +2,13 @@
   background-color: #562799;
   color: white;
   border: none;
-   padding: 10px 20px;
-  border-radius: 5px;
+  padding: 0.625em 1.25em;
+  border-radius: 0.3125em;
   cursor: pointer;
-  margin-top: 20px;
-  font-size: 12px;
+  margin-top: 1.25em;
+  font-size: 0.75em;
 }
+
 .shopping-cart {
   display: flex;
   flex-direction: row;
@@ -17,12 +18,12 @@
 
 .left-section {
   flex: 2;
-  margin-left: 10px;
+  margin-left: 0.625em;
 }
 
 .right-section {
   flex: 1;
-  margin-right: 10px;
+  margin-right: 0.625em;
 }
 
 .invoice-container {
@@ -31,15 +32,15 @@
 }
 
 .invoice {
-  border: 2px solid white;
-  border-radius: 10px;
-  padding: 10px;
-  min-width: 400px;
+  border: 0.125em solid white;
+  border-radius: 0.625em;
+  padding: 0.625em;
+  min-width: 25em;
 }
 
 .cart-summary {
   text-align: left;
-  margin-bottom: 20px;
+  margin-bottom: 1.25em;
 }
 
 .label {
@@ -47,14 +48,14 @@
 }
 
 .value {
-  margin-left: 10px;
+  margin-left: 0.625em;
 }
 
 .cart-items {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin-top: 20px;
+  margin-top: 1.25em;
   width: 100%;
 }
 
@@ -63,17 +64,17 @@
 }
 
 .cart-items .ticket-item {
-  width: calc(50% - 10px);
-  margin-right: 10px;
-  margin-bottom: 10px;
+  width: calc(50% - 0.625em);
+  margin-right: 0.625em;
+  margin-bottom: 0.625em;
 }
 
 .program-info {
-  margin-bottom: 20px;
+  margin-bottom: 1.25em;
 }
 
 .personal-program {
-  font-size: 14px;
+  font-size: 0.875em;
 }
 
 .invoice {
@@ -83,107 +84,29 @@
 .label {
   text-align: left;
 }
-.value {
-  text-align: right;
-  margin-left: 10px;
-}
 
-.checkshopping-cart {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  width: 100%;
-}
-
-.left-section {
-  flex: 2;
-  margin-left: 10px;
-}
-
-.right-section {
-  flex: 1;
-  margin-right: 10px;
-}
-
-.invoice-container {
-  width: 100%;
-  overflow-x: auto;
-}
-
-.invoice {
-  border: 2px solid white;
-  border-radius: 10px;
-  padding: 10px;
-  min-width: 400px;
-}
-
-.cart-summary {
-  text-align: left;
-  margin-bottom: 20px;
-}
-
-.label {
-  font-weight: bold;
-}
-
-.value {
-  margin-left: 10px;
-}
-
-.cart-items {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  margin-top: 20px;
-  width: 100%;
-}
-
-.cart-items.agenda-view {
-  flex-direction: column;
-}
-
-.cart-items .ticket-item {
-  width: calc(50% - 10px);
-  margin-right: 10px;
-  margin-bottom: 10px;
-}
-
-.program-info {
-  margin-bottom: 20px;
-}
-
-.personal-program {
-  font-size: 14px;
-}
-
-.invoice {
-  text-align: left;
-}
-
-.label {
-  text-align: left;
-}
 .value {
   text-align: right;
-  margin-left: 10px;
+  margin-left: 0.625em;
 }
 
 .checkout-button {
   background-color: #562799;
   color: white;
   border: none;
-  padding: 15px 40px;
-  border-radius: 5px;
+  padding: 0.9375em 2.5em;
+  border-radius: 0.3125em;
   cursor: pointer;
-  margin-top: 20px;
+  margin-top: 1.25em;
   width: 100%;
-  font-size: 16px;
+  font-size: 1em;
 }
 
 .separator {
-  border-top: 1px solid #562799;
-  margin: 10px 0;
+  border-top: 0.0625em solid #562799;
+  margin: 0.625em 0;
 }
+
 .success-view {
   display: flex;
   justify-content: center;
@@ -192,8 +115,8 @@
 }
 
 .success-box {
-  border: 2px solid white;
-  border-radius: 10px;
-  padding: 20px;
+  border: 0.125em solid white;
+  border-radius: 0.625em;
+  padding: 1.25em;
   text-align: center;
 }

@@ -22,7 +22,7 @@
         </section>
 
         <section class="homerecipes-slider-section">
-            <RecipeSlider :recipes="recipes" />
+            <Slider :slides="pageData.infoText" />
         </section>
     </main>
 </template>
@@ -30,20 +30,12 @@
 <script setup>
 import Ingredients from '@/assets/images/Yummy/home/ingredients.svg';
 import Pan from '@/assets/images/Yummy/home/pan.svg';
-import Tatsu from '@/assets/images/Yummy/home/tatsu.png';
-import Zeeuw from '@/assets/images/Yummy/home/zeeuw.png';
 import RestaurantOne from '@/assets/images/Yummy/home/restaurantOne.svg';
 import RestaurantTwo from '@/assets/images/Yummy/home/restaurantTwo.svg';
-import RecipeSlider from '@/components/recipeSlider/RecipeSlider.vue';
+import Slider from '@/components/slider/Slider.vue';
 import axios from 'axios';
 import bannerComponent from '@/components/banner/bannerComponent.vue';
 import CardComponent from '@/components/card/CardComponent.vue';
-
-const recipes = [
-  { image: Tatsu, text: 'Recipe 1 text...' },
-  { image: Zeeuw, text: 'Recipe 2 text...' },
-];
-
 </script>
 
 <script>
@@ -62,6 +54,7 @@ export default {
         axios.get(`${import.meta.env.VITE_API_URL}/pages/3`)
             .then(response => {
                 this.pageData = response.data;
+                console.log((response.data.infoText));
                 console.log((response.data));
             })
             .catch(error => {
@@ -72,5 +65,5 @@ export default {
 </script>
 
 <style scoped>
-@import url(./yummyhome.scss);
+@import url(./yummy.scss);
 </style>

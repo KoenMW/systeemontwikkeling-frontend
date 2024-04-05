@@ -52,7 +52,7 @@ export default{
     methods: {
         addTicket() {
             if (this.tickets < this.agendaItem.ticket_amount) {
-                this.addTicketStore(this.agendaItem.id);
+                this.addTicketStore(this.agendaItem);
                 this.tickets = this.getTickets(this.agendaItem.id);
             }
         },

@@ -19,6 +19,7 @@ import Wysiwyg from '@/views/Admin/wysiwyg/WysiwygView.vue'
 import editPage from '@/views/Admin/wysiwyg/editPage/EditPage.vue'
 import Shop from '@/views/Shop/ShopView.vue'
 import PasswordReset from '@/views/Login/PasswordResetView.vue'
+import successView from '../views/Shop/successView.vue'
 import { changeBackgroundColour } from '@/helpers/colour'
 
 /**
@@ -110,7 +111,15 @@ const router = createRouter({
         next()
       }
     },
-
+    {
+      path:'/success',
+      name:'success',
+      component: successView,
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('default')
+        next()
+      }
+    },
     {
       path: '/dance',
       name: 'dance',

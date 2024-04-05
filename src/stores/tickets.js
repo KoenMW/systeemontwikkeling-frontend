@@ -1,5 +1,4 @@
-import { defineStore } from 'pinia';
-import axios from '../axios-auth';
+import { defineStore } from "pinia";
 
 /**
  * Tickets store
@@ -9,33 +8,22 @@ export const useTicketsStore = defineStore('tickets',  {
     state: () => ({
         tickets: JSON.parse(localStorage.getItem('tickets')) ?? []
     }),
-  actions: {
-    async fetchTicketDetails(ticketIds) {
-      try {
-        const uniqueTicketIds = [...new Set(ticketIds)];
+    actions: {
+        addTicket(ticket) {
+            this.tickets.push(ticket);
+            localStorage.setItem('tickets', JSON.stringify(this.tickets));
+        },
+        removeTicket(ticket) {
+            this.tickets.splice(this.tickets.indexOf(ticket), 1);
+            localStorage.setItem('tickets', JSON.stringify(this.tickets));
+        },
+        getTicketById(id) {
 
-        const ticketDetails = await Promise.all(
-          uniqueTicketIds.map(async (ticketId) => {
-            const response = await axios.get(`/event/${ticketId}`);
-            return response.data; 
-          })
-        );
-
-        this.tickets = ticketDetails.flat();
-      } catch (error) {
-        console.error('Error fetching ticket details:', error);
-      }
-    },
-    addTicket(ticketId) {
-      this.tickets.push(ticketId);
-      localStorage.setItem('tickets', JSON.stringify(this.tickets));
-    },
-    removeTicket(ticketId) {
-      this.tickets = this.tickets.filter((ticket) => ticket !== ticketId);
-      localStorage.setItem('tickets', JSON.stringify(this.tickets));
-    },
-    getTicketById(ticketId) {
-      return this.tickets.filter((ticket) => ticket === ticketId).length || 0;
-    },
-  },
+            return this.tickets.filter(t => t === id).length || 0;
+        },
+        clearTickets() {
+            this.tickets = [];
+            localStorage.setItem('tickets', JSON.stringify(this.tickets));
+        }
+    }
 });

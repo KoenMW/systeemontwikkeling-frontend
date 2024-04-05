@@ -7,7 +7,7 @@
     <select v-model="pageData.parentId" v-if="!isParent" required>
       <option v-for="parent in parentOptions" :key="parent.id" :value="parent.id">{{ parent.name }}</option>
     </select>
-    <button @click="savePage" class="savePage button" type="submit">Save</button>
+    <button @click.prevent="savePage" class="savePage button" type="submit">Save</button>
       <section class="banner">
           <div class="text-content">
             <input type="text" v-model="pageData.name" class="title pageEditField" placeholder="title" required>
@@ -57,6 +57,7 @@
 
 <script>
 import axios from '../../../../axios-auth';
+import { useAuthStore } from '../../../../stores/auth.js';
 
 export default {
   data() {
@@ -64,23 +65,29 @@ export default {
             pageData: {},
             infoText: [],
             links: [],
-            new: false,
+            new: true,
             isParent: false,
-            parentOptions: []
+            parentOptions: [],
+            token: null,
         }
   },
   mounted() {
+    const authStore = useAuthStore();
+    this.token = authStore.getJwt;
+
     const pageId = this.$route.params.id;
+    if (pageId !== 'new') {
     axios.get(`/pages/${pageId}`)
       .then(response => {
         this.pageData = response.data;
         this.pageData.infoText.forEach((info) => {
           this.infoText.push(info);
         })
+        this.new = false;
       }).catch(error => {
         console.error('There was an error fetching the content:', error);
-        this.new = true;
       });
+    }
 
     axios.get('/pages/links')
       .then(response => {
@@ -144,9 +151,13 @@ export default {
       });
     },
     savePage() {
-      // dit moet waarschijnlijk anders
       if (this.new) {
-        axios.post('/pages', this.pageData)
+        this.pageData.infoText = this.infoText;
+        axios.post('/pages', this.pageData, {
+          headers: {
+            'Authorization': `Bearer ${this.token}`
+          }
+        })
           .then(response => {
             console.log(response);
           })
@@ -154,7 +165,12 @@ export default {
             console.log(error);
           });
       } else {
-      axios.put(`/pages/${this.pageData.id}`, this.pageData)
+        this.pageData.infoText = this.infoText;
+      axios.put(`/pages/${this.pageData.id}`, this.pageData, {
+          headers: {
+            'Authorization': `Bearer ${this.token}`
+          }
+        })
         .then(response => {
           console.log(response);
         })

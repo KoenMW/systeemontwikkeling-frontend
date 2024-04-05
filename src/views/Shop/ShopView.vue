@@ -95,6 +95,7 @@ const finalPrice = computed(() => {
   const price = subtotal.value + tax.value
   return isNaN(price) ? 0 : price.toFixed(2)
 })
+
 const shareCart = () => {
   const cartState = encodeURIComponent(JSON.stringify(tickets.value));
   const shareUrl = `${window.location.origin}/shop/?cart=${cartState}`;
@@ -109,7 +110,7 @@ const shareCart = () => {
     .catch((error) => console.log('Error sharing', error));
   } else {
     console.log('Web Share API is not supported in your browser.');
-    console.log('Share this URL with the other visitor:', shareUrl);
+
   }
 }
 

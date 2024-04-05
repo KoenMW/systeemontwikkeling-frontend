@@ -17,7 +17,7 @@
       </div>
       <div class="total-tax">
         <p class="label">
-          Total Tax (9%): <span class="value">€{{ tax }}</span>
+          Total Tax (9%): <span class="value">€{{ tax.toFixed(2) }}</span>
         </p>
       </div>
       <hr class="separator" />
@@ -40,7 +40,7 @@
 
 <script setup>
 import { computed, defineProps, defineEmits } from 'vue'
-import { useAuthStore } from '@/stores/auth';
+import { useAuthStore } from '@/stores/auth'
 const props = defineProps({
   tickets: Array,
   totalItems: Number,
@@ -64,15 +64,14 @@ const filteredTickets = computed(() => {
 })
 
 const handleCheckout = () => {
-   if(authStore.isLoggedIn){
-      emit('checkout')
-   }else
-   {
-      alert('Please log in to continue to checkout.')
-   }
+  if (authStore.isLoggedIn) {
+    emit('checkout')
+  } else {
+    alert('Please log in to continue to checkout.')
+  }
 }
 </script>
 
 <style scoped>
-@import './invoice.scss'
+@import './invoice.scss';
 </style>

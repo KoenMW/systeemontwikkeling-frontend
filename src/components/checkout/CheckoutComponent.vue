@@ -39,7 +39,13 @@ onMounted(async () => {
   stripe = await loadStripe(import.meta.env.VITE_VUE_APP_STRIPE_PUBLIC_KEY)
   if (stripe) {
     const elements = stripe.elements()
-    cardElement = elements.create('card')
+    cardElement = elements.create('card', {
+      style: {
+        base: {
+          color: '#ffffff' 
+        }
+      }
+    })
     cardElement.mount(cardElementContainer.value)
   }
 })

@@ -72,7 +72,6 @@ async function redirectToStripe() {
       },
       email: email.value
     }
-    console.log('Payment data:', paymentData)
     const response = await axios.post('/payment', paymentData)
 
     if (!response.data.clientSecret) {

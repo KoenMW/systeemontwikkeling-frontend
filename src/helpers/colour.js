@@ -3,13 +3,13 @@ const body = document.querySelector('body');
 
 /**
  * changes the background colour of the body and header
- * @param {*} colour 
+ * @param {*} name 
  * @returns void
  * @author @KoenMW
  */
-export const changeBackgroundColour = (colour) => {
+export const changeBackgroundColour = (name) => {
     const header = document.querySelector('header');
-    const newColour = colours.find(c => c.name === colour) ?? colours[0];
+    const newColour = colours.find(c => c.name === name.toLocaleLowerCase()) ?? colours[0];
     body.style.backgroundColor = newColour.hex;
     newColour.textColour ? body.style.color = newColour.textColour : body.style.color = '#ffffff';
     header.style.backgroundColor = newColour.hex;

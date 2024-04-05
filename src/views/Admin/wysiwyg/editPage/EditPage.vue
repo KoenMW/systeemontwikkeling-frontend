@@ -153,7 +153,6 @@ export default {
     savePage() {
       if (this.new) {
         this.pageData.infoText = this.infoText;
-        console.log(this.pageData);
         axios.post('/pages', this.pageData, {
           headers: {
             'Authorization': `Bearer ${this.token}`
@@ -167,7 +166,6 @@ export default {
           });
       } else {
         this.pageData.infoText = this.infoText;
-        console.log(this.pageData);
       axios.put(`/pages/${this.pageData.id}`, this.pageData, {
           headers: {
             'Authorization': `Bearer ${this.token}`

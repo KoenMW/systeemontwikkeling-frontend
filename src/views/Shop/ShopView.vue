@@ -93,7 +93,7 @@ const tax = computed(() => subtotal.value * 0.09)
 
 const finalPrice = computed(() => {
   const price = subtotal.value + tax.value
-  return isNaN(price) ? 0 : price.toFixed(2)
+  return isNaN(price) ? 0 : price;
 })
 
 const shareCart = () => {

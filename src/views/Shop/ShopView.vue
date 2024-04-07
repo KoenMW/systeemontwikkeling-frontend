@@ -7,8 +7,12 @@
           Reservation fee for restaurants will be deducted from the final check at the restaurant.
         </p>
         <button class="share" @click="shareCart">share</button>
+        <div class="view-switch">
+          <button @click="currentView = 'list'">List</button>
+          <button @click="currentView = 'agenda'">Agenda</button>
+        </div>
       </div>
-      <div class="cart-items" v-if="!showCheckoutModal">
+      <div class="cart-items" v-if="currentView === 'list' && !showCheckoutModal">
         <TicketComponent
           :agendaItem="item"
           v-for="(item, index) in tickets"
@@ -17,6 +21,19 @@
           @ticketRemoved="handleTicketRemoved"
           @commentUpdated="handleCommentUpdated"
         />
+      </div>
+      <div class="agenda-items grid" v-if="currentView === 'agenda' && !showCheckoutModal">
+        <div v-for="(dayTickets, day) in groupedAndSortedTickets" :key="day">
+          <h2>{{ day }}</h2>
+          <TicketComponent
+            :agendaItem="item"
+            v-for="(item, index) in dayTickets"
+            :key="index"
+            class="full-width"
+            @ticketAdded="handleTicketAdded"
+            @ticketRemoved="handleTicketRemoved"
+          />
+        </div>
       </div>
       <checkoutComponent
         v-if="showCheckoutModal"
@@ -48,35 +65,35 @@ import { ref, computed, onMounted } from 'vue'
 
 const tickets = ref([])
 const showCheckoutModal = ref(false)
-
+const currentView = ref('list')
 const fetchTickets = () => {
   try {
-    const urlParams = new URLSearchParams(window.location.search);
-    const cartState = urlParams.get('cart');
+    const urlParams = new URLSearchParams(window.location.search)
+    const cartState = urlParams.get('cart')
     if (cartState) {
-      tickets.value = JSON.parse(decodeURIComponent(cartState));
-      localStorage.setItem('tickets', JSON.stringify(tickets.value));
+      tickets.value = JSON.parse(decodeURIComponent(cartState))
+      localStorage.setItem('tickets', JSON.stringify(tickets.value))
     } else {
-      const ticketsData = localStorage.getItem('tickets');
+      const ticketsData = localStorage.getItem('tickets')
       if (ticketsData) {
-        const parsedTickets = JSON.parse(ticketsData);
+        const parsedTickets = JSON.parse(ticketsData)
         const groupedTickets = parsedTickets.reduce((acc, ticket) => {
-          const existingTicket = acc.find((item) => item.id === ticket.id);
+          const existingTicket = acc.find((item) => item.id === ticket.id)
           if (existingTicket) {
-            existingTicket.quantity += 1;
+            existingTicket.quantity += 1
           } else {
-            ticket.quantity = 1;
-            acc.push(ticket);
+            ticket.quantity = 1
+            acc.push(ticket)
           }
-          return acc;
-        }, []);
-        tickets.value = groupedTickets;
+          return acc
+        }, [])
+        tickets.value = groupedTickets
       } else {
-        tickets.value = [];
+        tickets.value = []
       }
     }
   } catch (error) {
-    console.error('Error fetching tickets:', error);
+    console.error('Error fetching tickets:', error)
   }
 }
 
@@ -95,26 +112,35 @@ const tax = computed(() => subtotal.value * 0.09)
 
 const finalPrice = computed(() => {
   const price = subtotal.value + tax.value
-  return isNaN(price) ? 0 : price;
+  return isNaN(price) ? 0 : price
 })
 
 const shareCart = () => {
-  const cartState = encodeURIComponent(JSON.stringify(tickets.value));
-  const shareUrl = `${window.location.origin}/shop/?cart=${cartState}`;
+  const cartState = encodeURIComponent(JSON.stringify(tickets.value))
+  const shareUrl = `${window.location.origin}/shop/?cart=${cartState}`
 
   if (navigator.share) {
-    navigator.share({
-      title: 'My Personal Program',
-      text: 'Check out my personal program!',
-      url: shareUrl,
-    })
-    .then(() => console.log('Successful share'))
-    .catch((error) => console.log('Error sharing', error));
+    navigator
+      .share({
+        title: 'My Personal Program',
+        text: 'Check out my personal program!',
+        url: shareUrl
+      })
+      .then(() => console.log('Successful share'))
+      .catch((error) => console.log('Error sharing', error))
   } else {
-    console.log('Web Share API is not supported in your browser.');
-
+    console.log('Web Share API is not supported in your browser.')
   }
 }
+const groupedAndSortedTickets = computed(() => {
+  const sortedTickets = [...tickets.value].sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
+
+  return sortedTickets.reduce((acc, ticket) => {
+    const day = new Date(ticket.startTime).toDateString();
+    (acc[day] = acc[day] || []).push(ticket);
+    return acc;
+  }, {});
+});
 
 const handleTicketAdded = (agendaItem) => {
   const index = tickets.value.findIndex((ticket) => ticket.id === agendaItem.id)

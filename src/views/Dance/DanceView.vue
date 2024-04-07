@@ -41,7 +41,6 @@ axios.get(`/events/4`)
         console.log(error);
     });
 </script>
-
 <style scoped>
 @import url(./dance.scss);
 </style>

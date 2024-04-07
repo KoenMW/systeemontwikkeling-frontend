@@ -1,4 +1,4 @@
-const events = ['jazz', 'history', 'dance' , 'yummy'];
+const events = ['jazz', 'history', 'yummy' , 'dance'];
 const eventIdToEvent = (id) => {
     switch (id) {
         case 1:
@@ -6,9 +6,9 @@ const eventIdToEvent = (id) => {
         case 2:
             return 'history';
         case 3:
-            return 'dance';
-        case 4:
             return 'yummy';
+        case 4:
+            return 'dance';
         default:
             return 'Invalid event';
     }

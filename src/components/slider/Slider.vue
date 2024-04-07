@@ -4,8 +4,9 @@
 <template>
     <section class="slider">
       <button @click="prevSlide"><</button>
-      <article v-for="(recipe, index) in recipes" :key="index" :class="{ active: index === currentSlide }" class="slide" :style="{ backgroundImage: `url(${recipe.image})` }">
-        <p>{{ recipe.text }}</p>
+      <article v-for="(slide, index) in slides" :key="index" :class="{ active: index === currentSlide }" class="slide" :style="{ backgroundImage: `url(${slide.picture})` }">
+        <h2>{{ slide.title }}</h2>
+        <p>{{ slide.content }}</p>
       </article>
       <button @click="nextSlide">></button>
     </section>
@@ -14,7 +15,7 @@
 <script>
   export default {
     props: {
-      recipes: {
+      slides: {
         type: Array,
         required: true,
       },
@@ -26,15 +27,15 @@
     },
     methods: {
       nextSlide() {
-        this.currentSlide = (this.currentSlide + 1) % this.recipes.length;
+        this.currentSlide = (this.currentSlide + 1) % this.slides.length;
       },
       prevSlide() {
-        this.currentSlide = (this.currentSlide - 1 + this.recipes.length) % this.recipes.length;
+        this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
       },
     },
   };
 </script>
   
 <style scoped>
-@import url(./recipeSlider.scss);
+@import url(./slider.scss);
 </style>

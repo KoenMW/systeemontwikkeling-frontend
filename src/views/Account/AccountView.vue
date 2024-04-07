@@ -1,3 +1,7 @@
+<!--
+    author: @LukoGi
+-->
+
 <template>
   <section class="account-view" v-if="user">
     <figure>

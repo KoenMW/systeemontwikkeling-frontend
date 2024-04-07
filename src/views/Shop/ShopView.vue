@@ -15,6 +15,7 @@
           :key="index"
           @ticketAdded="handleTicketAdded"
           @ticketRemoved="handleTicketRemoved"
+          @commentUpdated="handleCommentUpdated"
         />
       </div>
       <checkoutComponent
@@ -122,6 +123,13 @@ const handleTicketAdded = (agendaItem) => {
   } else {
     agendaItem.quantity = 1
     tickets.value.push(agendaItem)
+  }
+}
+
+const handleCommentUpdated = ({ id, comment }) => {
+  const index = tickets.value.findIndex((ticket) => ticket.id === id)
+  if (index !== -1) {
+    tickets.value[index].comment = comment
   }
 }
 

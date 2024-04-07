@@ -126,8 +126,10 @@ async function sendOrder() {
     const userId = localStorage.getItem('userId')
     const formattedTickets = props.tickets.map((ticket) => ({
       id: ticket.id,
-      quantity: ticket.quantity
+      quantity: ticket.quantity,
+      comment: ticket.comment
     }))
+    console.log('Formatted tickets:', formattedTickets)
     const jwtToken = localStorage.getItem('jwt')
     axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`
     const response = await axios.post('/orders', {

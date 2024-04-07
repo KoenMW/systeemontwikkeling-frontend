@@ -10,8 +10,13 @@
     </div>
     <div class="card-element" ref="cardElementContainer"></div>
     <div class="button-container">
-      <button class="cancel-button" @click="cancelCheckout">Cancel</button>
-      <button class="checkout-button" @click="redirectToStripe">Checkout</button>
+      <div v-if="loading" class="loading-container">
+        <div class="loading-circle"></div>
+      </div>
+      <div v-else>
+        <button class="cancel-button" @click="cancelCheckout">Cancel</button>
+        <button class="checkout-button" @click="redirectToStripe">Checkout</button>
+      </div>
     </div>
   </div>
 </template>
@@ -27,6 +32,7 @@ const name = ref('')
 const email = ref('')
 const emit = defineEmits(['cancel'])
 const router = useRouter()
+const loading = ref(false)
 
 let stripe = null
 let cardElement = null
@@ -52,8 +58,10 @@ onMounted(async () => {
 })
 
 async function redirectToStripe() {
+   loading.value = true
   if (!stripe || !cardElement) {
     console.error('Stripe or cardElement is not properly initialized.')
+    loading.value = false
     return
   }
 
@@ -61,10 +69,12 @@ async function redirectToStripe() {
     const { token, error } = await stripe.createToken(cardElement)
     if (error) {
       console.error('Error creating card token:', error)
+      loading.value = false
       return
     }
     if (!token) {
       console.error('No token received.')
+      loading.value = false
       return
     }
     const amountInCents = Math.round(props.finalPrice * 100)
@@ -91,6 +101,7 @@ async function redirectToStripe() {
     )
     if (confirmError) {
       console.error('Error confirming card payment:', confirmError)
+      loading.value = false
       return
     }
 
@@ -104,6 +115,7 @@ async function redirectToStripe() {
     }
   } catch (error) {
     console.error('Error redirecting to Stripe:', error)
+    loading.value = false
   }
 }
 

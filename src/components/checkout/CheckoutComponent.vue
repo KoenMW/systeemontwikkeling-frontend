@@ -117,8 +117,8 @@ async function sendOrder() {
     const jwtToken = localStorage.getItem('jwt')
     axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`
     const response = await axios.post('/orders', {
-      userId: userId,
-      tickets: formattedTickets
+      tickets: formattedTickets,
+      userId: userId
     })
     if (response.status === 200) {
       console.log('Tickets sent successfully')

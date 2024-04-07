@@ -23,7 +23,7 @@
       <hr class="separator" />
       <div class="final-price">
         <p class="label">
-          Final price (incl. Tax): <span class="value">€{{ finalPrice }}</span>
+          Final price (incl. Tax): <span class="value">€{{ finalPrice.toFixed(2) }}</span>
         </p>
       </div>
       <button

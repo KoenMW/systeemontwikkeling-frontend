@@ -67,9 +67,9 @@ async function redirectToStripe() {
       console.error('No token received.')
       return
     }
-
+    const amountInCents = Math.round(props.finalPrice * 100)
     const paymentData = {
-      amount: props.finalPrice * 100,
+      amount: amountInCents,
       currency: 'eur',
       payment_method_data: {
         type: 'card',

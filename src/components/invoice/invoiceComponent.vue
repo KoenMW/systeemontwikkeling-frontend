@@ -56,16 +56,8 @@ const emit = defineEmits(['checkout'])
 const authStore = useAuthStore()
 
 const filteredTickets = computed(() => {
-  if (props.tickets.length === 0) return []
-
-  const hasPayNow = props.tickets.some((ticket) => ticket.payNow)
-  if (hasPayNow) {
-    return props.tickets.filter((ticket) => ticket.payNow)
-  } else {
-    return props.tickets
-  }
+  return props.tickets
 })
-
 const handleCheckout = () => {
   if (authStore.isLoggedIn) {
     emit('checkout')

@@ -21,6 +21,7 @@ import { onMounted, ref, defineProps } from 'vue'
 import { loadStripe } from '@stripe/stripe-js'
 import axios from '../../axios-auth'
 import { useRouter } from 'vue-router'
+import { useTicketsStore } from '../../stores/tickets'
 
 const name = ref('')
 const email = ref('')
@@ -96,6 +97,7 @@ async function redirectToStripe() {
     if (paymentIntent.status === 'succeeded') {
       console.log('Payment succeeded:', paymentIntent)
       await sendOrder()
+      useTicketsStore().clearTickets()
       router.push('/success')
     } else {
       console.log('Payment failed:', paymentIntent)
@@ -115,8 +117,8 @@ async function sendOrder() {
     const jwtToken = localStorage.getItem('jwt')
     axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`
     const response = await axios.post('/orders', {
-      userId: userId,
-      tickets: formattedTickets
+      tickets: formattedTickets,
+      userId: userId
     })
     if (response.status === 200) {
       console.log('Tickets sent successfully')

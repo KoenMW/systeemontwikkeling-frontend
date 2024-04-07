@@ -6,7 +6,7 @@
     <bannerComponent :title="pageData.name" :description="pageData.intro" :image="pageData.picture" />
 
     <section id="cards">
-        <CardComponent v-for="card in pageData.cards" :key="card.name" :title="card.title" :description="card.text" :image="card.picture" event="dance"/>
+        <CardComponent v-for="card in pageData.cards" :key="card.name" :title="card.title" :description="card.text" :image="card.picture" event="dance" :redirect_link="card.redirect_link"/>
     </section>
   
     <AgendaComponent :agendaItems="events" />

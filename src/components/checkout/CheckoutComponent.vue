@@ -58,10 +58,11 @@ onMounted(async () => {
 })
 
 async function redirectToStripe() {
-   loading.value = true
+  toggleLoading(true);
+
   if (!stripe || !cardElement) {
     console.error('Stripe or cardElement is not properly initialized.')
-    loading.value = false
+    toggleLoading(false);
     return
   }
 
@@ -69,12 +70,12 @@ async function redirectToStripe() {
     const { token, error } = await stripe.createToken(cardElement)
     if (error) {
       console.error('Error creating card token:', error)
-      loading.value = false
+      toggleLoading(false);
       return
     }
     if (!token) {
       console.error('No token received.')
-      loading.value = false
+      toggleLoading(false);
       return
     }
     const amountInCents = Math.round(props.finalPrice * 100)
@@ -93,6 +94,7 @@ async function redirectToStripe() {
 
     if (!response.data.clientSecret) {
       console.error('No client secret received.')
+      toggleLoading(false);
       return
     }
 
@@ -101,7 +103,7 @@ async function redirectToStripe() {
     )
     if (confirmError) {
       console.error('Error confirming card payment:', confirmError)
-      loading.value = false
+      toggleLoading(false);
       return
     }
 
@@ -115,7 +117,7 @@ async function redirectToStripe() {
     }
   } catch (error) {
     console.error('Error redirecting to Stripe:', error)
-    loading.value = false
+    toggleLoading(false);
   }
 }
 
@@ -144,6 +146,10 @@ async function sendOrder() {
 
 const cancelCheckout = () => {
   emit('cancel')
+}
+
+function toggleLoading(value) {
+  loading.value = value;
 }
 </script>
 

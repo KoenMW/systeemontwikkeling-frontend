@@ -92,9 +92,7 @@ export default {
         currentPassword: this.currentPassword,
         newPassword: this.newPassword,
       }, {
-        headers: {
-          Authorization: `Bearer ${this.token}`,
-        },
+        headers: requestHeader(),
       });
 
       this.isChangingPassword = false;
@@ -112,7 +110,7 @@ export default {
 
   async onDoneButtonClick() {
     try {
-      await axios.put(`${import.meta.env.VITE_API_URL}/users/update`, {
+      await axios.put(`${import.meta.env.VITE_API_URL}/users`, {
         id: this.user.id,
         username: this.user.username,
         email: this.user.email,
@@ -120,9 +118,7 @@ export default {
         address: this.user.address,
         role: this.user.role,
       }, {
-        headers: {
-          'Authorization': `Bearer ${this.token}`
-        }
+        headers: requestHeader(),
       });
 
       this.isEditingProfileInfo = false;
@@ -149,9 +145,7 @@ export default {
           id: this.user.id,
           base64Image,
         }, {
-          headers: {
-            Authorization: `Bearer ${this.token}`,
-          },
+          headers: requestHeader(),
         });
 
         this.user.img = base64Image;

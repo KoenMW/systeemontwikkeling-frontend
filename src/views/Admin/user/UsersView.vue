@@ -84,7 +84,7 @@ export default {
     deleteUser(userId) {
       if (confirm("Are you sure you want to delete this user?")) {
         axios
-          .delete(`/users/delete/${userId}`,
+          .delete(`/users/${userId}`,
             {
               headers: requestHeader()
             })

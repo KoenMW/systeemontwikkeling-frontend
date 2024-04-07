@@ -16,6 +16,9 @@ import Events from '@/views/Admin/event/EventsView.vue'
 import Orders from '@/views/Admin/order/OrdersView.vue'
 import Wysiwyg from '@/views/Admin/wysiwyg/WysiwygView.vue'
 import editPage from '@/views/Admin/wysiwyg/editPage/EditPage.vue'
+import Shop from '@/views/Shop/ShopView.vue'
+import PasswordReset from '@/views/Login/PasswordResetView.vue'
+import successView from '../views/Shop/successView.vue'
 import AccountView from '@/views/Account/AccountView.vue'
 import { changeBackgroundColour } from '@/helpers/colour'
 import requestAccess from '@/helpers/roleCheck'
@@ -47,6 +50,24 @@ const router = createRouter({
       }
     },
     {
+      path: '/yummydetail',
+      name: 'yummydetail',
+      component: YummyDetailView,
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('yummy')
+        next()
+      }
+    },
+    {
+      path: '/reset-password', 
+      name: 'reset-password',
+      component: PasswordReset,
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('default');
+        next();
+      },
+    },
+    {
       path: '/login',
       name: 'login',
       component: Login,
@@ -73,6 +94,7 @@ const router = createRouter({
         next()
       }
     },
+
     {
       path: '/history',
       name: 'history',
@@ -83,12 +105,30 @@ const router = createRouter({
       }
     },
     {
+      path:'/success',
+      name:'success',
+      component: successView,
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('default')
+        next()
+      }
+    },
+    {
       path: '/dance',
       name: 'dance',
       component: Dance,
       beforeEnter: (_to, _from, next) => {
         changeBackgroundColour('default')
-        next()
+        next();
+      }
+    },
+    {
+      path: '/shop',
+      name: 'shop',
+      component: Shop,
+      beforeEnter: (_to, _from, next) => {
+        changeBackgroundColour('default')
+        next();
       }
     },
     {

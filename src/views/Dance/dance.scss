@@ -19,6 +19,15 @@
   gap: 2rem;
   margin: 2rem 0;
 }
+#cards {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+
   
 
 

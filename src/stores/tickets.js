@@ -19,7 +19,11 @@ export const useTicketsStore = defineStore('tickets',  {
         },
         getTicketById(id) {
 
-            return this.tickets.filter(t => t === id).length || 0;
+            return this.tickets.filter(t => t.id === id).length || 0;
+        },
+        clearTickets() {
+            this.tickets = [];
+            localStorage.setItem('tickets', JSON.stringify(this.tickets));
         }
     }
 });

@@ -12,6 +12,8 @@
           <th>End Time</th>
           <th>Price</th>
           <th>Ticket Amount</th>
+          <th>Page</th>
+          <th>Detail Page</th>
         </tr>
       </thead>
       <tbody>
@@ -40,10 +42,21 @@
             <input type="number" v-model="event.price" required min="0">  
           </td>
           <td>
-            <input type="number" v-model="event.ticket_amount" required min="0">  
+            <input type="number" v-model="event.ticket_amount" required min="0">
           </td>
           <td>
-            <button @click="saveEvent(event.id)" class="button edit">save</button>
+            <select v-model="event.page_id" required>
+              <option v-for="page in pages" :key="page.id" :value="page.id">{{ page.name }}</option>
+            </select> 
+          </td>
+          <td>
+            <select v-model="event.detail_page_id" required>
+              <option v-for="page in pages" :key="page.id" :value="page.id">{{ page.name }}</option>
+            </select>
+          </td>
+
+          <td>
+            <button @click="saveEvent(event)" class="button edit">save</button>
             <button @click="deleteEvent(event.id)" class="button delete">Delete</button>
           </td>
         </tr>
@@ -59,9 +72,21 @@ export default {
   props: ['eventType'],
   data() {
     return {
-      events: []
+      events: [],
+      pages: [],
     }
   },
+  mounted() {
+    axios.get('/pages/ids')
+      .then(response => {
+        this.pages = response.data
+        console.log(response.data)
+      })
+      .catch(error => {
+        console.error('Failed to fetch pages:', error)
+      })
+  }
+  ,
   computed: {
     eventName() {
       const eventTypeNames = {
@@ -83,12 +108,13 @@ export default {
   },
   methods: {
     async fetchEvents() {
-      try {
-        const response = await axios.get(`/events/${this.eventType}`)
-        this.events = response.data
-      } catch (error) {
-        console.error('Failed to fetch events:', error)
-      }
+      axios.get(`/events/${this.eventType}`)
+        .then(response => {
+          this.events = response.data
+        })
+        .catch(error => {
+          console.error('Failed to fetch events:', error)
+        })
     },
     addEvent() {
       this.events.push({
@@ -98,19 +124,22 @@ export default {
         startTime: '',
         endTime: '',
         price: 0,
-        ticket_amount: 0
+        ticket_amount: 0,
+        page_id: 0,
+        detail_page_id: 0
       })
     },
-    async saveEvent(eventId) {
-      const event = this.events.find(event => event.id === eventId)
+    async saveEvent(event) {
       if (!event) {
-        console.error('Event not found:', eventId)
+        console.error('Event not found')
         return
       }
       try {
         if (event.id) {
-          await axios.put(`/events/${eventId}`, event,
-            { headers: requestHeader() })
+          axios.put(`/events/${event.id}`, event,
+            { headers: requestHeader() }).then((response) => {
+              console.log('Event saved: ', response)
+            })
         } else {
           const response = await axios.post('/events', event, 
             { headers: requestHeader() }

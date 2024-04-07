@@ -50,15 +50,6 @@ const router = createRouter({
       }
     },
     {
-      path: '/yummydetail',
-      name: 'yummydetail',
-      component: YummyDetailView,
-      beforeEnter: (_to, _from, next) => {
-        changeBackgroundColour('yummy')
-        next()
-      }
-    },
-    {
       path: '/reset-password', 
       name: 'reset-password',
       component: PasswordReset,

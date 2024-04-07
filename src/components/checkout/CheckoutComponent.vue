@@ -10,8 +10,13 @@
     </div>
     <div class="card-element" ref="cardElementContainer"></div>
     <div class="button-container">
-      <button class="cancel-button" @click="cancelCheckout">Cancel</button>
-      <button class="checkout-button" @click="redirectToStripe">Checkout</button>
+      <div v-if="loading" class="loading-container">
+        <div class="loading-circle"></div>
+      </div>
+      <div v-else>
+        <button class="cancel-button" @click="cancelCheckout">Cancel</button>
+        <button class="checkout-button" @click="redirectToStripe">Checkout</button>
+      </div>
     </div>
   </div>
 </template>
@@ -27,6 +32,7 @@ const name = ref('')
 const email = ref('')
 const emit = defineEmits(['cancel'])
 const router = useRouter()
+const loading = ref(false)
 
 let stripe = null
 let cardElement = null
@@ -52,8 +58,11 @@ onMounted(async () => {
 })
 
 async function redirectToStripe() {
+  toggleLoading(true);
+
   if (!stripe || !cardElement) {
     console.error('Stripe or cardElement is not properly initialized.')
+    toggleLoading(false);
     return
   }
 
@@ -61,10 +70,12 @@ async function redirectToStripe() {
     const { token, error } = await stripe.createToken(cardElement)
     if (error) {
       console.error('Error creating card token:', error)
+      toggleLoading(false);
       return
     }
     if (!token) {
       console.error('No token received.')
+      toggleLoading(false);
       return
     }
     const amountInCents = Math.round(props.finalPrice * 100)
@@ -83,6 +94,7 @@ async function redirectToStripe() {
 
     if (!response.data.clientSecret) {
       console.error('No client secret received.')
+      toggleLoading(false);
       return
     }
 
@@ -91,6 +103,7 @@ async function redirectToStripe() {
     )
     if (confirmError) {
       console.error('Error confirming card payment:', confirmError)
+      toggleLoading(false);
       return
     }
 
@@ -104,6 +117,7 @@ async function redirectToStripe() {
     }
   } catch (error) {
     console.error('Error redirecting to Stripe:', error)
+    toggleLoading(false);
   }
 }
 
@@ -132,6 +146,10 @@ async function sendOrder() {
 
 const cancelCheckout = () => {
   emit('cancel')
+}
+
+function toggleLoading(value) {
+  loading.value = value;
 }
 </script>
 

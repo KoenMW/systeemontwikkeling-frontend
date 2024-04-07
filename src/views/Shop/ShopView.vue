@@ -44,6 +44,7 @@ import TicketComponent from '../../components/ticket/TicketComponent.vue'
 import InvoiceComponent from '../../components/invoice/invoiceComponent.vue'
 import checkoutComponent from '../../components/checkout/CheckoutComponent.vue'
 import { ref, computed, onMounted } from 'vue'
+
 const tickets = ref([])
 const showCheckoutModal = ref(false)
 

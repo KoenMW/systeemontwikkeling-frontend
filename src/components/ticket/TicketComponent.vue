@@ -13,6 +13,10 @@
             <label for="payNow">Pay Now</label>
           </div>
         </div>
+        <div class="comment-options" v-if="agendaItem.event === 'dance'">
+            <label for="comment">Comment for Restaurant:</label>
+            <input type="text" id="comment" v-model="comment"/>
+          </div>
         <div class="bottom-section">
           <div class="ticket-count" v-if="agendaItem.quantity > 0">
             <button @click="removeTicket" class="subtract">-</button>
@@ -46,7 +50,13 @@ export default {
         dance: '#000080',
         yummy: '#445a59',
         default: '#011b2c'
-      }
+      },
+      comment: ''
+    }
+  },
+  watch: {
+    comment(newComment) {
+      this.$emit('commentUpdated', { id: this.agendaItem.id, comment: newComment });
     }
   },
   methods: {
@@ -57,7 +67,7 @@ export default {
       if (this.tickets < this.agendaItem.ticket_amount) {
         this.addTicketStore(this.agendaItem)
         this.tickets = this.getTickets(this.agendaItem.id)
-        this.$emit('ticketAdded' , this.agendaItem)
+        this.$emit('ticketAdded', this.agendaItem);
       }
     },
     removeTicket() {

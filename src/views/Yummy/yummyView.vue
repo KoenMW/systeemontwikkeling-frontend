@@ -24,6 +24,8 @@
         <section class="homerecipes-slider-section">
             <Slider :slides="pageData.infoText" />
         </section>
+
+        <AgendaComponent :agendaItems="events" />
     </main>
 </template>
 
@@ -36,6 +38,8 @@ import Slider from '@/components/slider/Slider.vue';
 import axios from 'axios';
 import bannerComponent from '@/components/banner/bannerComponent.vue';
 import CardComponent from '@/components/card/CardComponent.vue';
+import AgendaComponent from '@/components/agenda/AgendaComponent.vue';
+import { Event } from '@/models/event';
 </script>
 
 <script>
@@ -43,17 +47,22 @@ import CardComponent from '@/components/card/CardComponent.vue';
 export default {
     components: {
         bannerComponent,
-        CardComponent
+        CardComponent,
+        AgendaComponent
     },
     data() {
         return {
             pageData: {},
+            events: []
         }
     },
     mounted() {
         axios.get(`${import.meta.env.VITE_API_URL}/pages/3`)
             .then(response => {
                 this.pageData = response.data;
+                this.pageData.events.forEach((event) => {
+                    this.events.push(new Event(event.id, event.title, event.location, event.startTime, event.endTime, event.price, event.ticket_amount, event.eventType));                
+                })
                 console.log((response.data.infoText));
                 console.log((response.data));
             })

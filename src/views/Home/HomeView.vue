@@ -13,6 +13,7 @@
       :key="infoText.id" 
       :title="infoText.title" 
       :description="infoText.content"
+      :image="infoText.picture"
       :textRight="!!(index % 2)"
     />
   </div>

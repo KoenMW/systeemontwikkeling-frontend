@@ -120,3 +120,25 @@
   padding: 1.25em;
   text-align: center;
 }
+
+.view-switch {
+  margin-top: 1em;
+
+  button {
+    background-color: #562799;
+    color: white;
+    border: none;
+    padding: 0.625em 1.25em;
+    border-radius: 0.3125em;
+    cursor: pointer;
+    font-size: 0.75em;
+    position: relative;
+    margin-right: 0.5em;
+  }
+}
+
+.agenda-items.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}

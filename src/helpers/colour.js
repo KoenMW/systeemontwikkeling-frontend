@@ -21,6 +21,6 @@ export const colours = [
     { name: 'jazz', hex: '#1F1C1B' },
     { name: 'yummy', hex: '#445A59' },
     { name: 'history', hex: '#EAE2D1', textColour: '#000000'},
-    { name: 'dance', hex: '#000080' },
+    { name: 'dance', hex: '#333333' },
     { name: 'transparent', hex: 'transparent' },
 ]

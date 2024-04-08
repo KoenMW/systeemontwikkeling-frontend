@@ -109,8 +109,8 @@ const router = createRouter({
       name: 'dance',
       component: Dance,
       beforeEnter: (_to, _from, next) => {
-        changeBackgroundColour('default')
-        next();
+        changeBackgroundColour('dance')
+        next()
       }
     },
     {

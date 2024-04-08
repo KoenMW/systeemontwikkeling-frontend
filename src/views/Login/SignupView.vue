@@ -31,14 +31,6 @@
 
     <label for="address">Address:</label>
     <input type="text" id="address" v-model="address" required placeholder="Enter your address" />
-    <div v-if="isAdminAdd">
-      <label for="role">Role:</label>
-      <select id="role" v-model="role">
-        <option value="0">User</option>
-        <option value="1">Employee</option>
-        <option value="2">Admin</option>
-      </select>
-    </div>
     <button type="submit" class="login-button">Sign Up</button>
     <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
     <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
@@ -47,6 +39,8 @@
 
 <script>
 import axios from '../../axios-auth.js'
+import requestAccess from '@/helpers/roleCheck'
+
 export default {
   data() {
     return {
@@ -58,11 +52,6 @@ export default {
       role: 0,
       errorMessage: '',
       successMessage: ''
-    }
-  },
-  computed: {
-    isAdminAdd() {
-      return this.$route.query.adminAdd === 'true'
     }
   },
   methods: {
@@ -80,7 +69,8 @@ export default {
           .post('users/signUp', signupData)
           .then((response) => {
             if (response.status === 200) {
-              if (this.isAdminAdd) {
+              const isAdmin = requestAccess(2)
+              if (isAdmin) {
                 this.$router.push({ name: 'adminUsers' })
               } else {
                 this.$router.push('/login')

@@ -46,12 +46,14 @@
           </td>
           <td>
             <select v-model="event.page_id" required>
+              <option :value="null">no page</option>
               <option v-for="page in pages" :key="page.id" :value="page.id">{{ page.name }}</option>
             </select> 
           </td>
           <td>
             <select v-model="event.detail_page_id" required>
-              <option v-for="page in pages" :key="page.id" :value="page.id">{{ page.name }}</option>
+              <option :value="null">no detail page</option>
+              <option v-for="detail_page in detail_pages" :key="detail_page.id" :value="detail_page.id">{{ detail_page.name }}</option>
             </select>
           </td>
 
@@ -74,6 +76,7 @@ export default {
     return {
       events: [],
       pages: [],
+      detail_pages: []
     }
   },
   mounted() {
@@ -84,6 +87,10 @@ export default {
       })
       .catch(error => {
         console.error('Failed to fetch pages:', error)
+      })
+      axios.get('/pages/detail/ids').then(response => {
+        this.detail_pages = response.data
+        console.log(response.data)
       })
   }
   ,
@@ -121,12 +128,12 @@ export default {
         title: '',
         eventType: this.eventType,
         location: '',
-        startTime: '',
-        endTime: '',
+        startTime: new Date().toISOString().slice(0, 16),
+        endTime: new Date().toISOString().slice(0, 16),
         price: 0,
         ticket_amount: 0,
-        page_id: 0,
-        detail_page_id: 0
+        page_id: this.eventType || null,
+        detail_page_id: null
       })
     },
     async saveEvent(event) {
@@ -141,10 +148,12 @@ export default {
               console.log('Event saved: ', response)
             })
         } else {
-          const response = await axios.post('/events', event, 
+          axios.post('/events', event, 
             { headers: requestHeader() }
-          )
-          event.id = response.data.id
+          ).then((response) => {
+            console.log('Event saved: ', response)
+            event.id = response.data.id
+          })
         }
       } catch (error) {
         console.error('Failed to save event:', error)

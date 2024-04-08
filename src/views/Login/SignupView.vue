@@ -6,13 +6,25 @@
   <h2 class="header">Sign Up</h2>
   <form @submit.prevent="signup" class="login-form">
     <label for="username">Username:</label>
-    <input type="text" id="username" v-model="username" required placeholder="Enter your username" />
+    <input
+      type="text"
+      id="username"
+      v-model="username"
+      required
+      placeholder="Enter your username"
+    />
 
     <label for="email">Email:</label>
     <input type="email" id="email" v-model="email" required placeholder="Enter your email" />
 
     <label for="password">Password:</label>
-    <input type="password" id="password" v-model="password" required placeholder="Create a password" />
+    <input
+      type="password"
+      id="password"
+      v-model="password"
+      required
+      placeholder="Create a password"
+    />
 
     <label for="phone">Phone Number:</label>
     <input type="tel" id="phone" v-model="phone" required placeholder="Enter your phone number" />
@@ -50,8 +62,8 @@ export default {
   },
   computed: {
     isAdminAdd() {
-      return this.$route.query.adminAdd === 'true';
-    },
+      return this.$route.query.adminAdd === 'true'
+    }
   },
   methods: {
     signup() {
@@ -74,10 +86,11 @@ export default {
                 this.$router.push('/login')
               }
             } else {
-              console.log('Signup was not successful. Please try again.')
+              this.errorMessage = 'Signup was not successful. Please try again.'
             }
           })
           .catch((error) => {
+            this.errorMessage = 'An error occurred during signup. Please try again.'
             console.error('An error occurred during signup:', error)
           })
       }

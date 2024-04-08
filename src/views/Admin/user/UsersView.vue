@@ -4,7 +4,7 @@
 
 <template>
   <div class="user-management">
-    <button @click="signup" class="button">Add User</button>
+    <button @click="navigateTo('signup', { adminAdd: true })">Add User</button>
     <div class="filters">
       <input v-model="searchQuery" @input="fetchUsers" placeholder="Search users..." class="search-input">
       <select v-model="filterRole" @change="fetchUsers" class="role-select">
@@ -22,7 +22,7 @@
     <table class="users-table">
       <thead>
         <tr>
-        <!-- setSortField doet nog niks-->
+          <!-- setSortField doet nog niks-->
           <th @click="setSortField('email')">Email</th>
           <th @click="setSortField('role')">Role</th>
           <th @click="setSortField('createDate')">Created At</th>
@@ -30,21 +30,21 @@
       </thead>
       <tbody>
         <tr v-for="user in users" :key="user.id">
-            <td>
-              <input type="email" v-model="user.email" required>
-            </td>
-            <td>
-              <select v-model="user.role" required>
-                <option value="0">User</option>
-                <option value="1">Employee</option>
-                <option value="2">Admin</option>
-              </select>
-            </td>
-            <td>{{ user.createDate }}</td>
-            <td>
-              <button @click="saveUser(user)" class="button edit">Save</button>
-              <button @click="deleteUser(user.id)" class="button delete">Delete</button>
-            </td>
+          <td>
+            <input type="email" v-model="user.email" required>
+          </td>
+          <td>
+            <select v-model="user.role" required>
+              <option value="0">User</option>
+              <option value="1">Employee</option>
+              <option value="2">Admin</option>
+            </select>
+          </td>
+          <td>{{ user.createDate }}</td>
+          <td>
+            <button @click="saveUser(user)" class="button edit">Save</button>
+            <button @click="deleteUser(user.id)" class="button delete">Delete</button>
+          </td>
         </tr>
 
       </tbody>
@@ -69,12 +69,25 @@ export default {
   },
 
   methods: {
+    setSortField(field) {
+      if (this.sortField === field) {
+        this.sortOrder = this.sortOrder === 'ASC' ? 'DESC' : 'ASC';
+      } else {
+        this.sortField = field;
+        this.sortOrder = 'ASC';
+      }
+      this.fetchUsers();
+    },
     fetchUsers() {
-      axios.get(`/users`, {
+      axios.get('/users', {
+        params: {
+          searchEmail: this.searchQuery,
+          filterRole: this.filterRole,
+          sortOrder: this.sortOrder,
+        },
         headers: requestHeader(),
       })
         .then(response => {
-          console.log(response.data);
           this.users = response.data;
         })
         .catch(error => {
@@ -95,9 +108,9 @@ export default {
             console.error('There was an error deleting the user:', error);
           });
       }
-    }, 
-    signup() {
-      this.$router.push('signup');
+    },
+    navigateTo(routeName, queryParams = {}) {
+      this.$router.push({ name: routeName, query: queryParams });
     },
     saveUser(user) {
       axios.put(`/users`, user,
@@ -106,7 +119,7 @@ export default {
         })
         .then(() => {
           console.log('User saved');
-        
+
         })
         .catch(error => {
           console.error('There was an error saving the user:', error);

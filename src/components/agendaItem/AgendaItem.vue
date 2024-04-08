@@ -62,9 +62,9 @@ export default{
                 this.tickets = this.getTickets(this.agendaItem.id);
             }
         },
-        formattedDate() {
-            return formattedDate(this.agendaItem.startTime);
-        },
+        formattedDate(time) {
+        return formattedDate(time);
+    },
     },mounted() {
         this.tickets = this.getTickets(this.agendaItem.id);
     }

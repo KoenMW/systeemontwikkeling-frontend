@@ -13,7 +13,7 @@
             <label for="payNow">Pay Now</label>
           </div>
         </div>
-        <div class="comment-options" v-if="agendaItem.event === 'dance'">
+        <div class="comment-options" v-if="agendaItem.event === 'yummy'">
             <label for="comment">Comment for Restaurant:</label>
             <input type="text" id="comment" v-model="comment"/>
           </div>

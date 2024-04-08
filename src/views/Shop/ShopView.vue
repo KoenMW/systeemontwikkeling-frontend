@@ -32,6 +32,7 @@
             class="full-width"
             @ticketAdded="handleTicketAdded"
             @ticketRemoved="handleTicketRemoved"
+            @commentUpdated="handleCommentUpdated"
           />
         </div>
       </div>

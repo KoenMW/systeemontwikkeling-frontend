@@ -32,7 +32,6 @@
           password: this.password,
         })
           .then((response) => {
-            console.log(response);
             axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.jwt}`;
             const authStore = useAuthStore();
             authStore.login(response.data.jwt, response.data.userId);
@@ -45,7 +44,7 @@
         })
           })
           .catch((error) => {
-            console.log(error);
+            console.error(error);
             alert('Invalid email or password');
           });
         }

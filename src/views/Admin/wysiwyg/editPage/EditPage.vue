@@ -92,7 +92,6 @@ export default {
     axios.get('/pages/links')
       .then(response => {
         this.links = response.data;
-        console.log(this.links);
       })
     axios.get('/pages/parent').then(response => {
       this.parentOptions = response.data;
@@ -118,7 +117,7 @@ export default {
       };
 
       reader.onerror = error => {
-        console.log('Error: ', error);
+        console.error('Error: ', error);
       };
       reader.readAsDataURL(file);
     },
@@ -158,11 +157,8 @@ export default {
             'Authorization': `Bearer ${this.token}`
           }
         })
-          .then(response => {
-            console.log(response);
-          })
           .catch(error => {
-            console.log(error);
+            console.error(error);
           });
       } else {
         this.pageData.infoText = this.infoText;
@@ -171,11 +167,8 @@ export default {
             'Authorization': `Bearer ${this.token}`
           }
         })
-        .then(response => {
-          console.log(response);
-        })
         .catch(error => {
-          console.log(error);
+          console.error(error);
         });
       }
     }

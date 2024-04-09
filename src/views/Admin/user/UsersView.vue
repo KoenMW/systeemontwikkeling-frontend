@@ -121,9 +121,6 @@ export default {
         .put(`/users`, user, {
           headers: requestHeader()
         })
-        .then(() => {
-          console.log('User saved')
-        })
         .catch((error) => {
           console.error('There was an error saving the user:', error)
         })

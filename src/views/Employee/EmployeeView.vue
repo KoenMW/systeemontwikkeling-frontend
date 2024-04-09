@@ -51,16 +51,13 @@ export default {
             this.checkCode(detectedCodes[0].rawValue);
          },
          checkCode (code) {
-            console.log('code: ', code);
 
             axios.get(`${import.meta.env.VITE_API_URL}/orders/check/${code}`)
                 .then(response => {
                     this.unknownCode = false;
-                    console.log('response: ', response);
                     this.orderData = response.data;
                 })
-                .catch(error => {
-                    console.log(error);
+                .catch(() => {
                     this.unknownCode = true;
                 });
          },
@@ -70,11 +67,10 @@ export default {
          checkin () {
             axios.put(`${import.meta.env.VITE_API_URL}/orders/checkin`, { id: this.orderData.id, checkedIn: true })
                 .then(response => {
-                    console.log('response: ', response);
                     this.orderData.checkedIn = response.data;
                 })
                 .catch(error => {
-                    console.log(error);
+                    console.error(error);
                 });
          },
          formattedDate (date) {

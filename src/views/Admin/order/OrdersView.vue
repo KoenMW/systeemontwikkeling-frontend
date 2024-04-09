@@ -91,7 +91,6 @@ export default {
       })
       .then((response) => {
         this.orders = response.data
-        console.log(this.orders)
       })
       .catch((error) => {
         console.error('There was an error fetching the orders:', error)
@@ -103,14 +102,9 @@ export default {
         new Date().toLocaleDateString()
     },
     save(order) {
-      console.log(order)
       axios
         .put(`/orders`, order, {
           headers: requestHeader()
-        })
-        .then((response) => {
-          console.log(response.data)
-          console.log('Order saved')
         })
         .catch((error) => {
           console.error('There was an error saving the order:', error)
@@ -122,8 +116,7 @@ export default {
           .delete(`/orders/${orderId}`, {
             headers: requestHeader()
           })
-          .then((response) => {
-            console.log(response.data)
+          .then(() => {
             this.orders = this.orders.filter((order) => order.id !== orderId)
           })
           .catch((error) => {

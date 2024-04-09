@@ -83,14 +83,12 @@ export default {
     axios.get('/pages/ids')
       .then(response => {
         this.pages = response.data
-        console.log(response.data)
       })
       .catch(error => {
         console.error('Failed to fetch pages:', error)
       })
       axios.get('/pages/detail/ids').then(response => {
         this.detail_pages = response.data
-        console.log(response.data)
       })
   }
   ,
@@ -144,14 +142,11 @@ export default {
       try {
         if (event.id) {
           axios.put(`/events/${event.id}`, event,
-            { headers: requestHeader() }).then((response) => {
-              console.log('Event saved: ', response)
-            })
+            { headers: requestHeader() })
         } else {
           axios.post('/events', event, 
             { headers: requestHeader() }
           ).then((response) => {
-            console.log('Event saved: ', response)
             event.id = response.data.id
           })
         }

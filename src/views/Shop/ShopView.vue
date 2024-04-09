@@ -127,10 +127,7 @@ const shareCart = () => {
         text: 'Check out my personal program!',
         url: shareUrl
       })
-      .then(() => console.log('Successful share'))
-      .catch((error) => console.log('Error sharing', error))
-  } else {
-    console.log('Web Share API is not supported in your browser.')
+      .catch((error) => console.error('Error sharing', error))
   }
 }
 const groupedAndSortedTickets = computed(() => {

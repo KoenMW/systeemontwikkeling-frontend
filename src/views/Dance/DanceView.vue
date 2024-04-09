@@ -28,7 +28,7 @@ axios.get(`/pages/4`)
         pageData.value = response.data;
     })
     .catch(error => {
-        console.log(error);
+        console.error(error);
     });
 
 axios.get(`/events/4`)
@@ -38,7 +38,7 @@ axios.get(`/events/4`)
         });
     })
     .catch(error => {
-        console.log(error);
+        console.error(error);
     });
 </script>
 <style scoped>

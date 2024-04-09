@@ -108,12 +108,9 @@ async function redirectToStripe() {
     }
 
     if (paymentIntent.status === 'succeeded') {
-      console.log('Payment succeeded:', paymentIntent)
       await sendOrder()
       useTicketsStore().clearTickets()
       router.push('/success')
-    } else {
-      console.log('Payment failed:', paymentIntent)
     }
   } catch (error) {
     console.error('Error redirecting to Stripe:', error)
@@ -129,18 +126,12 @@ async function sendOrder() {
       quantity: ticket.quantity,
       comment: ticket.comment
     }))
-    console.log('Formatted tickets:', formattedTickets)
     const jwtToken = localStorage.getItem('jwt')
     axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`
-    const response = await axios.post('/orders', {
+    await axios.post('/orders', {
       tickets: formattedTickets,
       userId: userId
     })
-    if (response.status === 200) {
-      console.log('Tickets sent successfully')
-    } else {
-      console.error('Error sending tickets:', response)
-    }
   } catch (error) {
     console.error('Error sending tickets:', error)
   }

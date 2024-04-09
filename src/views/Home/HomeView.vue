@@ -51,7 +51,6 @@ export default {
     axios.get('/pages/0')
       .then(response => {
         this.pageData = response.data;
-        console.log("page: ", response.data);
       })
       axios.get('/events').then(response => {
         this.events = response.data.map(event => new Event(event.id, event.title, event.location, event.startTime, event.endTime, event.price, event.ticket_amount, event.eventType));

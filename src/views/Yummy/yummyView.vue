@@ -62,12 +62,10 @@ export default {
                 this.pageData = response.data;
                 this.pageData.events.forEach((event) => {
                     this.events.push(new Event(event.id, event.title, event.location, event.startTime, event.endTime, event.price, event.ticket_amount, event.eventType));                
-                })
-                console.log((response.data.infoText));
-                console.log((response.data));
+                });
             })
             .catch(error => {
-                console.log(error);
+                console.error(error);
             });
     }
 }

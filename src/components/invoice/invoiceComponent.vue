@@ -1,3 +1,7 @@
+<!--
+    author: @Nicks721
+-->
+
 <template>
   <div class="invoice">
     <div class="cart-summary">

@@ -1,3 +1,7 @@
+<!--
+    author: @Nicks721
+-->
+
 <template>
   <div class="success-view">
     <div class="success-box">

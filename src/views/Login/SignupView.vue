@@ -69,12 +69,15 @@ export default {
           .post('users/signUp', signupData)
           .then((response) => {
             if (response.status === 200) {
-              const isAdmin = requestAccess(2)
-              if (isAdmin) {
+              requestAccess(2).then((response) => {
+                const isAdmin = response
+                if (isAdmin) {
                 this.$router.push({ name: 'adminUsers' })
               } else {
                 this.$router.push('/login')
               }
+              })
+              
             } else {
               this.errorMessage = 'Signup was not successful. Please try again.'
             }

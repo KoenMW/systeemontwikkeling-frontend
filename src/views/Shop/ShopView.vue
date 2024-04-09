@@ -1,3 +1,7 @@
+<!--
+    author: @Nicks721
+-->
+
 <template>
   <div class="shopping-cart">
     <div class="left-section">
@@ -78,6 +82,7 @@ const fetchTickets = () => {
       const ticketsData = localStorage.getItem('tickets')
       if (ticketsData) {
         const parsedTickets = JSON.parse(ticketsData)
+        //kijken of de ticket al bestaat anders qauntity +1
         const groupedTickets = parsedTickets.reduce((acc, ticket) => {
           const existingTicket = acc.find((item) => item.id === ticket.id)
           if (existingTicket) {
@@ -117,6 +122,7 @@ const finalPrice = computed(() => {
 })
 
 const shareCart = () => {
+   //tickets omzetten naar string en dan encoden
   const cartState = encodeURIComponent(JSON.stringify(tickets.value))
   const shareUrl = `${window.location.origin}/shop/?cart=${cartState}`
 
@@ -138,6 +144,7 @@ const groupedAndSortedTickets = computed(() => {
 
   return sortedTickets.reduce((acc, ticket) => {
     const day = new Date(ticket.startTime).toDateString();
+    // voeg de ticket toe aan de dag of maak een nieuwe array
     (acc[day] = acc[day] || []).push(ticket);
     return acc;
   }, {});

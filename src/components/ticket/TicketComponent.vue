@@ -1,3 +1,7 @@
+<!--
+    author: @Nicks721
+-->
+
 <template>
   <div class="shopping-cart-item" :style="{ backgroundColor: getBackgroundColor() }">
     <div class="overlay" v-if="agendaItem">

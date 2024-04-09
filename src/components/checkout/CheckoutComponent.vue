@@ -1,3 +1,7 @@
+<!--
+    author: @Nicks721
+-->
+
 <template>
   <div class="checkout">
     <div class="input-group">
@@ -67,6 +71,7 @@ async function redirectToStripe() {
   }
 
   try {
+   //Maakt een token aan voor de creditcard
     const { token, error } = await stripe.createToken(cardElement)
     if (error) {
       console.error('Error creating card token:', error)
@@ -97,7 +102,7 @@ async function redirectToStripe() {
       toggleLoading(false);
       return
     }
-
+    //bevestig de betaling met client secret
     const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
       response.data.clientSecret
     )
@@ -129,8 +134,8 @@ async function sendOrder() {
       quantity: ticket.quantity,
       comment: ticket.comment
     }))
-    console.log('Formatted tickets:', formattedTickets)
     const jwtToken = localStorage.getItem('jwt')
+    //Voegt de jwt toe aan de headers
     axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`
     const response = await axios.post('/orders', {
       tickets: formattedTickets,

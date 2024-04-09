@@ -4,7 +4,7 @@
 
 <template>
   <div class="user-management">
-    <button @click="navigateTo('signup', { adminAdd: true })">Add User</button>
+    <button @click="navigateTo('signup')">Add User</button>
     <div class="filters">
       <input
         v-model="searchQuery"
@@ -87,7 +87,7 @@ export default {
         .get('/users', {
           params: {
             searchEmail: this.searchQuery,
-            filterRole: this.filterRole,
+            filterRole: this.filterRole === '' ? null : this.filterRole,
             sortOrder: this.sortOrder
           },
           headers: requestHeader()

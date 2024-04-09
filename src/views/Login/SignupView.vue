@@ -32,11 +32,15 @@
     <label for="address">Address:</label>
     <input type="text" id="address" v-model="address" required placeholder="Enter your address" />
     <button type="submit" class="login-button">Sign Up</button>
+    <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+    <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
   </form>
 </template>
 
 <script>
 import axios from '../../axios-auth.js'
+import requestAccess from '@/helpers/roleCheck'
+
 export default {
   data() {
     return {
@@ -45,7 +49,9 @@ export default {
       password: '',
       phone: '',
       address: '',
-      role: 0
+      role: 0,
+      errorMessage: '',
+      successMessage: ''
     }
   },
   methods: {
@@ -63,16 +69,18 @@ export default {
           .post('users/signUp', signupData)
           .then((response) => {
             if (response.status === 200) {
-              if (this.isAdminAdd) {
+              const isAdmin = requestAccess(2)
+              if (isAdmin) {
                 this.$router.push({ name: 'adminUsers' })
               } else {
                 this.$router.push('/login')
               }
             } else {
-              console.log('Signup was not successful. Please try again.')
+              this.errorMessage = 'Signup was not successful. Please try again.'
             }
           })
           .catch((error) => {
+            this.errorMessage = 'An error occurred during signup. Please try again.'
             console.error('An error occurred during signup:', error)
           })
       }

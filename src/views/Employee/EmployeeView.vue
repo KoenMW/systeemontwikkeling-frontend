@@ -31,7 +31,8 @@
 <script>
 import { QrcodeStream } from 'vue-qrcode-reader'
 import { formattedDate } from '@/helpers/formatDate';
-import axios from 'axios';
+import axios from '../../axios-auth.js';
+import { requestHeader } from '@/helpers/requestHeader';
 
 export default {
     props: {
@@ -50,9 +51,10 @@ export default {
          onDetect (detectedCodes) {
             this.checkCode(detectedCodes[0].rawValue);
          },
-         checkCode (code) {
-
-            axios.get(`${import.meta.env.VITE_API_URL}/orders/check/${code}`)
+         checkCode (code) {            
+            axios.get(`${import.meta.env.VITE_API_URL}/orders/check/${code}`, {
+               Headers: requestHeader()
+            })
                 .then(response => {
                     this.unknownCode = false;
                     this.orderData = response.data;
@@ -65,7 +67,10 @@ export default {
             this.orderData = {};
          },
          checkin () {
-            axios.put(`${import.meta.env.VITE_API_URL}/orders/checkin`, { id: this.orderData.id, checkedIn: true })
+            axios.put(`${import.meta.env.VITE_API_URL}/orders/checkin`, 
+            { 
+               Headers: requestHeader(),
+               id: this.orderData.id, checkedIn: true })
                 .then(response => {
                     this.orderData.checkedIn = response.data;
                 })

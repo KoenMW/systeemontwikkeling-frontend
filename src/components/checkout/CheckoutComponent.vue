@@ -133,6 +133,8 @@ async function sendOrder() {
     }))
     const jwtToken = localStorage.getItem('jwt')
     //Voegt de jwt toe aan de headers
+    console.log(formattedTickets, jwtToken);
+    console.log(userId);
     axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`
     await axios.post('/orders', {
       tickets: formattedTickets,

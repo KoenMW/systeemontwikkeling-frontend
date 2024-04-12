@@ -6,9 +6,12 @@
     <bannerComponent :title="pageData.name" :description="pageData.intro" :image="pageData.picture" />
 
     <section id="" v-if="infoText.length > 0">
-        <div v-for="info in infoText" :key="info.id">
+        <div v-for="info in infoText" :key="info.id" class="infoText">
+         <div>
             <h2>{{info.title}}</h2>
             <p>{{info.content}}</p>
+         </div>   
+            <img v-if="info.picture" :src="info.picture" alt="info.picture" />
         </div>
     </section>
 
@@ -55,15 +58,22 @@ export default {
                 this.pageData.events.forEach((event) => {
                     this.events.push(new Event(event.id, event.title, event.location, event.startTime, event.endTime, event.price, event.ticket_amount, event.eventType));                
                 })
+                this.infoText.forEach((info) => {
+                console.log(info);
+            });
+            console.log(this.pageData);
             })
             .catch(error => {
                 console.error(error);
                 router.push('/404');
             });
+            
     },
 }
 
 
 </script>
-
+<style>
+@import 'detail.scss';
+</style>
 
